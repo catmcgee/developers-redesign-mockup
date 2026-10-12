@@ -280,7 +280,7 @@
         live.dataset.state = "live";
       } catch {
         live.dataset.state = "offline";
-        const eb = live.querySelector(".eyebrow"); if (eb) eb.textContent = "Mainnet · sample numbers (RPC unreachable)";
+        const eb = live.querySelector(".eyebrow"); if (eb) eb.textContent = "Mainnet · sample numbers";
       }
     };
     const feed = $("#feed");

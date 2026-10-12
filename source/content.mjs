@@ -149,7 +149,7 @@ const page = (p, o) => (pages[p] = { path: p, ...o });
 /* ------------------------------------------------------------ START */
 page("docs", {
   tab: "start", title: "Start here", wide: true,
-  desc: "Pick what you're building. Every path starts in your browser, ends running in your own stack, and teaches you the parts of Solana each step needs, when it needs them.",
+  desc: "Solana is where internet capital markets run. Pick the piece you're building. Every path starts in your browser, ends running in your own stack, and teaches you the parts of Solana each step needs, when it needs them.",
   body: () => `
 <div class="dpick">
   <a href="@/docs/payments/"><span class="di">${I.card}</span><h3>Accept dollar payments that settle in seconds</h3><p>Take USDC (digital dollars) from anyone. Money arrives in under a second for less than a cent, with no percentage fee and no chargebacks.</p><div class="dm"><span>First result ~5 min</span><b>Build a checkout →</b></div></a>
@@ -185,7 +185,7 @@ page("docs/from-ethereum", { tab: "start", title: "Coming from Ethereum", desc: 
 /* ------------------------------------------------------------ PAYMENTS */
 page("docs/payments", {
   tab: "payments", title: "Accept dollar payments that settle in seconds",
-  desc: "Take USDC, a digital dollar, from anyone with a wallet. You can use the money in under a second, the fee is a fraction of a cent, and there are no chargebacks.",
+  desc: "Money is the first piece of internet capital markets. Take USDC, a digital dollar, from anyone with a wallet. You can use the money in under a second, the fee is a fraction of a cent, and there are no chargebacks.",
   body: () => `
 ${flow([["Request", "amount + order"], ["Approve", "customer's wallet"], ["Settle", "~0.4 s on Solana"], ["Verify", "your server checks"], ["Ship", "fulfil the order"]])}
 ${pathCard("payments", "Take a 1 USDC payment through a checkout button and confirm it from your own server. The first payment happens in your browser, with nothing to install.")}
@@ -437,7 +437,7 @@ ${cards([
 /* -------------------------------------------------------------- APIS */
 page("docs/apis", {
   tab: "apis", title: "Charge a few cents per API call",
-  desc: "Price each request at a cent or less. Clients, whether people's apps or AI agents, pay inline over HTTP, with no signup, API key or invoice.",
+  desc: "On internet capital markets anything can have a price, down to a single request. Price each request at a cent or less. Clients, whether people's apps or AI agents, pay inline over HTTP, with no signup, API key or invoice.",
   body: () => `
 ${flow([["Request", "GET /api/forecast"], ["402", "price: $0.01"], ["Pay", "client signs"], ["Retry", "with payment"], ["200", "your data"]])}
 ${pathCard("apis", "Put a 1¢ price on an endpoint and have a client pay for it automatically. You'll see it work in the browser before you touch your server.")}
@@ -584,7 +584,7 @@ page("docs/apis/facilitator", { tab: "apis", title: "x402 facilitator", desc: "R
 /* -------------------------------------------------------- TOKENIZATION */
 page("docs/tokenization", {
   tab: "tokenization", title: "Issue a tokenized asset with compliance controls",
-  desc: "Create a token for a fund share, a security, a point or a real-world asset, with metadata, an approval list and a pause switch that the network enforces on every transfer.",
+  desc: "Assets are what internet capital markets trade. Create a token for a fund share, a security, a point or a real-world asset, with metadata, an approval list and a pause switch that the network enforces on every transfer.",
   body: () => `
 ${flow([["Define", "name, rules"], ["Approve", "who may hold it"], ["Issue", "mint to holders"], ["Transfer", "under your rules"], ["Control", "pause · recover"]])}
 ${pathCard("tokenization", "Hold a restricted asset, see a transfer get blocked, then create your own with metadata, pause and approvals, and run it from your machine.")}
@@ -795,5 +795,7 @@ export const landingWhy = [
   N("why", "Each job card follows the template: the <b>developer's question</b> as the title, one line on fit that compares against something they already know (card fees, a database), and the time to a first result. The cards name no concepts."),
   N("change", "Products are gone from this page. The 8-product grid becomes part of the paths: Commerce Kit in Payments, the x402 facilitator and Kora in Pay-per-call, Token ACL and Attestations in Tokenization. A grid of nine product names is a concept gate too."),
   N("change", "Nav: the Build dropdown now leads with <i>What are you building?</i> (hover it). Token Extensions moves out of the menu and into the tokenization job. DeFi and Gaming sit behind <i>More use cases</i> until their paths exist. Reorder the global nav only once the Payments path is live."),
-  N("why", "The words “web3”, “blockchain”, “decentralized” and “keypair” appear nowhere on this page. “Ledger” and “digital dollars” do that work."),
+  N("why", "<b>Internet capital markets is the frame; the jobs stay in the developer's words.</b> The headline uses the Foundation's narrative, and the very next sentence defines it in plain terms (money, assets and markets on the internet, open 24/7). The picker then splits it into building blocks: Money → payments, Pricing → pay-per-call, Assets → tokenization, with Markets behind them. Each card title is still the developer's own question."),
+  N("risk", "<b>Check that web2 developers understand “internet capital markets”.</b> It isn't chain vocabulary, but it is a coined term. Add one question to the MLH rerun script: “After reading the first screen, what do you think you could build here?” If people can't answer, keep ICM as the eyebrow and move the plain-language line into the headline."),
+  N("why", "The words “web3”, “blockchain”, “decentralized” and “keypair” still appear nowhere on this page."),
 ];

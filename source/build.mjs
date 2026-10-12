@@ -7,6 +7,7 @@ import { pages, paths, tabs, sidebars, landingWhy } from "./content.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const OUT = join(here, "..", "site");
+const BUILD = Date.now().toString(36);
 
 /* ---------------------------------------------------------- utilities */
 const depth = (p) => (p ? p.split("/").length : 0);
@@ -60,8 +61,8 @@ const shell = (p, { title, body, cls, notes }) => `<!doctype html><html lang="en
 <title>${stripTags(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="@/assets/site.css"></head>
-<body class="${cls}">${topbar()}${body}${drawer(notes)}<script src="@/assets/site.js"></script></body></html>`;
+<link rel="stylesheet" href="@/assets/site.css?v=${BUILD}"></head>
+<body class="${cls}">${topbar()}${body}${drawer(notes)}<script src="@/assets/site.js?v=${BUILD}"></script></body></html>`;
 
 /* ------------------------------------------------------- docs pieces */
 function sidebarHtml(tab, cur) {
@@ -167,8 +168,8 @@ function landing() {
 <section class="hero"><div class="wrap">
   <div>
     <span class="eyebrow">Solana for developers</span>
-    <h1 class="display">A shared global ledger <em>your code runs on.</em></h1>
-    <p class="lede">Payments and records settle in under a second for a fraction of a cent. Pick what you're building and have it working in your browser in minutes, with nothing to install.</p>
+    <h1 class="display">Build on <em>internet capital markets.</em></h1>
+    <p class="lede">Money, assets and markets that run on the internet like everything else does: open 24/7, open to anyone, and settling in under a second for a fraction of a cent. Pick the piece you're building and have it working in your browser in minutes.</p>
     <div class="ctas"><a class="btn green" href="#picker">What are you building? ${I.down}</a><a class="btn line" href="${link("docs")}">Read the docs</a>
     <span class="quiet">Coming from Ethereum? <a href="${link("docs/from-ethereum")}">EVM → SVM guide</a></span></div>
   </div>
@@ -183,13 +184,13 @@ function landing() {
 <section class="band" id="picker"><div class="wrap">
   <span class="eyebrow">Start here</span>
   <h2 class="display">What are you building?</h2>
-  <p class="intro">Each path starts in your browser and ends running in your own stack. You'll pick up the parts of Solana it needs, at the moment you need them.</p>
+  <p class="intro">Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one piece, starting in your browser and ending in your own stack.</p>
   <div class="grid g3">
-    ${job("docs/payments", I.card, "Payments", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
-    ${job("docs/apis", I.api, "APIs &amp; agents", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
-    ${job("docs/tokenization", I.layers, "Tokenization", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
+    ${job("docs/payments", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
+    ${job("docs/apis", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
+    ${job("docs/tokenization", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
   </div>
-  <div class="morejobs"><span class="lbl">Building something else?</span>
+  <div class="morejobs"><span class="lbl">Markets &amp; more</span>
     <a href="${link("docs/more/markets")}">Trading &amp; markets <span>guides →</span></a>
     <a href="${link("docs/more/games")}">Games &amp; digital items <span>guides →</span></a>
     <a href="${link("docs/apis/agents")}">AI agents that pay <span>guides →</span></a>
@@ -210,8 +211,8 @@ function landing() {
 
 <section class="band"><div class="wrap feedwrap">
   <div><span class="eyebrow">Right now on mainnet</span>
-    <h2 class="display" style="font-size:46px">The network, doing the job.</h2>
-    <p class="intro" style="margin-bottom:28px">Every row is a real transaction that touched USDC in the last few seconds. Open one to see what your own payment will look like.</p>
+    <h2 class="display" style="font-size:46px">The market is open. It always is.</h2>
+    <p class="intro" style="margin-bottom:28px">Every row is a real transaction that touched USDC in the last few seconds, at 3am on a Sunday the same as at noon on a Tuesday. Open one to see what your own payment will look like.</p>
     <a class="btn line" href="https://explorer.solana.com" target="_blank" rel="noopener">Open the Explorer ${I.arrow}</a></div>
   <div><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
     ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">● confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
@@ -233,7 +234,7 @@ function landing() {
 <div class="wrap"><div class="newsband"><div><h3>Solana developer update</h3><p>Releases, upgrades and new paths, once a month. Or read the <a href="#" style="text-decoration:underline">changelog</a>.</p></div>
 <form onsubmit="return false"><input placeholder="you@company.com"><button class="btn green">Subscribe</button></form></div></div>
 <footer class="site"><div class="wrap"><span>© Solana Foundation · structural mockup, illustrative copy</span><nav><a href="#">Grants</a><a href="#">Media kit</a><a href="#">Careers</a><a href="#">Privacy</a><a href="https://github.com/catmcgee/developers-redesign-mockup">Source</a></nav></div></footer>`;
-  return shell("", { title: "Build on Solana | Solana Developers", body, cls: "dark", notes: landingWhy });
+  return shell("", { title: "Build on internet capital markets | Solana Developers", body, cls: "dark", notes: landingWhy });
 }
 
 /* -------------------------------------------------------------- write */
