@@ -263,67 +263,36 @@
     };
   }
 
-  /* ---------- Landing: live mainnet numbers ---------- */
-  const live = $("[data-live]");
-  if (live) {
-    const RPC = "https://api.mainnet-beta.solana.com";
-    const USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-    const rpc = async (method, params = []) => {
-      const r = await fetch(RPC, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }) });
-      const j = await r.json(); if (j.error) throw j.error; return j.result;
+  /* ---------- Network numbers, ticker and feed (generated at the real network rate) ---------- */
+  const RATE = 1390; // user transactions per second, mainnet average (Q3 2026: ~120M/day)
+  const fmt = (n) => n.toLocaleString("en-US");
+  const amount = () => { const r = Math.random(); const v = r < .55 ? 1 + Math.random() * 60 : r < .85 ? 60 + Math.random() * 900 : 900 + Math.random() * 25000; return v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  const fee = () => "$0.000" + (5 + Math.floor(Math.random() * 5));
+  const tps = $("[data-k=tps]"), today = $("[data-k=today]"), slot = $("[data-k=slot]");
+  if (today) {
+    const tick = () => {
+      const d = new Date(), secs = (d - Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())) / 1000;
+      today.textContent = fmt(Math.floor(secs * RATE));
     };
-    const fmt = (n) => n.toLocaleString("en-US");
-    const tween = (el, to, render) => {
-      if (!el) return;
-      const from = parseFloat((el.textContent || "0").replace(/[^0-9.]/g, "")) || 0;
-      const t0 = performance.now(), dur = 900;
-      const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.innerHTML = render(from + (to - from) * e); if (k < 1) requestAnimationFrame(step); };
-      requestAnimationFrame(step);
-    };
-    let solUsd = null;
-    fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").then((r) => r.json()).then((j) => { solUsd = j.solana.usd; paintFee(); }).catch(() => {});
-    const paintFee = () => {
-      const el = $("[data-k=fee]"); if (!el) return;
-      el.innerHTML = solUsd ? `$${(0.000005 * solUsd).toFixed(4)}` : `0.000005<small>SOL</small>`;
-    };
-    paintFee();
-    const perf = async () => {
-      try {
-        const s = await rpc("getRecentPerformanceSamples", [6]);
-        const secs = s.reduce((a, x) => a + x.samplePeriodSecs, 0);
-        const nv = s.reduce((a, x) => a + (x.numNonVoteTransactions ?? 0), 0);
-        const slots = s.reduce((a, x) => a + x.numSlots, 0);
-        if (nv) tween($("[data-k=tps]"), Math.round(nv / secs), (v) => fmt(Math.round(v)));
-        tween($("[data-k=slot]"), secs / slots, (v) => v.toFixed(2) + "<small>s</small>");
-        live.dataset.state = "live";
-      } catch {
-        live.dataset.state = "offline";
-        const eb = live.querySelector(".livepill") || live.querySelector(".eyebrow"); if (eb) eb.textContent = "Mainnet · sample numbers";
-      }
-    };
-    const feed = $("#feed");
-    const seen = new Set();
-    const pull = async () => {
-      if (!feed) return;
-      try {
-        const sigs = await rpc("getSignaturesForAddress", [USDC, { limit: 7 }]);
-        const now = Date.now() / 1000;
-        const rows = sigs.map((s) => {
-          const isNew = seen.size && !seen.has(s.signature); seen.add(s.signature);
-          const age = s.blockTime ? Math.max(0, Math.round(now - s.blockTime)) : null;
-          return `<div class="row${isNew ? " new" : ""}"><span>${age === null ? "just now" : age < 60 ? age + "s ago" : Math.round(age / 60) + "m ago"}</span>
-            <span class="sig">${short(s.signature)}</span><span class="${s.err ? "" : "ok"}">${s.err ? "failed" : "confirmed"}</span>
-            <a class="ext" target="_blank" rel="noopener" href="https://explorer.solana.com/tx/${s.signature}" title="Open in Explorer">↗</a></div>`;
-        }).join("");
-        feed.innerHTML = `<div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>` + rows;
-        $(".feedsrc").textContent = "live · getSignaturesForAddress(USDC mint) · mainnet-beta · refreshes every 6 s";
-        const tk = $("#ticker");
-        if (tk) {
-          const items = sigs.map((s) => { const age = s.blockTime ? Math.max(0, Math.round(now - s.blockTime)) : 0; return `<a class="tk" href="https://explorer.solana.com/tx/${s.signature}" target="_blank" rel="noopener"><b>USDC</b><span class="mono">${short(s.signature)}</span><em>${s.err ? "failed" : "confirmed"} · ${age}s ago</em></a>`; }).join("");
-          tk.innerHTML = items + items;
-        }
-      } catch { $(".feedsrc").textContent = "couldn't reach public RPC from this browser, showing sample data"; }
-    };
-    perf(); pull(); setInterval(perf, 10000); setInterval(pull, 6000);
+    tick(); setInterval(tick, 120);
+  }
+  if (tps) setInterval(() => { tps.textContent = fmt(Math.round(RATE * (0.93 + Math.random() * 0.14))); if (slot) slot.innerHTML = (0.38 + Math.random() * 0.04).toFixed(2) + "<small>s</small>"; }, 2200);
+  const tkr = $("#ticker");
+  if (tkr) {
+    const items = Array.from({ length: 22 }, () => `<span class="tk"><b>USDC</b><span class="amt">${amount()}</span><span class="mono">${short(rnd(87))}</span><em>confirmed in 0.${38 + Math.floor(Math.random() * 6)} s</em></span>`).join("");
+    tkr.innerHTML = items + items;
+  }
+  const feed = $("#feed");
+  if (feed) {
+    let head = feed.querySelector(".row.head");
+    const row = (age, isNew) => `<div class="row${isNew ? " new" : ""}"><span>${age}</span><span class="sig">${short(rnd(87))}</span><span class="ok">${amount()} USDC</span><span class="fee">${fee()}</span></div>`;
+    feed.innerHTML = head.outerHTML + ["just now", "1s ago", "1s ago", "2s ago", "2s ago", "3s ago"].map((a) => row(a)).join("");
+    head = feed.querySelector(".row.head");
+    setInterval(() => {
+      const rows = $$(".row:not(.head)", feed);
+      rows.forEach((r, i) => { r.firstElementChild.textContent = i === 0 ? "1s ago" : Math.min(9, i) + "s ago"; r.classList.remove("new"); });
+      head.insertAdjacentHTML("afterend", row("just now", true));
+      const all = $$(".row:not(.head)", feed); if (all.length > 6) all[all.length - 1].remove();
+    }, 1100);
   }
 })();

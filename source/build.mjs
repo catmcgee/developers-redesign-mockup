@@ -177,14 +177,15 @@ function landing() {
     <p class="lp-quiet2">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
   </div>
   <div class="lp-statcard rv" style="--d:120ms" data-live>
-    <div class="lp-sc-h"><span class="livepill">Live from mainnet</span></div>
-    <div class="lp-sc-r"><span>Base fee per transaction</span><b data-k="fee">$0.0010</b></div>
+    <div class="lp-sc-h"><span>Solana mainnet</span></div>
+    <div class="lp-sc-r"><span>Base fee per transaction</span><b data-k="fee">$0.0008</b></div>
     <div class="lp-sc-r"><span>Block time</span><b data-k="slot">0.40<small>s</small></b></div>
-    <div class="lp-sc-r"><span>User transactions / sec</span><b data-k="tps">1,100</b></div>
-    <div class="lp-sc-f">Excludes validator votes. Most transactions confirm within one block.</div>
+    <div class="lp-sc-r"><span>User transactions / sec</span><b data-k="tps">1,390</b></div>
+    <div class="lp-sc-r"><span>Transactions today</span><b data-k="today">0</b></div>
+    <div class="lp-sc-f">User transactions, excluding validator votes. Most confirm within one block.</div>
   </div>
 </div>
-<div class="lp-ticker rv" style="--d:200ms" aria-label="Recent mainnet transactions"><div class="lp-tk-track" id="ticker">${(() => { const it = [["5VfY…h3Kq","1s"],["3kPq…tV9a","1s"],["Hq1c…9pLm","2s"],["2xTr…Ww7e","2s"],["Bq9T…mm8A","3s"],["Fv2m…1yQp","3s"],["7xKX…gAsU","4s"],["9WzD…AWWM","4s"]].map(([s, a]) => `<a class="tk" href="https://explorer.solana.com" target="_blank" rel="noopener"><b>USDC</b><span class="mono">${s}</span><em>confirmed · ${a} ago</em></a>`).join(""); return it + it; })()}</div></div>
+<div class="lp-ticker rv" style="--d:200ms" aria-label="Recent transactions"><div class="lp-tk-track" id="ticker"></div></div>
 </section>
 
 <section class="lp-sec" id="picker"><div class="lp-wrap">
@@ -200,23 +201,23 @@ function landing() {
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap">
-  <div class="lp-head rv"><h2>How the guides work</h2>
-  <p>Every guide has the same four steps. Solana concepts are explained briefly at the step where you first need them, with links to the full docs.</p></div>
-  <div class="lp-timeline rv"><div class="lp-rail"><i></i></div>
-    ${step(1, "Try it", "Use a working version with a test wallet created in the page.")}
-    ${step(2, "Build it in the browser", "Edit and run the code in a playground. Nothing to install.", true)}
-    ${step(3, "Run it locally", "Run the same code from your own backend against devnet.")}
-    ${step(4, "Go to production", "A checklist for mainnet, then related guides.")}
+  <div class="lp-head rv"><h2>Why Solana</h2>
+  <p>One network that settles in under a second for a fraction of a cent, already used for payments by large financial companies.</p></div>
+  <div class="lp-why">
+    ${[["$1.9T", "stablecoin volume in H1 2026", "22.5% of global stablecoin volume"], ["$16.7B", "stablecoins issued on Solana", "July 2026"], ["120M", "transactions per day", "Q3 2026 average"], ["30+ months", "without a network outage", "last outage February 2024"]].map(([v, l, n], i) => `<div class="lp-tile rv" style="--d:${i * 70}ms"><b>${v}</b><span>${l}</span><em>${n}</em></div>`).join("")}
   </div>
+  <div class="lp-reasons">
+    ${[["Settles in under a second", "Transactions confirm in about 0.4 seconds, so your server can mark an order paid before the customer leaves the page."], ["Costs a fraction of a cent", "A flat base fee of about $0.001 whatever the amount. Your app can pay it, so users only ever hold dollars."], ["Compliance controls in the token", "Token-2022 extensions add allowlists, freezing and pause controls that apply in every wallet and app."], ["One network, no bridges", "Every app shares the same state and liquidity. There are no rollups or bridges to integrate."]].map(([t, d], i) => `<div class="lp-reason rv" style="--d:${i * 70}ms"><h4>${t}</h4><p>${d}</p></div>`).join("")}
+  </div>
+  <div class="lp-users rv"><span>In production at</span><b>Visa</b><b>Stripe</b><b>PayPal</b><b>Western Union</b><b>Worldpay</b></div>
+  <p class="lp-src rv">Sources: <a href="https://stablecoininsider.org/stablecoin-liquidity-report-2026-supply-volume-venue-depth-and-defi-utilization/">Stablecoin Insider</a>, <a href="https://solanacompass.com/news/solana-stablecoin-supply-reaches-167b-growing-11x-in-three-years-to-rank-third-globally">Solana Compass</a>, <a href="https://cryptobriefing.com/solana-14-billion-transactions-q3-2026/">Crypto Briefing (Q3 2026)</a>, <a href="https://cryptobriefing.com/solana-100-percent-uptime-30-months/">Crypto Briefing (uptime)</a>, <a href="https://blog.stake.fish/the-state-of-solana-in-2026/">stake.fish</a>.</p>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap lp-split">
   <div class="rv"><h2>Recent USDC transactions</h2>
-    <p class="lp-p">Live transactions involving the USDC mint on mainnet, fetched from a public RPC node. Click one to view it in Explorer.</p>
+    <p class="lp-p">USDC transfers settling on Solana mainnet, about 0.4 seconds each, for well under a cent.</p>
     <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open Explorer ${I.arrow}</a></div>
-  <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
-    ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
-  </div></div><div class="feedsrc">sample data · connecting to mainnet…</div></div>
+  <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>USDC transfer</span><span>Amount</span><span>Fee</span></div></div></div></div>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap">

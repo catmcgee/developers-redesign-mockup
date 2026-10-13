@@ -650,3 +650,25 @@ main.content{padding:40px 64px 80px;min-width:0}
 .tk:hover .mono{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (prefers-reduced-motion:reduce){.lp-tk-track{animation:none}}
 .c402{color:#f5b86a;font-weight:600}.cpay{color:#c4a4ff;font-weight:600}.c200{color:var(--green);font-weight:600}
+
+/* Why Solana */
+.lp-why{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lp-tile{border-radius:18px;background:#121215;border:1px solid rgba(255,255,255,.07);padding:24px 22px;display:flex;flex-direction:column;gap:6px}
+.lp-tile b{font-size:40px;font-weight:500;letter-spacing:-.04em;line-height:1.05;color:#fff}
+.lp-tile span{font-size:14.5px;color:#d4d4d8}
+.lp-tile em{font-style:normal;font-size:12.5px;color:var(--ink-dim)}
+.lp-reasons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.lp-reason{padding:22px;border-radius:18px;border:1px solid rgba(255,255,255,.07)}
+.lp-reason h4{margin:0 0 8px;font-size:17px;font-weight:500;letter-spacing:-.015em}
+.lp-reason p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-muted)}
+.lp-users{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;margin-top:32px;padding:20px 0;border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line)}
+.lp-users span{font-size:13.5px;color:var(--ink-dim)}
+.lp-users b{font-size:19px;font-weight:600;letter-spacing:-.02em;color:#d4d4d8}
+.lp-src{margin:14px 0 0;font-size:12px;color:var(--ink-dim)}
+.lp-src a{color:var(--ink-muted);text-decoration:underline;text-decoration-color:#3a3a40;text-underline-offset:3px}
+.tk .amt{color:#e4e4e7;font-variant-numeric:tabular-nums;font-size:13px}
+.feed .row .fee{color:var(--ink-dim);font-size:13px}
+.feed .row .ok{font-variant-numeric:tabular-nums}
+@media (max-width:980px){.lp-why,.lp-reasons{grid-template-columns:1fr 1fr}}
+.feed .row{grid-template-columns:80px 1fr 130px 72px}
+.feed .row>span:nth-child(3),.feed .row>span:nth-child(4){text-align:right}

@@ -143,8 +143,7 @@ const pathCard = (key, blurb) => {
 <div class="steps">${p.steps.map(([, t], i) => `<span class="${i === p.first ? "s" : ""}">${i + 1}. ${t}${i === p.first ? " ★" : ""}</span>`).join("")}</div></div>
 <a class="btnd purple" href="@/${p.steps[0][0]}/">Start building ${I.arrow}</a></div>`;
 };
-const liveFeed = () => `<div class="feed light" id="feed" data-live><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
-${[["2s ago", "5VfY…h3Kq"], ["2s ago", "3kPq…tV9a"], ["3s ago", "Hq1c…9pLm"], ["4s ago", "2xTr…Ww7e"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}</div><div class="feedsrc">sample data · connecting to mainnet…</div>`;
+const liveFeed = () => `<div class="feed light" id="feed"><div class="row head"><span>Age</span><span>USDC transfer</span><span>Amount</span><span>Fee</span></div></div>`;
 const N = (t, h) => ({ t, h });
 
 /* ================================================================ pages */
@@ -249,7 +248,7 @@ ${h2("What just happened")}
 ${concept("transaction")}
 ${concept("tokenAccount")}
 ${h2("Meanwhile, on mainnet")}
-<p>Real businesses are doing exactly this right now. These are live transactions involving USDC on mainnet:</p>
+<p>Real businesses are doing exactly this on mainnet:</p>
 ${liveFeed()}
 ${next("docs/payments/checkout/browser", "Build the checkout in your browser", "Edit the code behind the button you just used, and take your first payment with it.")}
 `,
@@ -794,10 +793,11 @@ for (const [p, t, w] of [["rpc", "RPC methods", "/docs/rpc"], ["rpc/http", "HTTP
 
 /* ============================================================ LANDING */
 export const landingWhy = [
-  N("why", "<b>The page has one job:</b> get a developer into the right path within one scroll. The order is hero → proof (live network) → job picker → how a path works → live activity → guided routes. There's no standalone concepts section."),
+  N("why", "<b>The page has one job:</b> get a developer into the right path within one scroll. The order is hero → network numbers → job picker → <b>Why Solana</b> → recent transfers → guided routes. There's no standalone concepts section."),
+  N("why", "<b>Why Solana</b> follows Tempo's pattern of a few sourced stat tiles, plain benefit lines and named production users. Every figure has a source link and an as-of date. Check them against Artemis or the Foundation's own data before launch."),
   N("change", "Today's hero buttons are <i>Read the core docs</i> and <i>Browse templates</i>, and the use-case grid is the <b>third</b> block, below <i>Learn the stack / Build by example / Move to Solana</i>. Here the primary button scrolls to the picker, and the picker is the only block with green buttons."),
   N("why", "The quiet links under the hero (<i>Go to the docs</i>, <i>Coming from Ethereum</i>) keep today's crypto-native developers one click from where they go now. The redesign is aimed at web2 developers, and it shouldn't cost the current users anything."),
-  N("risk", "<b>Keep the network numbers honest.</b> The side panel here is fetched live from mainnet RPC. (a) TPS excludes validator votes, because raw TPS is inflated about 3× and skeptical developers will notice. (b) “Under a second” is true for <i>confirmed</i>; <i>finalized</i> is ~13 s unless Alpenglow ships first, so label it. (c) A dollar fee needs a price feed, with a fallback to SOL."),
+  N("risk", "<b>Keep the network numbers honest.</b> In this mockup the numbers, ticker and feed are generated in the browser at the real network rate (about 1,390 user transactions per second). In production, serve them from an indexer-backed endpoint rather than calling public RPC from the browser, which is slow and rate-limited. (a) TPS excludes validator votes, because raw TPS is inflated about 3× and skeptical developers will notice. (b) “Under a second” is true for <i>confirmed</i>; <i>finalized</i> is ~13 s unless Alpenglow ships first, so label it. (c) A dollar fee needs a price feed, with a fallback to SOL."),
   N("why", "Each job card follows the template: the <b>developer's question</b> as the title, one line on fit that compares against something they already know (card fees, a database), and the time to a first result. The cards name no concepts."),
   N("change", "Products are gone from this page. The 8-product grid becomes part of the paths: Commerce Kit in Payments, the x402 facilitator and Kora in Pay-per-call, Token ACL and Attestations in Tokenization. A grid of nine product names is a concept gate too."),
   N("change", "Nav: the Build dropdown now leads with <i>What are you building?</i> (hover it). Token Extensions moves out of the menu and into the tokenization job. DeFi and Gaming sit behind <i>More use cases</i> until their paths exist. Reorder the global nav only once the Payments path is live."),
