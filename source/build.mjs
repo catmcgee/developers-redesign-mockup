@@ -169,21 +169,21 @@ function landing() {
   const body = `
 <nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
-<section class="lp-hero">
-  <div class="lp-aurora"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
-  <div class="lp-gridbg"></div>
-  <div class="lp-wrap lp-hin">
-    <h1 class="rv">Build on <span class="lp-shine">internet capital markets.</span></h1>
-    <p class="lp-lede rv" style="--d:80ms">Solana is a public network for moving money and assets. Transactions confirm in about 0.4 seconds and cost about $0.001. Each guide below gets a working example running in your browser, then in your own code.</p>
-    <div class="lp-ctas rv" style="--d:160ms"><a class="lp-btn primary" href="#picker">Pick a guide ${I.down}</a><a class="lp-btn ghost" href="${link("docs")}">Docs</a></div>
-    <p class="lp-quiet rv" style="--d:220ms">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
-    <div class="lp-stats rv" style="--d:300ms" data-live>
-      <div class="lp-stat"><span class="lp-k"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></span><span class="lp-v" data-k="fee">$0.0010</span><span class="lp-h">base fee per transaction, regardless of amount</span></div>
-      <div class="lp-stat"><span class="lp-k">Block time</span><span class="lp-v" data-k="slot">0.40<small>s</small></span><span class="lp-h">transactions usually confirm within one block</span></div>
-      <div class="lp-stat"><span class="lp-k">Transactions / sec</span><span class="lp-v" data-k="tps">1,100</span><span class="lp-h">user transactions, excluding votes</span></div>
-    </div>
+<section class="lp-hero2"><div class="lp-wrap lp-h2grid">
+  <div class="rv">
+    <h1>Build on internet capital markets.</h1>
+    <p class="lp-lede2">Solana is a public network for moving money and assets. Transactions confirm in about 0.4 seconds and cost about $0.001. Each guide below gets a working example running in your browser, then in your own code.</p>
+    <div class="lp-ctas2"><a class="lp-btn primary sm" href="#picker">Pick a guide ${I.down}</a><a class="lp-btn ghost sm" href="${link("docs")}">Docs</a></div>
+    <p class="lp-quiet2">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
   </div>
-</section>
+  <div class="lp-statcard rv" style="--d:120ms" data-live>
+    <div class="lp-sc-h"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></div>
+    <div class="lp-sc-r"><span>Base fee per transaction</span><b data-k="fee">$0.0010</b></div>
+    <div class="lp-sc-r"><span>Block time</span><b data-k="slot">0.40<small>s</small></b></div>
+    <div class="lp-sc-r"><span>User transactions / sec</span><b data-k="tps">1,100</b></div>
+    <div class="lp-sc-f">Excludes validator votes. Most transactions confirm within one block.</div>
+  </div>
+</div></section>
 
 <section class="lp-sec" id="picker"><div class="lp-wrap">
   <div class="lp-head rv"><h2>What are you building?</h2>
