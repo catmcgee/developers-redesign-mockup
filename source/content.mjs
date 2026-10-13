@@ -888,6 +888,28 @@ ${table(["Principle (brief)", "Implemented as"], [
   ["Coverage map", "Generated from the paths on How Solana works; flags PDAs and CPI as not covered in Wave 1."],
 ])}
 
+<p><a href="#appendix-a-the-brief-in-full">Read the full brief in Appendix A →</a></p>
+<h3>Where this mockup follows the brief, and where it departs</h3>
+${table(["Brief says", "Mockup", "Status"], [
+  ["Hero draft: “A shared global ledger your code runs on.”", "“Build on internet capital markets.”, with a plain-language definition in the next sentence. Changed at your request after the first mockup.", "<strong>Departs</strong>. Test it in the MLH rerun (§9)."],
+  ["Network module: throughput, median fee, finality", "Live from mainnet: flat fee, block time, user TPS excluding votes. Finality is labelled (confirmed ≈0.4 s vs finalized).", "Follows, with claim hygiene"],
+  ["“What are you building?” picker: question title, one line on fit, one button", "Landing page and Start here, three cards", "Follows"],
+  ["Guided routes: Docs, Solana School, ecosystem partners", "Docs, Solana School, Templates, Work with a partner", "Follows"],
+  ["No standalone concepts section on the landing page", "None", "Follows"],
+  ["Build dropdown: use-case column first, relabelled as questions; Start building and Tools follow", "Mega menu: “What are you building?” column first", "Follows"],
+  ["Token Extensions leaves the dropdown and folds into the tokenized-asset path", "Removed from the nav, taught inside the path. The extension how-tos live once in How Solana works → Tokens and the path links to them.", "Follows, refined by the research (single source)"],
+  ["Six-stage path template", "Path intro (job + fit check) + four steps: use it, browser build ★, your stack, go live and go further", "Follows"],
+  ["“Across the five paths, every core concept is taught at least once”", "The generated coverage map shows <strong>CPI is not covered by any of the five paths</strong>; PDAs and writing programs arrive only in Wave 2.", "<strong>Gap found.</strong> Decide when scoping Wave 2."],
+  ["Silent on docs top-level navigation", "Answered by this research: use cases as the entry point, one Use cases tab, canonical core", "<strong>New</strong>"],
+  ["Job picker mockup (job-picker-mockup.html)", "Not available to this work; the picker was rebuilt from the description", "Not reviewed"],
+])}
+<h3>Recommendations on the open decisions</h3>
+${table(["Open decision", "Recommendation"], [
+  ["Wave 1 paths", "Keep Payments, Pay-per-call and Tokenized asset. Web2 developers use existing programs long before they write one; the current Quick Start covers programs, PDAs and CPI under the Programs tab until the Wave 2 path ships."],
+  ["Where “web3” appears", "Agree: never in path titles or the hero; allowed in deeper docs. The mockup's landing page and paths don't use “web3”, “blockchain”, “decentralized” or “keypair”."],
+  ["Initial phase 1 assessment: MLH rerun? Internal process?", "Both. Quick internal tests (about five people) during the Phase 1 pilot, then the MLH rerun at Phase 3 with the same script, plus the tree test and top-tasks survey in §9."],
+])}
+
 ${h2("2. Method")}
 <p>Three research tracks ran in parallel on 13 Oct 2026, plus inspection of the live site and repo while building the mockup:</p>
 <ol>
@@ -968,9 +990,88 @@ ${h2("9. Validate before shipping")}
 <li><strong>MLH rerun</strong> question from the brief: after the first screen, can participants say what Solana is and what they'd build?</li>
 </ol>
 
+${h2("Appendix A: the brief, in full")}
+<p>Reproduced from the Notion brief ${c(1)} as shared on 12 Oct 2026. Formatting adapted for this page.</p>
+<div style="border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px 26px 14px;margin:14px 0 30px">
+<h3>TL;DR</h3>
+<p>solana.com/developers becomes a job picker: every developer enters through a problem they already have, and leaves with something working. Solana fundamentals are never an initial blocker.</p>
+<p>Each concept appears only at the step of a build that needs it, preferably explained against something the developer already knows.</p>
+<p>We ship three use cases / job paths first (stablecoin payments, pay-per-call APIs, Tokenized Assets), on one shared path template, and validate by rerunning the MLH focus group / Creating our own.</p>
+<h3>Why</h3>
+<p>Web2 / “regular” developers arrive with a problem to solve; today's page answers "why Solana over other chains" and teaches concepts before showing anything they can build.</p>
+<ul>
+<li><strong>MLH focus group (Sept 2026):</strong> participants could not say what Solana is or what they would build with it. They compared it to Stripe and traditional databases, not other chains. Concepts like transactions, accounts and framework choice arrived without context, and examples ended with no next step. MLH's recommendation: explain Solana through the questions web2 developers already ask.</li>
+<li>Developers land on concept-heavy pages (keypairs, decentralization) and disengage. We should lead with concrete use cases and weave fundamentals in.</li>
+<li><strong>Existing flags:</strong> the solana.com Build dropdown already has a "Build by use case" column (Payments, DeFi, Gaming, Token Extensions, Agents and AI), but it sits third.</li>
+</ul>
+<h3>Principles</h3>
+<p>Every job path is held to these rules:</p>
+<ol>
+<li><strong>Name the outcome.</strong> "Charge per API call", not "SPL tokens". The developer should recognise their own problem in the title.</li>
+<li><strong>Fundamentals arrive just in time.</strong> A concept appears only at the step that uses it. It gets at most two sentences, a web2 analogy, and a link to docs for depth.</li>
+<li><strong>No concept gate before first success.</strong> Nothing to read, install or decide before the developer sees their result working. The first success happens in the browser playground; local "try it yourself" guides, installation and setup come after it.</li>
+<li><strong>Use it, then show it live.</strong> Before building, the developer uses the product as a customer would (a wallet, a stablecoin received) then sees the real network doing that job right now, not a mock (This builds on principle 3)</li>
+<li><strong>End in their stack.</strong> The last build step runs from the developer's own machine, then offers the next path or a guided program.</li>
+</ol>
+<h3>Page architecture</h3>
+<p>The landing page has one job: get the developer into the right path within one scroll. Top to bottom:</p>
+<ol>
+<li>What Solana does for them, with no chain vocabulary. Draft: "A shared global ledger your code runs on. Payments and records settle in under a second for a fraction of a cent."</li>
+<li>One module showing the network working now: throughput, median fee, finality.</li>
+<li><strong>"What are you building?" job picker.</strong> One card per job path: the developer's question as the title, one line on fit, one button into the path.</li>
+<li><strong>Guided routes such as Docs,</strong> Solana School, Ecosystem partners for developers who want a structured start.</li>
+</ol>
+<p>Mockup of the job picker (item 3), structure only, not final copy or design: <em>job-picker-mockup.html</em></p>
+<p>There is no standalone concepts section on the landing page.</p>
+<p>Navigation changes compared to solana.com: the existing "Build by use case" column moves first in the Build dropdown and becomes the job-path list, each entry relabelled as the developer's question ("Payments" → "Accept dollar payments").</p>
+<p>Concepts / Technology (Token Extensions as an example) leaves that dropdown and folds into the use case / job path (Tokenised assets as an example), since they are primitives, not a job.</p>
+<p>Start building and Tools and references follow behind it.</p>
+<h3>The job paths</h3>
+<p>The following is an idea for the initial job paths, mentioning what the user would build and which fundamentals they would learn.</p>
+${table(["Path (the developer's question)", "What they build", "Fundamentals picked up"], [
+  ["<strong>Wave 1 · Accept dollar payments that settle in seconds</strong>", "A checkout that takes a stablecoin payment and confirms it server-side", "Wallets and signatures, transactions, token accounts, confirmation"],
+  ["<strong>Wave 1 · Charge a few cents per API call</strong>", "A paywalled API endpoint that unlocks after payment", "Transaction fees, RPC, verifying a payment from a backend"],
+  ["<strong>Wave 1 · Issue a tokenized asset with compliance controls</strong>", "A token with metadata, transfer rules and a freeze/pause control", "Accounts, mint authority, programs (Token-2022), extensions"],
+  ["<strong>Wave 2 · Keep a shared record partners can audit</strong>", "A small program that records who changed what, queried from an app", "Writing a program, accounts as state, PDAs, Anchor"],
+  ["<strong>Wave 2 · Let players own items across games</strong>", "An item minted to a player and read by a second app", "Tokens as ownership, metadata, reading state"],
+])}
+<h3>Anatomy of a job path</h3>
+<p>Every path follows the same six stages, so the team builds one template and fills it per job.</p>
+${table(["Stage", "What the developer does", "Fundamentals picked up here"], [
+  ["1. The job", "A problem they already have, in their words", "Nothing yet: plain language, no chain vocabulary"],
+  ["2. Fit check", "Where Solana fits, and where it does not", "Fees and settlement time"],
+  ["3. Use it, then see it live", "Receive a stablecoin in a wallet, then watch it", "Transactions and the explorer: a transaction is a signed request, here is one"],
+  ["<strong>4. Build it in the browser</strong>", "<strong>First success in the playground, no install</strong>", "Wallets, accounts, programs: only those this build touches, two lines each"],
+  ["5. Plug it into your stack", "Same result from their own backend and SDK", "RPC, confirmation, fees in production"],
+  ["6. Go further", "Next job path, deep docs, or a guided program", "Depth on demand: links into docs"],
+])}
+<h3>Fundamentals coverage map</h3>
+<p>Across the five paths, every core concept is taught at least once, always inside a build.</p>
+<h3>Phasing and owners</h3>
+<p>The Payments path is built first as the pilot for the template; the other two Wave 1 paths are cloned from it once it passes review.</p>
+${table(["Phase", "Work", "Definition of Done"], [
+  ["Phase 0 · Align", "First 3 jobs; path template draft", "Scope signed off"],
+  ["Phase 1 · Pilot", "Use-case column first; hero and job picker; Payments path pilot", "Pilot path approved"],
+  ["Phase 2 · Build", "Pay-per-call path; Tokenized asset path", "Three paths live"],
+  ["Phase 3 · Validate", "Validate through assessment; pick Wave 2 paths", "Initial assessment passes"],
+])}
+${table(["Workstream", "Owner"], [
+  ["Execution lead, information architecture, path template", "Awesome Docs team"],
+  ["Playground integration", "Playground team"],
+  ["Short video per job path", "Bri"],
+])}
+<h3>Open decisions</h3>
+<p>These close at the Phase 0 Definition of done.</p>
+<ul>
+<li>☐ <strong>Wave 1 paths.</strong> Recommended: Payments, Pay-per-call, Tokenized asset. One alternative could be swapping one for a program-writing path</li>
+<li>☐ <strong>Where "web3" appears.</strong> Recommended: never in path titles or the hero; allowed in deeper docs.</li>
+<li>☐ <strong>Initial phase 1 assessment:</strong> MLH rerun? Internal process?</li>
+</ul>
+</div>
+
 ${h2("Sources")}
 <ol style="list-style:none;padding-left:0;font-size:14px">
-${src(1, "Internal Notion brief: “TL;DR: solana.com/developers becomes a job picker” (Awesome Docs team), shared 12 Oct 2026, including the MLH focus group findings (Sept 2026) and the job-picker mockup it references")}
+${src(1, "Internal Notion brief: “TL;DR: solana.com/developers becomes a job picker” (Awesome Docs team), shared 12 Oct 2026. Reproduced in full in Appendix A, including the MLH focus group findings (Sept 2026). The job-picker-mockup.html it references was not available to this work.")}
 ${src(2, "Live solana.com/developers and solana.com/docs pages, inspected 12–13 Oct 2026", "https://solana.com/developers")}
 ${src(10, "Stripe docs", "https://docs.stripe.com/")}
 ${src(11, "Stripe: Get started → Use cases", "https://docs.stripe.com/get-started/use-cases")}
