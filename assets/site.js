@@ -263,36 +263,36 @@
     };
   }
 
-  /* ---------- Network numbers, ticker and feed (generated at the real network rate) ---------- */
-  const RATE = 1390; // user transactions per second, mainnet average (Q3 2026: ~120M/day)
-  const fmt = (n) => n.toLocaleString("en-US");
-  const amount = () => { const r = Math.random(); const v = r < .55 ? 1 + Math.random() * 60 : r < .85 ? 60 + Math.random() * 900 : 900 + Math.random() * 25000; return v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
-  const fee = () => "$0.000" + (5 + Math.floor(Math.random() * 5));
-  const tps = $("[data-k=tps]"), today = $("[data-k=today]"), slot = $("[data-k=slot]");
-  if (today) {
-    const tick = () => {
-      const d = new Date(), secs = (d - Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())) / 1000;
-      today.textContent = fmt(Math.floor(secs * RATE));
+  /* ---------- Landing: typed code example ---------- */
+  const typed = $("#typed"), out = $("#typed-out");
+  if (typed) {
+    const src = typed.dataset.src.replace(/\\n/g, "\n");
+    const paint = (t) => (typed.innerHTML = t.replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/("[^"\n]*"?)|\b(const|await)\b|\b(sendUsdc)\b/g, (m, str, kw, fn) => str ? `<span class="tk-s">${str}</span>` : kw ? `<span class="tk-k">${kw}</span>` : `<span class="tk-f">${fn}</span>`) + '<i class="caret-b"></i>');
+    const run = async () => {
+      for (;;) {
+        out.classList.remove("show"); paint("");
+        for (let i = 1; i <= src.length; i++) { paint(src.slice(0, i)); await sleep(src[i - 1] === "\n" ? 140 : 28 + Math.random() * 30); }
+        await sleep(450); out.classList.add("show"); await sleep(3600);
+      }
     };
-    tick(); setInterval(tick, 120);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { paint(src); out.classList.add("show"); } else run();
   }
-  if (tps) setInterval(() => { tps.textContent = fmt(Math.round(RATE * (0.93 + Math.random() * 0.14))); if (slot) slot.innerHTML = (0.38 + Math.random() * 0.04).toFixed(2) + "<small>s</small>"; }, 2200);
-  const tkr = $("#ticker");
-  if (tkr) {
-    const items = Array.from({ length: 22 }, () => `<span class="tk"><b>USDC</b><span class="amt">${amount()}</span><span class="mono">${short(rnd(87))}</span><em>confirmed in 0.${38 + Math.floor(Math.random() * 6)} s</em></span>`).join("");
-    tkr.innerHTML = items + items;
-  }
-  const feed = $("#feed");
-  if (feed) {
-    let head = feed.querySelector(".row.head");
-    const row = (age, isNew) => `<div class="row${isNew ? " new" : ""}"><span>${age}</span><span class="sig">${short(rnd(87))}</span><span class="ok">${amount()} USDC</span><span class="fee">${fee()}</span></div>`;
-    feed.innerHTML = head.outerHTML + ["just now", "1s ago", "1s ago", "2s ago", "2s ago", "3s ago"].map((a) => row(a)).join("");
-    head = feed.querySelector(".row.head");
-    setInterval(() => {
-      const rows = $$(".row:not(.head)", feed);
-      rows.forEach((r, i) => { r.firstElementChild.textContent = i === 0 ? "1s ago" : Math.min(9, i) + "s ago"; r.classList.remove("new"); });
-      head.insertAdjacentHTML("afterend", row("just now", true));
-      const all = $$(".row:not(.head)", feed); if (all.length > 6) all[all.length - 1].remove();
-    }, 1100);
+
+  /* ---------- Landing: cost calculator ---------- */
+  const calc = $("#calc");
+  if (calc) {
+    const money = (v) => "$" + (v >= 100 ? Math.round(v).toLocaleString("en-US") : v.toFixed(2));
+    const nFrom = (p) => Math.round(10 ** (2 + (p / 100) * 4) / 10) * 10; // 100 → 1,000,000, log scale
+    const upd = () => {
+      const n = nFrom(+$("[data-i=n]", calc).value), avg = +$("[data-i=avg]", calc).value;
+      const card = n * (avg * 0.029 + 0.3), sol = n * 0.001;
+      $("[data-o=n]", calc).textContent = n.toLocaleString("en-US");
+      $("[data-o=avg]", calc).textContent = "$" + avg;
+      $("[data-o=card]", calc).textContent = money(card);
+      $("[data-o=sol]", calc).textContent = money(sol);
+      $("[data-o=save]", calc).textContent = money(card - sol);
+    };
+    $$("input", calc).forEach((i) => (i.oninput = upd)); upd();
   }
 })();

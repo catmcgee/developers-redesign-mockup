@@ -176,16 +176,13 @@ function landing() {
     <div class="lp-ctas2"><a class="lp-btn primary sm" href="#picker">Pick a guide ${I.down}</a><a class="lp-btn ghost sm" href="${link("docs")}">Docs</a></div>
     <p class="lp-quiet2">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
   </div>
-  <div class="lp-statcard rv" style="--d:120ms" data-live>
-    <div class="lp-sc-h"><span>Solana mainnet</span></div>
-    <div class="lp-sc-r"><span>Base fee per transaction</span><b data-k="fee">$0.0008</b></div>
-    <div class="lp-sc-r"><span>Block time</span><b data-k="slot">0.40<small>s</small></b></div>
-    <div class="lp-sc-r"><span>User transactions / sec</span><b data-k="tps">1,390</b></div>
-    <div class="lp-sc-r"><span>Transactions today</span><b data-k="today">0</b></div>
-    <div class="lp-sc-f">User transactions, excluding validator votes. Most confirm within one block.</div>
+  <div class="lp-code rv" style="--d:120ms" aria-label="Example: send a USDC payment">
+    <div class="lp-code-h"><span>pay.ts</span><span>example · devnet</span></div>
+    <pre id="typed" data-src='const sig = await sendUsdc({\n  from: customer,\n  to: shop,\n  amount: "1.00",\n});'></pre>
+    <div class="lp-code-out" id="typed-out"><span class="ok">✓</span> confirmed in 0.4 s · fee $0.001</div>
   </div>
 </div>
-<div class="lp-ticker rv" style="--d:200ms" aria-label="Recent transactions"><div class="lp-tk-track" id="ticker"></div></div>
+</div>
 </section>
 
 <section class="lp-sec" id="picker"><div class="lp-wrap">
@@ -213,11 +210,20 @@ function landing() {
   <p class="lp-src rv">Sources: <a href="https://stablecoininsider.org/stablecoin-liquidity-report-2026-supply-volume-venue-depth-and-defi-utilization/">Stablecoin Insider</a>, <a href="https://solanacompass.com/news/solana-stablecoin-supply-reaches-167b-growing-11x-in-three-years-to-rank-third-globally">Solana Compass</a>, <a href="https://cryptobriefing.com/solana-14-billion-transactions-q3-2026/">Crypto Briefing (Q3 2026)</a>, <a href="https://cryptobriefing.com/solana-100-percent-uptime-30-months/">Crypto Briefing (uptime)</a>, <a href="https://blog.stake.fish/the-state-of-solana-in-2026/">stake.fish</a>.</p>
 </div></section>
 
-<section class="lp-sec"><div class="lp-wrap lp-split">
-  <div class="rv"><h2>Recent USDC transactions</h2>
-    <p class="lp-p">USDC transfers settling on Solana mainnet, about 0.4 seconds each, for well under a cent.</p>
-    <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open Explorer ${I.arrow}</a></div>
-  <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>USDC transfer</span><span>Amount</span><span>Fee</span></div></div></div></div>
+<section class="lp-sec"><div class="lp-wrap">
+  <div class="lp-head rv"><h2>What would your payments cost?</h2><p>Network fees on Solana against typical online card pricing. Move the sliders.</p></div>
+  <div class="lp-calc rv" id="calc">
+    <div class="lp-calc-in">
+      <label>Payments per month <b data-o="n">10,000</b><input type="range" min="0" max="100" value="50" data-i="n"></label>
+      <label>Average payment <b data-o="avg">$20</b><input type="range" min="1" max="500" value="20" data-i="avg"></label>
+      <p class="lp-calc-note">Cards: 2.9% + $0.30 per payment, money available in about 2 business days. Solana: about $0.001 network fee per payment, settled in about 0.4 seconds. Excludes on-ramp, off-ramp and provider fees.</p>
+    </div>
+    <div class="lp-calc-out">
+      <div class="lp-calc-row"><span>Card processing</span><b data-o="card">$8,800</b><em>per month</em></div>
+      <div class="lp-calc-row sol"><span>Solana network fees</span><b data-o="sol">$10</b><em>per month</em></div>
+      <div class="lp-calc-save">That's <b data-o="save">$8,790</b> less per month, and the money arrives in seconds instead of days.</div>
+    </div>
+  </div>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap">
