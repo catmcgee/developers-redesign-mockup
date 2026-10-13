@@ -33,9 +33,9 @@ const pathOfPage = (pg) => {
 function topbar() {
   const mega = `<div class="mega">
     <div class="col first"><h6>What are you building?</h6>
-      <a class="it" href="${link("docs/build/checkout")}"><b>Accept dollar payments</b><span>A checkout that settles in seconds</span></a>
-      <a class="it" href="${link("docs/build/paywall-api")}"><b>Charge per API call</b><span>Pay-per-request for apps and AI agents</span></a>
-      <a class="it" href="${link("docs/build/issue-asset")}"><b>Issue a tokenized asset</b><span>Tokens with approvals and a pause switch</span></a>
+      <a class="it" href="${link("docs/payments/checkout")}"><b>Accept dollar payments</b><span>A checkout that settles in seconds</span></a>
+      <a class="it" href="${link("docs/payments/paywall-api")}"><b>Charge per API call</b><span>Pay-per-request for apps and AI agents</span></a>
+      <a class="it" href="${link("docs/assets/issue-asset")}"><b>Issue a tokenized asset</b><span>Tokens with approvals and a pause switch</span></a>
       <a class="more" href="${link("docs/use-cases")}">More use cases: trading, games, custom programs →</a></div>
     <div class="col"><h6>Start building</h6>
       <a class="it" href="${link("docs")}"><b>Docs</b><span>Start here, then everything else</span></a>
@@ -43,7 +43,7 @@ function topbar() {
       <a class="it" href="${link("docs/agents")}"><b>Build with AI agents</b><span>MCP server and Solana skill</span></a>
       <a class="it" href="${link("docs/from-ethereum")}"><b>Coming from Ethereum</b><span>EVM → SVM guide</span></a></div>
     <div class="col"><h6>Tools &amp; reference</h6>
-      <a class="it" href="${link("docs/resources/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
+      <a class="it" href="${link("docs/develop/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
       <a class="it" href="${link("docs/reference/rpc")}"><b>RPC API</b><span>Every method</span></a>
       <a class="it" href="https://explorer.solana.com"><b>Explorer</b><span>Look up any transaction</span></a>
       <a class="it" href="#"><b>Changelog</b><span>What shipped</span></a></div></div>`;
@@ -164,7 +164,7 @@ function landing() {
   <div class="foot"><div class="meta"><span>First result <b>${first}</b></span><span>Full path <b>${total}</b></span><span>In browser</span></div>
   <div class="go">${cta}${I.arrow}</div></div></a>`;
   const body = `
-<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
+<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/develop/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
 <section class="hero"><div class="wrap">
   <div>
@@ -187,15 +187,15 @@ function landing() {
   <h2 class="display">What are you building?</h2>
   <p class="intro">Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one piece, starting in your browser and ending in your own stack.</p>
   <div class="grid g3">
-    ${job("docs/build/checkout", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
-    ${job("docs/build/paywall-api", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
-    ${job("docs/build/issue-asset", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
+    ${job("docs/payments/checkout", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
+    ${job("docs/payments/paywall-api", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
+    ${job("docs/assets/issue-asset", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
   </div>
   <div class="morejobs"><span class="lbl">Markets &amp; more</span>
     <a href="${link("docs/markets")}">Trading &amp; markets <span>guides →</span></a>
-    <a href="${link("docs/games")}">Games &amp; digital items <span>guides →</span></a>
+    <a href="${link("docs/assets/games")}">Games &amp; digital items <span>guides →</span></a>
     <a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay <span>guides →</span></a>
-    <a href="${link("docs/programs")}">Write your own program <span>guides →</span></a></div>
+    <a href="${link("docs/develop/programs")}">Write your own program <span>guides →</span></a></div>
 </div></section>
 
 <section class="band"><div class="wrap">

@@ -110,3 +110,18 @@ Resources         → tools, production readiness, video
 - Mintlify state of AI, https://www.mintlify.com/blog/state-of-ai
 - Vercel on agent-readable docs, https://vercel.com/kb/guide/make-your-documentation-readable-by-ai-agents
 - Stack Overflow 2025 survey, https://survey.stackoverflow.co/2025/
+
+## Revision (2026-10-13): domain tabs, not one "Use cases" tab
+
+The single-tab recommendation above leaned too heavily on today's page counts. The closest precedents (Stripe, Circle, Coinbase CDP, Plaid, Polygon) put **domains** at the top level, and only fine-grained jobs one level down. The mockup now uses:
+
+```
+Start here · Payments · Assets · Markets | How Solana works · Develop · Reference
+```
+
+- **Payments** opens with two paths, "Accept dollar payments" and "Charge per API call". Pay-per-call and x402 sit here, followed by the guides and the payments tools.
+- **Assets** opens with the "Issue a tokenized asset" path. It covers tokenization, all the token mechanics (basics, extensions, verify), NFTs and game items, which comes to roughly 55 pages, so the tab isn't thin.
+- **Markets** covers exchanges, the single canonical DvP page, MEV and SWQoS. It's thin today, at about 9 pages. If it doesn't grow, fold it into Assets.
+- **Develop** holds programs, frontend, tools and production readiness. It's for building, not lookup, which is the same split Base and Sui make. It replaces the Resources tab.
+- **Reference** is RPC, SDKs and CLI only.
+- **Start here** stays short: the job picker, All use cases, setup and AI agents.
