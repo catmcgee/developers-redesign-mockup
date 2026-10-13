@@ -43,8 +43,9 @@ export const tabs = [
   { id: "markets", label: "Markets", icon: I.chart, href: "docs/markets" },
   { sep: true },
   { id: "concepts", label: "How Solana works", icon: I.cube, href: "docs/concepts" },
-  { id: "develop", label: "Develop", icon: I.code, href: "docs/develop" },
-  { id: "reference", label: "Reference", icon: I.book, href: "docs/reference" },
+  { id: "programs", label: "Programs", icon: I.code, href: "docs/programs" },
+  { id: "resources", label: "Developer resources", icon: I.wrench, href: "docs/resources" },
+  { id: "reference", label: "API reference", icon: I.book, href: "docs/reference" },
 ];
 
 /* ============================================================ sidebars */
@@ -53,9 +54,6 @@ export const sidebars = {
   start: [
     { p: "docs", t: "Start here" },
     { p: "docs/use-cases", t: "All use cases" },
-    { h: "Set up" },
-    { p: "docs/agents", t: "Build with AI coding agents" },
-    { p: "docs/setup", t: "Set up your machine" },
     { p: "docs/from-ethereum", t: "Coming from Ethereum" },
     { h: "Learn" },
     { p: "docs/videos", t: "Video tutorials" },
@@ -110,27 +108,31 @@ export const sidebars = {
     for (const [k, c] of Object.entries(concepts)) (cats[c.cat] ||= []).push(k);
     return [{ p: "docs/concepts", t: "Overview & coverage" }, ...Object.entries(cats).flatMap(([cat, ks]) => [{ h: cat }, ...ks.map((k) => ({ p: `docs/concepts/${slug(k)}`, t: concepts[k].name }))])];
   })(),
-  develop: [
-    { p: "docs/develop", t: "Overview" },
-    { h: "Programs" },
-    { p: "docs/develop/programs", t: "Write your own program" },
-    { p: "docs/develop/programs/first-program", t: "First program in the browser" },
-    { p: "docs/develop/programs/anchor", t: "Anchor framework" },
-    { p: "docs/develop/programs/testing", t: "Testing programs" },
-    { p: "docs/develop/programs/deploying", t: "Deploying" },
-    { p: "docs/develop/programs/idls", t: "IDLs & Codama clients" },
-    { h: "Apps" },
-    { p: "docs/develop/frontend", t: "React & Next.js" },
-    { h: "Tools" },
-    guide("docs/develop/tools", "Developer tools", [["docs/develop/tools/surfpool", "Surfpool"], ["docs/develop/tools/litesvm", "LiteSVM"], ["docs/develop/tools/microscope", "Microscope"], ["docs/develop/tools/keychain", "Keychain"], ["docs/develop/tools/private-channels", "Private Channels"]]),
+  programs: [
+    { p: "docs/programs", t: "Write onchain programs" },
+    { p: "docs/programs/first-program", t: "First program in the browser" },
+    { h: "Build" },
+    { p: "docs/programs/anchor", t: "Anchor framework" },
+    { p: "docs/programs/testing", t: "Testing programs" },
+    { p: "docs/programs/deploying", t: "Deploying" },
+    { p: "docs/programs/idls", t: "IDLs & Codama clients" },
+  ],
+  resources: [
+    { p: "docs/resources", t: "Overview" },
+    { h: "Set up" },
+    { p: "docs/resources/agents", t: "Build with AI coding agents" },
+    { p: "docs/resources/setup", t: "Set up your machine" },
+    { p: "docs/resources/cli", t: "Solana CLI" },
+    { h: "Build apps" },
+    { p: "docs/resources/frontend", t: "React & Next.js" },
+    guide("docs/resources/tools", "Developer tools", [["docs/resources/tools/surfpool", "Surfpool"], ["docs/resources/tools/litesvm", "LiteSVM"], ["docs/resources/tools/microscope", "Microscope"], ["docs/resources/tools/keychain", "Keychain"], ["docs/resources/tools/private-channels", "Private Channels"]]),
     { h: "Ship" },
-    { p: "docs/develop/production", t: "Production readiness" },
+    { p: "docs/resources/production", t: "Production readiness" },
   ],
   reference: [
     { p: "docs/reference", t: "Overview" },
     guide("docs/reference/rpc", "RPC methods", [["docs/reference/rpc/http", "HTTP methods"], ["docs/reference/rpc/websocket", "WebSocket methods"], ["docs/reference/rpc/providers", "RPC providers"]]),
     guide("docs/reference/sdks", "SDKs", [["docs/reference/sdks/typescript", "TypeScript (Kit)"], ["docs/reference/sdks/rust", "Rust"], ["docs/reference/sdks/python", "Python"]]),
-    { p: "docs/reference/cli", t: "Solana CLI" },
   ],
 };
 
@@ -164,7 +166,7 @@ page("docs", {
 ${cards([
   ["Trading & markets", "Exchanges, order flow, MEV protection.", "@/docs/markets/", "Guides"],
   ["Games & digital items", "Items players own and other apps can read.", "@/docs/assets/games/", "Guides"],
-  ["Keep a shared record", "Write your own program when existing ones aren't enough.", "@/docs/develop/programs/", "Guides"],
+  ["Keep a shared record", "Write your own program when existing ones aren't enough.", "@/docs/programs/", "Guides"],
 ], "c3")}
 ${h2("Already know your way around?")}
 ${cards([
@@ -174,7 +176,7 @@ ${cards([
   ["Coming from Ethereum", "Map EVM concepts to Solana before you migrate.", "@/docs/from-ethereum/"],
 ])}
 ${h2("Build with AI coding agents")}
-${callout(`<p><strong>Using Claude Code, Cursor or Codex?</strong> Add the Solana MCP server or install the official Solana skill so your agent knows the current SDKs. <a href="@/docs/agents/">Set it up →</a></p>`)}
+${callout(`<p><strong>Using Claude Code, Cursor or Codex?</strong> Add the Solana MCP server or install the official Solana skill so your agent knows the current SDKs. <a href="@/docs/resources/agents/">Set it up →</a></p>`)}
 `,
   why: [
     N("change", "Today <code>/docs</code> opens with three cards: <i>Quick Start</i> (a Solana Playground course on accounts, PDAs and CPIs), <i>AI agents</i>, and <i>Core Concepts</i>. That's two concept gates and one tool. Here the docs front door is the same job picker as solana.com/developers, so someone arriving from search lands in the same place."),
@@ -182,8 +184,8 @@ ${callout(`<p><strong>Using Claude Code, Cursor or Codex?</strong> Add the Solan
     N("why", "The AI-agent card stays. More and more developers arrive through their coding agent, and that card is about tooling, not concepts."),
   ],
 });
-page("docs/agents", { tab: "start", title: "Build with AI coding agents", desc: "Give your coding agent current Solana knowledge with the MCP server or the official skill.", stub: { was: "/docs/intro/coding-with-agents" } });
-page("docs/setup", { tab: "start", title: "Set up your machine", desc: "Install the Solana CLI, Anchor and Surfpool when you're ready to write programs or run a local network. None of the job paths need this.", stub: { was: "/docs/intro/installation" },
+page("docs/resources/agents", { tab: "start", title: "Build with AI coding agents", desc: "Give your coding agent current Solana knowledge with the MCP server or the official skill.", stub: { was: "/docs/intro/coding-with-agents" } });
+page("docs/resources/setup", { tab: "start", title: "Set up your machine", desc: "Install the Solana CLI, Anchor and Surfpool when you're ready to write programs or run a local network. None of the job paths need this.", stub: { was: "/docs/intro/installation" },
   why: [N("change", "This was step 2 of <i>Getting Started</i>. The paths now link here as optional from their <i>run it from your machine</i> step, because the payments and API paths only need <code>npm install</code> and a URL.")] });
 page("docs/from-ethereum", { tab: "start", title: "Coming from Ethereum", desc: "How EVM concepts map onto Solana: accounts vs contract storage, programs vs contracts, fees and finality.", stub: { was: "/developers/evm-to-svm" } });
 
@@ -213,7 +215,7 @@ ${cards([
   ["Subscriptions", "Recurring charges with delegated spending limits.", "@/docs/payments/subscriptions/"],
   ["Payouts & disbursements", "Pay users, vendors or employees in bulk.", "@/docs/payments/payouts/"],
 ])}
-${callout(`<p>Moving real money? Read <a href="@/docs/develop/production/">Production readiness</a> before you launch. It covers RPC infrastructure, confirmation, monitoring and key management.</p>`)}
+${callout(`<p>Moving real money? Read <a href="@/docs/resources/production/">Production readiness</a> before you launch. It covers RPC infrastructure, confirmation, monitoring and key management.</p>`)}
 `,
   why: [
     N("change", "<b>Where this lives.</b> The path sits at the top of the <i>Payments</i> tab, the way Stripe's Payments sidebar opens with “Accept a payment”. That keeps the path, its guides and its tools in one sidebar, so following a link never swaps tabs. Start here links to it from the job picker."),
@@ -392,7 +394,7 @@ ${h2("4. Test it")}
 ${code({ label: "curl", lang: "sh", src: `curl -X POST localhost:3000/api/orders/demo/confirm \\
   -d '{"signature":"<your signature from step 2>"}'
 # {"paid":true}` })}
-${callout(`<p>Want the CLI, a local test network or Anchor? You don't need them for payments, but <a href="@/docs/setup/">Set up your machine</a> covers them.</p>`)}
+${callout(`<p>Want the CLI, a local test network or Anchor? You don't need them for payments, but <a href="@/docs/resources/setup/">Set up your machine</a> covers them.</p>`)}
 ${next("docs/payments/checkout/go-live", "Go live", "Switch to mainnet, decide who pays network fees, and handle the edge cases real customers hit.")}
 `,
   why: [
@@ -737,7 +739,7 @@ ${cards([
   ["Trading & markets", "Exchanges, order flow, MEV protection and stake-weighted QoS.", "@/docs/markets/", "Guides"],
   ["Let players own items across games", "Items minted to a player and read by a second app.", "@/docs/assets/games/", "Wave 2 path"],
   ["Private payments", "Confidential balances and private channels.", "@/docs/payments/privacy/", "Guides"],
-  ["Keep a shared record partners can audit", "Write a program that records who changed what.", "@/docs/develop/programs/", "Wave 2 path"],
+  ["Keep a shared record partners can audit", "Write a program that records who changed what.", "@/docs/programs/", "Wave 2 path"],
 ])}`,
   why: [N("why", "Only jobs with a real path get a top-level tab. These sections keep today's content without pretending to be paths, so the picker never promises a path that doesn't exist yet.")],
 });
@@ -748,12 +750,12 @@ page("docs/markets/swqos", { tab: "more", title: "Stake-weighted QoS", desc: "",
 page("docs/assets/games", { tab: "more", title: "Let players own items across games", desc: "Mint an item to a player and read it from a second app. A Wave 2 job path.", stub: { was: "/developers/guides/games" } });
 page("docs/payments/privacy", { tab: "more", title: "Private payments", desc: "Confidential transfers and private channels.", stub: { was: "/docs/finance/privacy" },
   why: [N("change", "Today this is the only page in a top-level section called <i>Finance</i>. A one-page section with a broad name promises more than it delivers, so it's renamed after what it covers.")] });
-page("docs/develop/programs", { tab: "more", title: "Keep a shared record: write your own program", desc: "When existing programs aren't enough, write your own. This becomes the Wave 2 path “Keep a shared record partners can audit”.", stub: { was: "/docs/develop/programs" },
+page("docs/programs", { tab: "more", title: "Keep a shared record: write your own program", desc: "When existing programs aren't enough, write your own. This becomes the Wave 2 path “Keep a shared record partners can audit”.", stub: { was: "/docs/programs" },
   why: [N("why", "The coverage map shows that Wave 1 teaches <i>using</i> Solana, but never <b>writing a program, PDAs or CPI</b>. This is where that lives until the Wave 2 path ships.")] });
-page("docs/develop/programs/first-program", { tab: "more", title: "First program in the browser", desc: "Write, deploy and call a program in Solana Playground: accounts, PDAs and cross-program calls.", stub: { was: "/docs/intro/quick-start" },
+page("docs/programs/first-program", { tab: "more", title: "First program in the browser", desc: "Write, deploy and call a program in Solana Playground: accounts, PDAs and cross-program calls.", stub: { was: "/docs/intro/quick-start" },
   why: [N("change", "This is today's <b>Quick Start</b>, the first card on <code>/docs</code>. It's good content behind the wrong front door: it teaches programs, PDAs and CPI before a web2 developer has a reason to care. It moves here, and the URL redirects.")] });
-for (const [k, t, w] of [["anchor", "Anchor framework", "/docs/develop/programs/anchor"], ["testing", "Testing programs", "/docs/develop/programs/testing"], ["deploying", "Deploying", "/docs/develop/programs/deploying"], ["idls", "IDLs & Codama clients", "/docs/develop/programs/idls"]])
-  page(`docs/develop/programs/${k}`, { tab: "more", title: t, desc: "", stub: { was: w } });
+for (const [k, t, w] of [["anchor", "Anchor framework", "/docs/programs/anchor"], ["testing", "Testing programs", "/docs/programs/testing"], ["deploying", "Deploying", "/docs/programs/deploying"], ["idls", "IDLs & Codama clients", "/docs/programs/idls"]])
+  page(`docs/programs/${k}`, { tab: "more", title: t, desc: "", stub: { was: w } });
 
 /* --------------------------------------------------------- CONCEPTS */
 page("docs/concepts", {
@@ -787,10 +789,10 @@ ${h2("Fees")}
 
 /* --------------------------------------------------------- REFERENCE */
 page("docs/reference", { tab: "reference", title: "Reference", desc: "APIs, SDKs and tools: the lookup material you'll need once something is working.",
-  body: () => cards([["RPC methods", "Every HTTP and WebSocket method.", "@/docs/reference/rpc/"], ["SDKs", "TypeScript (Kit), Rust, Python.", "@/docs/reference/sdks/"], ["React & Next.js", "Hooks, wallet connection and server patterns.", "@/docs/develop/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope, Keychain and more.", "@/docs/develop/tools/"], ["Solana CLI", "Keys, airdrops, deploys and config.", "@/docs/reference/cli/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/develop/production/"]]),
+  body: () => cards([["RPC methods", "Every HTTP and WebSocket method.", "@/docs/reference/rpc/"], ["SDKs", "TypeScript (Kit), Rust, Python.", "@/docs/reference/sdks/"], ["React & Next.js", "Hooks, wallet connection and server patterns.", "@/docs/resources/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope, Keychain and more.", "@/docs/resources/tools/"], ["Solana CLI", "Keys, airdrops, deploys and config.", "@/docs/resources/cli/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/resources/production/"]]),
   why: [N("change", "This merges today's <i>Solana SDKs</i>, <i>Frontend</i>, <i>Solana RPC Methods</i> and the tools half of <i>Resources</i> into one place for lookups. Tools that belong to one job (Commerce Kit, Kora, Attestations) are listed inside that job too, the same just-in-time rule applied to products.")] });
 for (const [p, t, w] of [["rpc", "RPC methods", "/docs/rpc"], ["rpc/http", "HTTP methods", "/docs/rpc/http"], ["rpc/websocket", "WebSocket methods", "/docs/rpc/websocket"], ["rpc/providers", "RPC providers", "/docs/rpc/providers"], ["sdks", "SDKs", "/docs/clients"], ["sdks/typescript", "TypeScript (Kit)", "/docs/clients/official/javascript"], ["sdks/rust", "Rust", "/docs/clients/official/rust"], ["sdks/python", "Python", "/docs/clients/community"], ["frontend", "React & Next.js", "/docs/frontend"], ["tools", "Developer tools", "/docs/tools"], ["tools/surfpool", "Surfpool", "/docs/tools/surfpool"], ["tools/litesvm", "LiteSVM", "/docs/tools/litesvm"], ["tools/microscope", "Microscope", "/microscope"], ["tools/keychain", "Keychain", "/docs/tools/keychain"], ["tools/private-channels", "Private Channels", "/docs/tools/private-channels"], ["cli", "Solana CLI", "/docs/intro/installation/solana-cli-basics"], ["production", "Production readiness", "/docs/tools/production-readiness"]])
-  page(/^(tools|production|frontend)/.test(p) ? `docs/develop/${p}` : `docs/reference/${p}`, { tab: "reference", title: t, desc: "", stub: { was: w } });
+  page(/^(tools|production|frontend|cli)/.test(p) ? `docs/resources/${p}` : `docs/reference/${p}`, { tab: "reference", title: t, desc: "", stub: { was: w } });
 
 /* ============================================================ LANDING */
 export const landingWhy = [
@@ -878,7 +880,7 @@ page("docs/research", {
   tab: "start", title: "Docs Research", wide: false,
   desc: "Why this mockup is structured the way it is: the brief it implements, the research into docs navigation, and every source.",
   body: () => `
-${callout(`<p><strong>Question:</strong> should use cases be the top-level navigation of solana.com/docs?<br><strong>Answer:</strong> not as fine-grained jobs (“Charge per API call”) in the global nav; no leading docs site does that. Yes as a few <strong>domain tabs</strong>, the Stripe / Circle / Coinbase pattern: <strong>Payments · Assets · Markets</strong>, the three pieces of internet capital markets. Each opens with its job path, then guides. Underneath sits one shared core: How Solana works · Develop · Reference.</p>`, "green")}
+${callout(`<p><strong>Question:</strong> should use cases be the top-level navigation of solana.com/docs?<br><strong>Answer:</strong> not as fine-grained jobs (“Charge per API call”) in the global nav; no leading docs site does that. Yes as a few <strong>domain tabs</strong>, the Stripe / Circle / Coinbase pattern: <strong>Payments · Assets · Markets</strong>, the three pieces of internet capital markets. Each opens with its job path, then guides. Underneath sits one shared core: How Solana works · Programs · Developer resources · API reference.</p>`, "green")}
 
 ${h2("1. The brief")}
 <p>This mockup implements an internal Notion brief, <em>“TL;DR: solana.com/developers becomes a job picker”</em> ${c(1)}, shared at the start of this work (12 Oct 2026). Its core claims:</p>
@@ -984,19 +986,21 @@ ${h2("7. Redesigns elsewhere")}
 </ul>
 
 ${h2("8. Decision and what changed in this mockup")}
-<p><strong>Tabs:</strong> Start here · <strong>Payments · Assets · Markets</strong> | How Solana works · Develop · Reference (seven, against Stripe's nine).</p>
+<p><strong>Tabs:</strong> Start here · <strong>Payments · Assets · Markets</strong> | How Solana works · Programs · Developer resources · API reference (eight, against Stripe's nine). Benchmarks are web2 and institutional-finance docs (Stripe, Shopify, Plaid, Circle, Canton) rather than other chains.</p>
 ${table(["Decision", "Why"], [
   ["<strong>Domain tabs: Payments, Assets, Markets</strong>", "The dominant pattern among the most comparable sites (Stripe, Circle, Coinbase CDP, Plaid, Polygon) " + c(10, 13, 14, 15, 18) + ". Broad enough to avoid overlap, specific enough to signal what's inside. They also spell out the internet capital markets framing."],
   ["<strong>Jobs are paths inside their domain</strong> (Payments opens with “Accept dollar payments” and “Charge per API call”)", "Stripe's Payments sidebar opens with “Accept a payment”. Keeping path, guides and tools in one sidebar avoids cross-tab jumps " + c(10)],
   ["<strong>Pay-per-call is part of Payments</strong>", "x402 <em>is</em> payments, and it's already split across three places in today's docs"],
   ["<strong>Tokens live in Assets</strong> (with tokenization, NFTs and game items)", "Gives NFT and game developers a home outside “Finance”, and makes Assets substantial (about 55 pages today) rather than thin (5)"],
   ["<strong>DvP has one page, in Markets</strong>", "Today it is split across two roots"],
-  ["<strong>Develop</strong> = programs, frontend, tools, production", "Writing programs is building, not lookup. Same split as Base and Sui " + c(12, 17) + ". It also replaces the catch-all Resources tab."],
-  ["<strong>Reference</strong> = RPC, SDKs, CLI only", "Reference is its own top-level item on every site surveyed"],
+  ["<strong>Programs</strong> keeps its own tab", "Stripe and Shopify nest custom code (Extend Stripe; Shopify Functions under Apps → Build) because it's an add-on there " + c(24, 23) + ". On Solana programs are the platform, and Canton gives the equivalent a top-level App Development tab " + c(22) + ". The label needs a tree test: “Programs” can read as grant programs."],
+  ["<strong>Developer resources</strong> = setup, AI agents, CLI, frontend, tools, production", "Stripe's Developer resources tab " + c(24) + ". It replaces today's catch-all Resources tab."],
+  ["<strong>API reference</strong> = RPC and SDK reference only", "Lookups only. Reference is its own top-level item on every site surveyed"],
   ["<strong>Start here stays short</strong>: the picker, All use cases, setup, AI agents", "It routes people; it doesn't hold content"],
 ])}
 <h3>Revision history</h3>
-<p>An earlier version of this mockup collapsed everything into a single “Use cases” tab, mainly because some of Solana's use-case sections are thin today (tokenization 5 pages, defi 9). On review that overweighted a snapshot of current page counts. It also departed from the closest precedents, Stripe above all, which put their domains at the top level. A single generic “Use cases” label also says nothing about what's inside. The thin-section risk is handled instead by folding tokens into Assets, and by a fold-back rule for Markets if it doesn't grow (see the design notes on that tab).</p>
+<p><strong>Second revision.</strong> A “Develop” tab (programs plus tools) was briefly modelled on Base and Sui. It was replaced after review by benchmarks from the strongest web2 and institutional-finance docs: Stripe (Developer resources), Shopify (Functions nested in Apps) and Canton (App Development as a top-level tab). Programs keeps its own tab, and tools move to Developer resources.</p>
+<p><strong>First revision.</strong> An earlier version of this mockup collapsed everything into a single “Use cases” tab, mainly because some of Solana's use-case sections are thin today (tokenization 5 pages, defi 9). On review that overweighted a snapshot of current page counts. It also departed from the closest precedents, Stripe above all, which put their domains at the top level. A single generic “Use cases” label also says nothing about what's inside. The thin-section risk is handled instead by folding tokens into Assets, and by a fold-back rule for Markets if it doesn't grow (see the design notes on that tab).</p>
 
 ${h2("9. Validate before shipping")}
 <ol>
@@ -1101,6 +1105,9 @@ ${src(18, "Polygon docs", "https://docs.polygon.technology/")}
 ${src(19, "ethereum.org developer docs", "https://ethereum.org/developers/docs/")}
 ${src(20, "AWS documentation", "https://docs.aws.amazon.com/")}
 ${src(21, "Azure Architecture Center", "https://learn.microsoft.com/en-us/azure/architecture/")}
+${src(22, "Canton Network docs (Overview · App Development · Global Synchronizer · Integrations · SDKs and Tools · API Reference)", "https://docs.canton.network/")}
+${src(23, "Shopify: Apps → Build (Functions nested inside)", "https://shopify.dev/docs/apps/build")}
+${src(24, "Stripe: Developer resources (CLI, SDKs, testing, agents/MCP, Extend Stripe)", "https://docs.stripe.com/development")}
 ${src(30, "Robillard & DeLine (2011), A field study of API learning obstacles", "https://www.cs.mcgill.ca/~martin/papers/ese2011.pdf")}
 ${src(31, "Meng, Steinhardt & Schubert (2019), How developers use API documentation: an observation study", "https://mangold-international.com/resources/meng-et-al-how-developers-use-api-documentation-2019.pdf")}
 ${src(32, "Meng et al. (2020), Optimizing API documentation (SIGDOC)", "https://mangold-international.com/resources/meng-et-al-optimizing-api-documentation-2020.pdf")}
@@ -1144,7 +1151,7 @@ ${cards([["Issue a tokenized asset", "Path · issue an asset in ~45 min", "@/doc
 ${h2("Markets")}
 ${cards([["Build an exchange", "Order flow and settlement", "@/docs/markets/exchange/", "Guides"], ["Delivery vs payment", "Swap an asset for USDC atomically", "@/docs/markets/dvp/", "Guides"], ["MEV protection", "Protect users' orders", "@/docs/markets/mev/", "Guides"]], "c3")}
 ${h2("Something else")}
-${cards([["Keep a shared record", "Write your own program (Wave 2 path)", "@/docs/develop/programs/", "Develop"], ["Coming from Ethereum", "Map EVM concepts to Solana", "@/docs/from-ethereum/", "Start here"]])}`,
+${cards([["Keep a shared record", "Write your own program (Wave 2 path)", "@/docs/programs/", "Develop"], ["Coming from Ethereum", "Map EVM concepts to Solana", "@/docs/from-ethereum/", "Start here"]])}`,
   why: [N("why", "Stripe has the same kind of page (<i>Find your use case</i>) alongside its domain tabs. It's the one place that lists every job, so the tabs can stay few.")],
 });
 page("docs/assets", {
@@ -1170,14 +1177,26 @@ page("docs/markets", {
     N("risk", "<b>This is the thinnest tab</b> (about 9 pages today). It earns its place because it completes the money / assets / markets framing and is where the Markets Wave 2 work lands. If it isn't growing within a couple of quarters, fold it into Assets as <i>Assets &amp; markets</i>."),
   ],
 });
-page("docs/develop", {
-  title: "Develop",
-  desc: "Skills that apply whatever you're building: writing onchain programs, building app frontends, testing locally and getting ready for production.",
-  body: () => `${cards([["Write your own program", "Rust and Anchor, from first program to deploy.", "@/docs/develop/programs/"], ["React & Next.js", "Wallet connection, hooks and server patterns.", "@/docs/develop/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope and more.", "@/docs/develop/tools/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/develop/production/"]])}`,
+page("docs/resources", {
+  title: "Developer resources",
+  desc: "Set up your environment and the tools that apply whatever you're building: AI coding agents, the CLI, frontends, local testing and production readiness.",
+  body: () => `${cards([["Build with AI coding agents", "MCP server and the Solana skill.", "@/docs/resources/agents/"], ["Set up your machine", "CLI, Anchor and Surfpool, when you need them.", "@/docs/resources/setup/"], ["React & Next.js", "Wallet connection, hooks and server patterns.", "@/docs/resources/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope and more.", "@/docs/resources/tools/"], ["Solana CLI", "Keys, airdrops, deploys and config.", "@/docs/resources/cli/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/resources/production/"]])}`,
   why: [
-    N("why", "<b>Why programs aren't in Reference.</b> Reference is for lookups (RPC methods, SDK APIs, CLI flags). Writing a program is a tutorial and how-to activity. That's the same split Base (<i>Build on Base</i> vs <i>SDKs &amp; APIs</i>) and Sui (<i>Develop</i> vs <i>References</i>) make."),
-    N("why", "<b>Why it isn't its own tab.</b> Programs is a skill, not a use case, and it sits naturally next to the other build skills: frontend, testing, tools and production. Merging them also removes the old catch-all <i>Resources</i> tab."),
-    N("why", "It's labelled <b>Develop</b>, not Build, because the global nav already has a Build menu."),
+    N("why", "Modelled on Stripe's <b>Developer resources</b> tab, which holds the CLI, SDKs, testing, agent and MCP setup, Workbench and production tooling, and keeps API reference separate."),
+    N("change", "This replaces today's catch-all <i>Resources</i> tab and the old <i>Getting Started → Installation</i>. Setup is reached from step 3 of a path, never before first success."),
+  ],
+});
+page("docs/programs", {
+  title: "Write onchain programs",
+  desc: "When existing programs (tokens, payments) aren't enough, write your own: code that runs on Solana, owns accounts and can be called by anyone.",
+  body: () => `<div class="pcard"><div><div class="k">Path · coming in Wave 2</div><h3>Keep a shared record partners can audit</h3><p>A small program that records who changed what, queried from an app. Until it ships, start with the first program in your browser.</p></div><a class="btnd purple" href="@/docs/programs/first-program/">First program in the browser ${I.arrow}</a></div>
+${cards([["Anchor framework", "The standard framework for Solana programs in Rust.", "@/docs/programs/anchor/"], ["Testing programs", "LiteSVM, Surfpool and Anchor tests.", "@/docs/programs/testing/"], ["Deploying", "Devnet, mainnet and upgrade authority.", "@/docs/programs/deploying/"], ["IDLs & Codama clients", "Generate typed clients for your program.", "@/docs/programs/idls/"]])}
+${callout(`<p>New to how programs, accounts and PDAs work? Start with ${chip("program")} and ${chip("pda")} in How Solana works.</p>`)}`,
+  why: [
+    N("why", "<b>Why Programs gets its own tab.</b> The best web2 docs nest custom code inside a broader area: Stripe puts “Extend Stripe” under Developer resources, and Shopify puts Functions under Apps → Build. That works because there, custom code is an add-on. On Solana, programs <i>are</i> the platform and serve a large existing audience. Canton, the closest institutional-finance platform, gives the same thing a top-level <b>App Development</b> tab."),
+    N("why", "<b>Why it isn't Reference.</b> Reference is for lookups (RPC methods, SDK APIs). Writing a program is a tutorial and how-to activity, which is the same reason Stripe separates Developer resources from API reference."),
+    N("risk", "<b>Check the label.</b> “Programs” is Solana's established term and today's URL, but on solana.com web2 developers may read it as grant or accelerator programs. The page title spells it out (“Write onchain programs”). If the tree test shows confusion, rename the tab to <i>Onchain programs</i>."),
+    N("why", "Like the domain tabs, it opens with a path: the Wave 2 “Keep a shared record” path from the brief."),
   ],
 });
 
@@ -1188,7 +1207,8 @@ const tabFor = (p) =>
   : /^docs\/(assets|tokenization|tokens)(\/|$)/.test(p) ? "assets"
   : /^docs\/markets(\/|$)/.test(p) ? "markets"
   : /^docs\/concepts(\/|$)/.test(p) ? "concepts"
-  : /^docs\/develop(\/|$)/.test(p) ? "develop"
+  : /^docs\/programs(\/|$)/.test(p) ? "programs"
+  : /^docs\/resources(\/|$)/.test(p) ? "resources"
   : /^docs\/reference(\/|$)/.test(p) ? "reference"
   : "start";
 for (const pg of Object.values(pages)) pg.tab = tabFor(pg.path);

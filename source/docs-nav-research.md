@@ -125,3 +125,19 @@ Start here · Payments · Assets · Markets | How Solana works · Develop · Ref
 - **Develop** holds programs, frontend, tools and production readiness. It's for building, not lookup, which is the same split Base and Sui make. It replaces the Resources tab.
 - **Reference** is RPC, SDKs and CLI only.
 - **Start here** stays short: the job picker, All use cases, setup and AI agents.
+
+## Revision 2 (2026-10-13): benchmark web2/TradFi, keep Programs
+
+Benchmarks are now the strongest web2 and institutional-finance docs rather than other chains.
+
+- **Stripe** groups the CLI, SDKs, testing, agents/MCP setup and "Extend Stripe" (its custom code) under **Developer resources**, and keeps API reference separate.
+- **Shopify** nests Functions under Apps → Build.
+- **Canton** gives **App Development** its own top-level tab.
+
+Custom code is an add-on at Stripe and Shopify, so they nest it. On Solana, programs *are* the platform, which is Canton's situation. So:
+
+```
+Start here · Payments · Assets · Markets | How Solana works · Programs · Developer resources · API reference
+```
+
+**Label risk:** web2 developers may read "Programs" as grant programs. The tab's landing page is titled "Write onchain programs". If the tree test shows confusion, rename the tab to "Onchain programs".

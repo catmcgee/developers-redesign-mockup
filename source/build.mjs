@@ -40,10 +40,10 @@ function topbar() {
     <div class="col"><h6>Start building</h6>
       <a class="it" href="${link("docs")}"><b>Docs</b><span>Start here, then everything else</span></a>
       <a class="it" href="#"><b>Templates</b><span>Clone a working app</span></a>
-      <a class="it" href="${link("docs/agents")}"><b>Build with AI agents</b><span>MCP server and Solana skill</span></a>
+      <a class="it" href="${link("docs/resources/agents")}"><b>Build with AI agents</b><span>MCP server and Solana skill</span></a>
       <a class="it" href="${link("docs/from-ethereum")}"><b>Coming from Ethereum</b><span>EVM → SVM guide</span></a></div>
     <div class="col"><h6>Tools &amp; reference</h6>
-      <a class="it" href="${link("docs/develop/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
+      <a class="it" href="${link("docs/resources/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
       <a class="it" href="${link("docs/reference/rpc")}"><b>RPC API</b><span>Every method</span></a>
       <a class="it" href="https://explorer.solana.com"><b>Explorer</b><span>Look up any transaction</span></a>
       <a class="it" href="#"><b>Changelog</b><span>What shipped</span></a></div></div>`;
@@ -164,7 +164,7 @@ function landing() {
   <div class="foot"><div class="meta"><span>First result <b>${first}</b></span><span>Full path <b>${total}</b></span><span>In browser</span></div>
   <div class="go">${cta}${I.arrow}</div></div></a>`;
   const body = `
-<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/develop/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
+<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
 <section class="hero"><div class="wrap">
   <div>
@@ -195,7 +195,7 @@ function landing() {
     <a href="${link("docs/markets")}">Trading &amp; markets <span>guides →</span></a>
     <a href="${link("docs/assets/games")}">Games &amp; digital items <span>guides →</span></a>
     <a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay <span>guides →</span></a>
-    <a href="${link("docs/develop/programs")}">Write your own program <span>guides →</span></a></div>
+    <a href="${link("docs/programs")}">Write your own program <span>guides →</span></a></div>
 </div></section>
 
 <section class="band"><div class="wrap">
