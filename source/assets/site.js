@@ -12,6 +12,17 @@
     set: (k, v) => localStorage.setItem("sx-" + k, JSON.stringify(v)),
   };
 
+  /* ---------- landing: reveal on scroll, card glow, timeline ---------- */
+  const rvs = $$(".rv");
+  if (rvs.length) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    rvs.forEach((el) => io.observe(el));
+  }
+  $$(".lp-job, .lp-route").forEach((c) => c.addEventListener("pointermove", (e) => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", e.clientX - r.left + "px"); c.style.setProperty("--my", e.clientY - r.top + "px");
+  }));
+
   /* ---------- nav mega menu ---------- */
   $$(".mainnav > div.has").forEach((d) => {
     let t;
@@ -280,7 +291,7 @@
         live.dataset.state = "live";
       } catch {
         live.dataset.state = "offline";
-        const eb = live.querySelector(".eyebrow"); if (eb) eb.textContent = "Mainnet · sample numbers";
+        const eb = live.querySelector(".livepill") || live.querySelector(".eyebrow"); if (eb) eb.textContent = "Mainnet · sample numbers";
       }
     };
     const feed = $("#feed");

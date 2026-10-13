@@ -158,82 +158,76 @@ ${g ? cards(g.kids.map(([k, t]) => [t, "Carried over.", link(k)])) : ""}${ghost(
 
 /* ------------------------------------------------------------ landing */
 function landing() {
-  const job = (href, icon, tag, title, text, first, total, cta) => `<a class="job" href="${link(href)}">
-  <div class="top"><span class="tag">${tag}</span><span class="ico">${icon}</span></div>
-  <h3>${title}</h3><p>${text}</p>
-  <div class="foot"><div class="meta"><span>First result <b>${first}</b></span><span>Full path <b>${total}</b></span><span>In browser</span></div>
-  <div class="go">${cta}${I.arrow}</div></div></a>`;
+  const job = (href, icon, title, text, first, total, cta, visual, i) => `<a class="lp-job rv" style="--d:${i * 90}ms" href="${link(href)}">
+  <div class="lp-vis">${visual}</div>
+  <div class="lp-jb"><span class="lp-ico">${icon}</span><h3>${title}</h3><p>${text}</p></div>
+  <div class="lp-jf"><span><b>~${first}</b> to first result</span><span class="lp-go">${cta}${I.arrow}</span></div></a>`;
+  const visPay = `<div class="v-pay"><span class="v-node">You</span><span class="v-track"><i class="v-coin">$</i></span><span class="v-node shop">Shop</span><span class="v-tag">1.00 USDC · 0.4 s · $0.001 fee</span></div>`;
+  const visApi = `<div class="v-api"><div class="v-line l1"><b>GET</b> /api/forecast</div><div class="v-line l2"><span class="s402">402</span> price: $0.01</div><div class="v-line l3"><span class="spay">paid</span> 0.01 USDC · 0.4 s</div><div class="v-line l4"><span class="s200">200</span> { "sky": "clear" }</div></div>`;
+  const visAsset = `<div class="v-asset"><div class="v-token">LSF</div><div class="v-rows"><div class="v-r ok">→ Approved investor <b>✓</b></div><div class="v-r no">→ Unknown address <b>✕</b></div></div></div>`;
+  const step = (n, t, d, hl) => `<div class="lp-step${hl ? " hl" : ""}"><span class="lp-dot">${n}</span><h4>${t}</h4><p>${d}</p>${hl ? '<span class="lp-win">First win</span>' : ""}</div>`;
   const body = `
-<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
+<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Solana for developers</span>
-    <h1 class="display">Build on <em>internet capital markets.</em></h1>
-    <p class="lede">Money, assets and markets that run on the internet like everything else does: open 24/7, open to anyone, and settling in under a second for a fraction of a cent. Pick the piece you're building and have it working in your browser in minutes.</p>
-    <div class="ctas"><a class="btn green" href="#picker">What are you building? ${I.down}</a><a class="btn line" href="${link("docs")}">Read the docs</a>
-    <span class="quiet">Coming from Ethereum? <a href="${link("docs/from-ethereum")}">EVM → SVM guide</a></span></div>
+<section class="lp-hero">
+  <div class="lp-aurora"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+  <div class="lp-gridbg"></div>
+  <div class="lp-wrap lp-hin">
+    <h1 class="rv">Build on <span class="lp-shine">internet capital markets.</span></h1>
+    <p class="lp-lede rv" style="--d:80ms">Money, assets and markets that run on the internet like everything else does: open 24/7, open to anyone, and settling in under a second for a fraction of a cent.</p>
+    <div class="lp-ctas rv" style="--d:160ms"><a class="lp-btn primary" href="#picker">What are you building? ${I.down}</a><a class="lp-btn ghost" href="${link("docs")}">Read the docs</a></div>
+    <p class="lp-quiet rv" style="--d:220ms">Coming from Ethereum? <a href="${link("docs/from-ethereum")}">EVM → SVM guide</a></p>
+    <div class="lp-stats rv" style="--d:300ms" data-live>
+      <div class="lp-stat"><span class="lp-k"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></span><span class="lp-v" data-k="fee">$0.0010</span><span class="lp-h">fee per transaction, whatever the amount</span></div>
+      <div class="lp-stat"><span class="lp-k">Block time</span><span class="lp-v" data-k="slot">0.40<small>s</small></span><span class="lp-h">payments confirm in about one block</span></div>
+      <div class="lp-stat"><span class="lp-k">Transactions / sec</span><span class="lp-v" data-k="tps">1,100</span><span class="lp-h">user transactions, excluding votes</span></div>
+    </div>
   </div>
-  <div class="netpanel" data-live>
-    <span class="eyebrow">Live from mainnet</span>
-    <div class="nstat"><div class="k">Network fee per transaction</div><div class="v" data-k="fee">$0.0010</div><div class="h">flat, whatever the amount</div></div>
-    <div class="nstat"><div class="k">Time per block</div><div class="v" data-k="slot">0.40<small>s</small></div><div class="h">payments confirm in about one block</div></div>
-    <div class="nstat"><div class="k">User transactions per second</div><div class="v" data-k="tps">1,100</div><div class="h">excluding validator votes</div></div>
+</section>
+
+<section class="lp-sec" id="picker"><div class="lp-wrap">
+  <div class="lp-head rv"><h2>What are you building?</h2>
+  <p>Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one, starting in your browser and ending in your own stack.</p></div>
+  <div class="lp-jobs">
+    ${job("docs/payments/checkout", I.card, "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. No percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout", visPay, 0)}
+    ${job("docs/payments/paywall-api", I.api, "Charge a few cents per API call", "Price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint", visApi, 1)}
+    ${job("docs/assets/issue-asset", I.layers, "Issue a tokenized asset with compliance controls", "Transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset", visAsset, 2)}
+  </div>
+  <div class="lp-more rv"><span>Also:</span>
+    <a href="${link("docs/markets")}">Trading &amp; markets</a><a href="${link("docs/assets/games")}">Games &amp; digital items</a><a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay</a><a href="${link("docs/programs")}">Write your own program</a><a href="${link("docs/use-cases")}">All use cases →</a></div>
+</div></section>
+
+<section class="lp-sec"><div class="lp-wrap">
+  <div class="lp-head rv"><h2>Working in five minutes.<br>In your stack by the end.</h2>
+  <p>Every path follows the same four steps. Concepts like wallets and transactions turn up in two sentences, right where you use them.</p></div>
+  <div class="lp-timeline rv"><div class="lp-rail"><i></i></div>
+    ${step(1, "Use it", "Pay, call or hold something the way your customer would, with a test wallet we create for you.")}
+    ${step(2, "Build it in the browser", "Edit real code, run it, and watch it work. Nothing to install, read or decide first.", true)}
+    ${step(3, "Plug it into your stack", "The same result from your own backend and SDK, on your machine.")}
+    ${step(4, "Go live", "A production checklist, then the next path, the deep docs or a guided program.")}
   </div>
 </div></section>
 
-<section class="band" id="picker"><div class="wrap">
-  <span class="eyebrow">Start here</span>
-  <h2 class="display">What are you building?</h2>
-  <p class="intro">Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one piece, starting in your browser and ending in your own stack.</p>
-  <div class="grid g3">
-    ${job("docs/payments/checkout", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
-    ${job("docs/payments/paywall-api", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
-    ${job("docs/assets/issue-asset", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
-  </div>
-  <div class="morejobs"><span class="lbl">Markets &amp; more</span>
-    <a href="${link("docs/markets")}">Trading &amp; markets <span>guides →</span></a>
-    <a href="${link("docs/assets/games")}">Games &amp; digital items <span>guides →</span></a>
-    <a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay <span>guides →</span></a>
-    <a href="${link("docs/programs")}">Write your own program <span>guides →</span></a></div>
-</div></section>
-
-<section class="band"><div class="wrap">
-  <span class="eyebrow">How every path works</span>
-  <h2 class="display">Working in five minutes. In your stack by the end.</h2>
-  <p class="intro">Every path follows the same four steps, so once you've done one you know how the rest go. Concepts like wallets and transactions turn up in two sentences, right where you use them.</p>
-  <div class="how">
-    <div><span class="bar"></span><span class="n">01</span><h4>Use it</h4><p>Pay, call or hold something the way your customer would, with a test wallet we create for you.</p></div>
-    <div class="hl"><span class="bar"></span><span class="star">★ First win</span><span class="n">02</span><h4>Build it in the browser</h4><p>Edit real code, run it, and watch it work. Nothing to install, read or decide first.</p></div>
-    <div><span class="bar"></span><span class="n">03</span><h4>Plug it into your stack</h4><p>Get the same result from your own backend and SDK, on your machine, against a test network.</p></div>
-    <div><span class="bar"></span><span class="n">04</span><h4>Go live</h4><p>A production checklist, then the next path, the deep docs or a guided program.</p></div>
-  </div>
-</div></section>
-
-<section class="band"><div class="wrap feedwrap">
-  <div><span class="eyebrow">Right now on mainnet</span>
-    <h2 class="display" style="font-size:46px">The market is open. It always is.</h2>
-    <p class="intro" style="margin-bottom:28px">Every row is a real transaction that touched USDC in the last few seconds, at 3am on a Sunday the same as at noon on a Tuesday. Open one to see what your own payment will look like.</p>
-    <a class="btn line" href="https://explorer.solana.com" target="_blank" rel="noopener">Open the Explorer ${I.arrow}</a></div>
-  <div><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
+<section class="lp-sec"><div class="lp-wrap lp-split">
+  <div class="rv"><h2>The market is open.<br>It always is.</h2>
+    <p class="lp-p">Every row is a real transaction that touched USDC in the last few seconds, at 3am on a Sunday the same as at noon on a Tuesday.</p>
+    <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open the Explorer ${I.arrow}</a></div>
+  <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
     ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">● confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
-  </div><div class="feedsrc">sample data · connecting to mainnet…</div></div>
+  </div></div><div class="feedsrc">sample data · connecting to mainnet…</div></div>
 </div></section>
 
-<section class="band"><div class="wrap">
-  <span class="eyebrow">Prefer a structured start?</span>
-  <h2 class="display" style="font-size:46px">Guided routes</h2>
-  <p class="intro">For when you'd rather learn the whole system than ship one thing first.</p>
-  <div class="grid g4">
-    <a class="route" href="${link("docs")}"><span class="ico">${I.book}</span><h4>Docs</h4><p>Reference for every concept, SDK and RPC method.</p></a>
-    <a class="route" href="#"><span class="ico">${I.school}</span><h4>Solana School</h4><p>A guided course from first transaction to production program.</p></a>
-    <a class="route" href="#"><span class="ico">${I.code}</span><h4>Templates</h4><p>Working starter apps to clone: Next.js, mobile, programs.</p></a>
-    <a class="route" href="#"><span class="ico">${I.users}</span><h4>Work with a partner</h4><p>Solana-native teams for companies that want help shipping.</p></a>
+<section class="lp-sec"><div class="lp-wrap">
+  <div class="lp-head rv"><h2>Prefer a structured start?</h2><p>For when you'd rather learn the whole system than ship one thing first.</p></div>
+  <div class="lp-routes">
+    ${[["docs", I.book, "Docs", "Every concept, SDK and RPC method."], ["#", I.school, "Solana School", "A guided course, first transaction to production."], ["#", I.code, "Templates", "Starter apps to clone: Next.js, mobile, programs."], ["#", I.users, "Work with a partner", "Solana-native teams that help you ship."]].map(([h, ic, t, d], i) => `<a class="lp-route rv" style="--d:${i * 70}ms" href="${h === "#" ? "#" : link(h)}"><span class="lp-ico">${ic}</span><h4>${t}</h4><p>${d}</p><span class="lp-arrow">${I.arrow}</span></a>`).join("")}
   </div>
 </div></section>
 
-<div class="wrap"><div class="newsband"><div><h3>Solana developer update</h3><p>Releases, upgrades and new paths, once a month. Or read the <a href="#" style="text-decoration:underline">changelog</a>.</p></div>
-<form onsubmit="return false"><input placeholder="you@company.com"><button class="btn green">Subscribe</button></form></div></div>
+<section class="lp-sec lp-last"><div class="lp-wrap"><div class="lp-news rv">
+  <div><h3>Solana developer update</h3><p>Releases, upgrades and new paths, once a month.</p></div>
+  <form onsubmit="return false"><input placeholder="you@company.com"><button class="lp-btn primary">Subscribe</button></form>
+</div></div></section>
 <footer class="site"><div class="wrap"><span>© Solana Foundation · structural mockup, illustrative copy</span><nav><a href="#">Grants</a><a href="#">Media kit</a><a href="#">Careers</a><a href="#">Privacy</a><a href="${link("docs/research")}">Docs Research</a><a href="https://github.com/catmcgee/developers-redesign-mockup">Source</a></nav></div></footer>`;
   return shell("", { title: "Build on internet capital markets | Solana Developers", body, cls: "dark", notes: landingWhy });
 }
