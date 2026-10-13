@@ -169,9 +169,9 @@ function landing() {
   const body = `
 <nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
-<section class="lp-hero2"><div class="lp-wrap lp-h2grid">
-  <div class="rv">
-    <h1>Build on internet capital markets.</h1>
+<section class="lp-hero2"><div class="lp-wrap">
+  <h1 class="rv">Build on internet capital markets.</h1></div><div class="lp-wrap lp-h2grid">
+  <div class="rv" style="--d:80ms">
     <p class="lp-lede2">Solana is a public network for moving money and assets. Transactions confirm in about 0.4 seconds and cost about $0.001. Each guide below gets a working example running in your browser, then in your own code.</p>
     <div class="lp-ctas2"><a class="lp-btn primary sm" href="#picker">Pick a guide ${I.down}</a><a class="lp-btn ghost sm" href="${link("docs")}">Docs</a></div>
     <p class="lp-quiet2">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
