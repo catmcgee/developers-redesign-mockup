@@ -135,7 +135,7 @@ function docsPage(p) {
   const PI = p.pathIntro && paths[p.pathIntro];
   const crumb = `Solana Documentation <span>/ ${tab.label}${P ? " / " + P.name + " · step " + (si + 1) + " of " + P.steps.length : PI ? " / " + PI.name + " · overview" : ""}</span>`;
   const main = `
-<nav class="tabs"><div class="in">${tabs.map((t) => t.sep ? `<span class="sep"></span>` : `<a class="${t.id === p.tab ? "cur" : ""}${t.util ? " util" : ""}" href="${link(t.href)}">${t.label}${t.util ? " ↗" : ""}</a>`).join("")}</div></nav>
+<nav class="tabs"><div class="in">${tabs.map((t) => t.sep ? `<span class="sep"></span>` : `<a class="${t.id === p.tab ? "cur" : ""}" href="${link(t.href)}">${t.icon}${t.label}${t.isNew ? ' <span class="tag-new">NEW</span>' : ""}</a>`).join("")}</div></nav>
 <div class="layout">
 <aside class="sidebar">${sidebarHtml(p.tab, p.path)}</aside>
 <main class="content"><div class="crumb">${crumb}</div><h1>${p.title}</h1>${p.desc ? `<p class="desc">${p.desc}</p>` : ""}

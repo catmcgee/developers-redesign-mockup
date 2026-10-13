@@ -446,9 +446,3 @@ main.content{padding:40px 64px 80px;min-width:0}
 .sidebar .pathbox a.ph:hover{background:var(--soft)}
 .sidebar .pathbox a.ph.on{background:#ece6fb;color:#4c1d95}
 .sidebar .pathbox+.pathbox{margin-top:8px}
-/* quieter tab bar: text only, API reference as a utility link */
-.docs .tabs .in{gap:4px}
-.docs .tabs a{padding:6px 12px;font-size:14px}
-.docs .tabs a.util{margin-left:auto;color:var(--dim);font-size:13.5px}
-.docs .tabs a.util:hover{color:#111;background:none}
-.docs .tabs a.util.cur{background:none;color:#111;font-weight:500}
