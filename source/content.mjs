@@ -45,6 +45,7 @@ export const tabs = [
   { id: "concepts", label: "How Solana works", icon: I.cube, href: "docs/concepts" },
   { id: "resources", label: "Developer resources", icon: I.wrench, href: "docs/resources" },
   { id: "reference", label: "API reference", icon: I.book, href: "docs/reference" },
+  { id: "videos", label: "Video tutorials", icon: I.play, href: "https://solana.com/docs/video-guides", ext: true },
 ];
 
 /* ============================================================ sidebars */
@@ -56,8 +57,6 @@ export const sidebars = {
     { p: "docs/from-ethereum", t: "Coming from Ethereum" },
     { h: "Build your own" },
     { p: "docs/programs", t: "Write onchain programs" },
-    { h: "Learn" },
-    { p: "docs/videos", t: "Video tutorials" },
     { h: "About this mockup" },
     { p: "docs/research", t: "Docs Research" },
   ],
@@ -870,7 +869,6 @@ ${cards([["Token basics", "Mints, minting, transfers, freeze and thaw.", "@/docs
     N("change", "DvP is currently split across <code>tokenization/dvp</code> and <code>defi/dvp-program/</code> (5 pages). This structure keeps one canonical DvP page here and links to it from Markets."),
   ],
 });
-page("docs/videos", { tab: "resources", title: "Video tutorials", desc: "", stub: { was: "/docs/video-guides" } });
 
 /* ===================================================== Docs Research */
 const src = (n, t, u) => `<li id="s${n}"><b>[${n}]</b> ${u ? `<a href="${u}">${t}</a>` : t}</li>`;

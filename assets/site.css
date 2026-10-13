@@ -446,3 +446,5 @@ main.content{padding:40px 64px 80px;min-width:0}
 .sidebar .pathbox a.ph:hover{background:var(--soft)}
 .sidebar .pathbox a.ph.on{background:#ece6fb;color:#4c1d95}
 .sidebar .pathbox+.pathbox{margin-top:8px}
+.docs .tabs a.ext{margin-left:auto;color:var(--dim)}
+.docs .tabs a.ext:hover{color:#111;background:none}
