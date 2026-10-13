@@ -154,7 +154,7 @@ const page = (p, o) => (pages[p] = { path: p, ...o });
 /* ------------------------------------------------------------ START */
 page("docs", {
   tab: "start", title: "Start here", wide: true,
-  desc: "Solana is where internet capital markets run. Pick the piece you're building. Every path starts in your browser, ends running in your own stack, and teaches you the parts of Solana each step needs, when it needs them.",
+  desc: "Pick a guide for what you're building. Each one starts in your browser, ends running in your own code, and explains the Solana concepts it uses along the way.",
   body: () => `
 <div class="dpick">
   <a href="@/docs/payments/checkout/"><span class="di">${I.card}</span><h3>Accept dollar payments that settle in seconds</h3><p>Take USDC (digital dollars) from anyone. Money arrives in under a second for less than a cent, with no percentage fee and no chargebacks.</p><div class="dm"><span>First result ~5 min</span><b>Build a checkout →</b></div></a>
@@ -190,7 +190,7 @@ page("docs/from-ethereum", { tab: "start", title: "Coming from Ethereum", desc: 
 /* ------------------------------------------------------------ PAYMENTS */
 page("docs/payments/checkout", {
   tab: "payments", title: "Accept dollar payments that settle in seconds", pathIntro: "payments",
-  desc: "Money is the first piece of internet capital markets. Take USDC, a digital dollar, from anyone with a wallet. You can use the money in under a second, the fee is a fraction of a cent, and there are no chargebacks.",
+  desc: "Take USDC, a digital dollar, from anyone with a wallet. You can use the money in under a second, the fee is a fraction of a cent, and there are no chargebacks.",
   body: () => `
 ${flow([["Request", "amount + order"], ["Approve", "customer's wallet"], ["Settle", "~0.4 s on Solana"], ["Verify", "your server checks"], ["Ship", "fulfil the order"]])}
 ${pathCard("payments", "Take a 1 USDC payment through a checkout button and confirm it from your own server. The first payment happens in your browser, with nothing to install.")}
@@ -443,7 +443,7 @@ ${cards([
 /* -------------------------------------------------------------- APIS */
 page("docs/payments/paywall-api", {
   tab: "apis", title: "Charge a few cents per API call", pathIntro: "apis",
-  desc: "On internet capital markets anything can have a price, down to a single request. Price each request at a cent or less. Clients, whether people's apps or AI agents, pay inline over HTTP, with no signup, API key or invoice.",
+  desc: "Price each request at a cent or less. Clients, whether people's apps or AI agents, pay inline over HTTP, with no signup, API key or invoice.",
   body: () => `
 ${flow([["Request", "GET /api/forecast"], ["402", "price: $0.01"], ["Pay", "client signs"], ["Retry", "with payment"], ["200", "your data"]])}
 ${pathCard("apis", "Put a 1¢ price on an endpoint and have a client pay for it automatically. You'll see it work in the browser before you touch your server.")}
@@ -590,7 +590,7 @@ page("docs/payments/pay-per-call/facilitator", { tab: "apis", title: "x402 facil
 /* -------------------------------------------------------- TOKENIZATION */
 page("docs/assets/issue-asset", {
   tab: "tokenization", title: "Issue a tokenized asset with compliance controls", pathIntro: "tokenization",
-  desc: "Assets are what internet capital markets trade. Create a token for a fund share, a security, a point or a real-world asset, with metadata, an approval list and a pause switch that the network enforces on every transfer.",
+  desc: "Create a token for a fund share, a security, a point or a real-world asset, with metadata, an approval list and a pause switch that the network enforces on every transfer.",
   body: () => `
 ${flow([["Define", "name, rules"], ["Approve", "who may hold it"], ["Issue", "mint to holders"], ["Transfer", "under your rules"], ["Control", "pause · recover"]])}
 ${pathCard("tokenization", "Hold a restricted asset, see a transfer get blocked, then create your own with metadata, pause and approvals, and run it from your machine.")}
@@ -1154,7 +1154,7 @@ ${cards([["Keep a shared record", "Write your own program (Wave 2 path)", "@/doc
 });
 page("docs/assets", {
   title: "Assets",
-  desc: "Assets are what internet capital markets trade: tokenized funds and securities, stablecoins, points, NFTs and game items. Everything about creating and controlling tokens lives here.",
+  desc: "Guides for creating and managing tokens: tokenized funds and securities, stablecoins, points, NFTs and game items.",
   body: () => `${hubPath("tokenization", "Hold a restricted asset, watch a blocked transfer, then create your own with approvals and a pause switch.")}
 ${h2("Tokenization")}
 ${cards([["Allowlists (Token ACL)", "Approve holders without writing a program.", "@/docs/tokenization/token-acl/"], ["KYC with Attestations", "Issue and check verifiable claims.", "@/docs/tokenization/attestations/"], ["NAV strikes for funds", "Daily pricing for money-market style funds.", "@/docs/tokenization/nav-strikes/"], ["Delivery vs payment", "Settle an asset against USDC. Lives in Markets.", "@/docs/markets/dvp/"]])}
@@ -1168,7 +1168,7 @@ ${callout(`<p>How token accounts, mints and extensions <em>work</em> is explaine
 });
 page("docs/markets", {
   title: "Markets",
-  desc: "Markets are where assets meet money: exchanges, order flow and settlement that run 24/7 and settle in under a second.",
+  desc: "Guides for exchanges, order flow and settlement.",
   body: () => `${cards([["Build an exchange", "Order books, matching and settlement.", "@/docs/markets/exchange/"], ["Delivery vs payment", "Swap an asset for USDC atomically. One canonical page.", "@/docs/markets/dvp/"], ["MEV protection", "Protect users' orders from front-running.", "@/docs/markets/mev/"], ["Stake-weighted QoS", "Get transactions landed reliably under load.", "@/docs/markets/swqos/"]])}`,
   why: [
     N("change", "DvP is split today across <code>tokenization/dvp</code> and <code>defi/dvp-program/</code> (5 pages). Settlement is a market activity, so it gets one canonical page here, linked from Assets."),

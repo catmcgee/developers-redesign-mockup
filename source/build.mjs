@@ -174,12 +174,12 @@ function landing() {
   <div class="lp-gridbg"></div>
   <div class="lp-wrap lp-hin">
     <h1 class="rv">Build on <span class="lp-shine">internet capital markets.</span></h1>
-    <p class="lp-lede rv" style="--d:80ms">Money, assets and markets that run on the internet like everything else does: open 24/7, open to anyone, and settling in under a second for a fraction of a cent.</p>
-    <div class="lp-ctas rv" style="--d:160ms"><a class="lp-btn primary" href="#picker">What are you building? ${I.down}</a><a class="lp-btn ghost" href="${link("docs")}">Read the docs</a></div>
-    <p class="lp-quiet rv" style="--d:220ms">Coming from Ethereum? <a href="${link("docs/from-ethereum")}">EVM → SVM guide</a></p>
+    <p class="lp-lede rv" style="--d:80ms">Solana is a public network for moving money and assets. Transactions confirm in about 0.4 seconds and cost about $0.001. Each guide below gets a working example running in your browser, then in your own code.</p>
+    <div class="lp-ctas rv" style="--d:160ms"><a class="lp-btn primary" href="#picker">Pick a guide ${I.down}</a><a class="lp-btn ghost" href="${link("docs")}">Docs</a></div>
+    <p class="lp-quiet rv" style="--d:220ms">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
     <div class="lp-stats rv" style="--d:300ms" data-live>
-      <div class="lp-stat"><span class="lp-k"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></span><span class="lp-v" data-k="fee">$0.0010</span><span class="lp-h">fee per transaction, whatever the amount</span></div>
-      <div class="lp-stat"><span class="lp-k">Block time</span><span class="lp-v" data-k="slot">0.40<small>s</small></span><span class="lp-h">payments confirm in about one block</span></div>
+      <div class="lp-stat"><span class="lp-k"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></span><span class="lp-v" data-k="fee">$0.0010</span><span class="lp-h">base fee per transaction, regardless of amount</span></div>
+      <div class="lp-stat"><span class="lp-k">Block time</span><span class="lp-v" data-k="slot">0.40<small>s</small></span><span class="lp-h">transactions usually confirm within one block</span></div>
       <div class="lp-stat"><span class="lp-k">Transactions / sec</span><span class="lp-v" data-k="tps">1,100</span><span class="lp-h">user transactions, excluding votes</span></div>
     </div>
   </div>
@@ -187,45 +187,45 @@ function landing() {
 
 <section class="lp-sec" id="picker"><div class="lp-wrap">
   <div class="lp-head rv"><h2>What are you building?</h2>
-  <p>Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one, starting in your browser and ending in your own stack.</p></div>
+  <p>Each guide takes about 30 minutes. You try the finished example first, build it in a browser playground, then run it from your own machine.</p></div>
   <div class="lp-jobs">
-    ${job("docs/payments/checkout", I.card, "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. No percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout", visPay, 0)}
-    ${job("docs/payments/paywall-api", I.api, "Charge a few cents per API call", "Price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint", visApi, 1)}
-    ${job("docs/assets/issue-asset", I.layers, "Issue a tokenized asset with compliance controls", "Transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset", visAsset, 2)}
+    ${job("docs/payments/checkout", I.card, "Accept dollar payments that settle in seconds", "Take USDC through a checkout button and confirm the payment from your server.", "5 min", "30 min", "Build a checkout", visPay, 0)}
+    ${job("docs/payments/paywall-api", I.api, "Charge a few cents per API call", "Charge per request using HTTP 402 (x402). Clients, including AI agents, pay without an account or API key.", "5 min", "30 min", "Paywall an endpoint", visApi, 1)}
+    ${job("docs/assets/issue-asset", I.layers, "Issue a tokenized asset with compliance controls", "Create a Token-2022 token with metadata, an allowlist and a pause control.", "10 min", "45 min", "Issue an asset", visAsset, 2)}
   </div>
   <div class="lp-more rv"><span>Also:</span>
     <a href="${link("docs/markets")}">Trading &amp; markets</a><a href="${link("docs/assets/games")}">Games &amp; digital items</a><a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay</a><a href="${link("docs/programs")}">Write your own program</a><a href="${link("docs/use-cases")}">All use cases →</a></div>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap">
-  <div class="lp-head rv"><h2>Working in five minutes.<br>In your stack by the end.</h2>
-  <p>Every path follows the same four steps. Concepts like wallets and transactions turn up in two sentences, right where you use them.</p></div>
+  <div class="lp-head rv"><h2>How the guides work</h2>
+  <p>Every guide has the same four steps. Solana concepts are explained briefly at the step where you first need them, with links to the full docs.</p></div>
   <div class="lp-timeline rv"><div class="lp-rail"><i></i></div>
-    ${step(1, "Use it", "Pay, call or hold something the way your customer would, with a test wallet we create for you.")}
-    ${step(2, "Build it in the browser", "Edit real code, run it, and watch it work. Nothing to install, read or decide first.", true)}
-    ${step(3, "Plug it into your stack", "The same result from your own backend and SDK, on your machine.")}
-    ${step(4, "Go live", "A production checklist, then the next path, the deep docs or a guided program.")}
+    ${step(1, "Try it", "Use a working version with a test wallet created in the page.")}
+    ${step(2, "Build it in the browser", "Edit and run the code in a playground. Nothing to install.", true)}
+    ${step(3, "Run it locally", "Run the same code from your own backend against devnet.")}
+    ${step(4, "Go to production", "A checklist for mainnet, then related guides.")}
   </div>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap lp-split">
-  <div class="rv"><h2>The market is open.<br>It always is.</h2>
-    <p class="lp-p">Every row is a real transaction that touched USDC in the last few seconds, at 3am on a Sunday the same as at noon on a Tuesday.</p>
-    <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open the Explorer ${I.arrow}</a></div>
+  <div class="rv"><h2>Recent USDC transactions</h2>
+    <p class="lp-p">Live transactions involving the USDC mint on mainnet, fetched from a public RPC node. Click one to view it in Explorer.</p>
+    <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open Explorer ${I.arrow}</a></div>
   <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
     ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">● confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
   </div></div><div class="feedsrc">sample data · connecting to mainnet…</div></div>
 </div></section>
 
 <section class="lp-sec"><div class="lp-wrap">
-  <div class="lp-head rv"><h2>Prefer a structured start?</h2><p>For when you'd rather learn the whole system than ship one thing first.</p></div>
+  <div class="lp-head rv"><h2>Other ways to learn</h2><p>Reference docs, courses, starter code and outside help.</p></div>
   <div class="lp-routes">
-    ${[["docs", I.book, "Docs", "Every concept, SDK and RPC method."], ["#", I.school, "Solana School", "A guided course, first transaction to production."], ["#", I.code, "Templates", "Starter apps to clone: Next.js, mobile, programs."], ["#", I.users, "Work with a partner", "Solana-native teams that help you ship."]].map(([h, ic, t, d], i) => `<a class="lp-route rv" style="--d:${i * 70}ms" href="${h === "#" ? "#" : link(h)}"><span class="lp-ico">${ic}</span><h4>${t}</h4><p>${d}</p><span class="lp-arrow">${I.arrow}</span></a>`).join("")}
+    ${[["docs", I.book, "Docs", "Concepts, SDKs and RPC reference."], ["#", I.school, "Solana School", "A structured course from first transaction to deployed program."], ["#", I.code, "Templates", "Starter apps for Next.js, mobile and programs."], ["#", I.users, "Development partners", "Agencies that build on Solana."]].map(([h, ic, t, d], i) => `<a class="lp-route rv" style="--d:${i * 70}ms" href="${h === "#" ? "#" : link(h)}"><span class="lp-ico">${ic}</span><h4>${t}</h4><p>${d}</p><span class="lp-arrow">${I.arrow}</span></a>`).join("")}
   </div>
 </div></section>
 
 <section class="lp-sec lp-last"><div class="lp-wrap"><div class="lp-news rv">
-  <div><h3>Solana developer update</h3><p>Releases, upgrades and new paths, once a month.</p></div>
+  <div><h3>Solana developer update</h3><p>A monthly email covering releases, network upgrades and new guides.</p></div>
   <form onsubmit="return false"><input placeholder="you@company.com"><button class="lp-btn primary">Subscribe</button></form>
 </div></div></section>
 <footer class="site"><div class="wrap"><span>© Solana Foundation · structural mockup, illustrative copy</span><nav><a href="#">Grants</a><a href="#">Media kit</a><a href="#">Careers</a><a href="#">Privacy</a><a href="${link("docs/research")}">Docs Research</a><a href="https://github.com/catmcgee/developers-redesign-mockup">Source</a></nav></div></footer>`;
