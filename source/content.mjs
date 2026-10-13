@@ -144,7 +144,7 @@ const pathCard = (key, blurb) => {
 <a class="btnd purple" href="@/${p.steps[0][0]}/">Start building ${I.arrow}</a></div>`;
 };
 const liveFeed = () => `<div class="feed light" id="feed" data-live><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
-${[["2s ago", "5VfY…h3Kq"], ["2s ago", "3kPq…tV9a"], ["3s ago", "Hq1c…9pLm"], ["4s ago", "2xTr…Ww7e"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">● confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}</div><div class="feedsrc">sample data · connecting to mainnet…</div>`;
+${[["2s ago", "5VfY…h3Kq"], ["2s ago", "3kPq…tV9a"], ["3s ago", "Hq1c…9pLm"], ["4s ago", "2xTr…Ww7e"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}</div><div class="feedsrc">sample data · connecting to mainnet…</div>`;
 const N = (t, h) => ({ t, h });
 
 /* ================================================================ pages */

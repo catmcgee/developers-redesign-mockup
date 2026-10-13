@@ -273,6 +273,13 @@
       const j = await r.json(); if (j.error) throw j.error; return j.result;
     };
     const fmt = (n) => n.toLocaleString("en-US");
+    const tween = (el, to, render) => {
+      if (!el) return;
+      const from = parseFloat((el.textContent || "0").replace(/[^0-9.]/g, "")) || 0;
+      const t0 = performance.now(), dur = 900;
+      const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.innerHTML = render(from + (to - from) * e); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    };
     let solUsd = null;
     fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").then((r) => r.json()).then((j) => { solUsd = j.solana.usd; paintFee(); }).catch(() => {});
     const paintFee = () => {
@@ -286,8 +293,8 @@
         const secs = s.reduce((a, x) => a + x.samplePeriodSecs, 0);
         const nv = s.reduce((a, x) => a + (x.numNonVoteTransactions ?? 0), 0);
         const slots = s.reduce((a, x) => a + x.numSlots, 0);
-        if (nv) $("[data-k=tps]").textContent = fmt(Math.round(nv / secs));
-        $("[data-k=slot]").innerHTML = (secs / slots).toFixed(2) + "<small>s</small>";
+        if (nv) tween($("[data-k=tps]"), Math.round(nv / secs), (v) => fmt(Math.round(v)));
+        tween($("[data-k=slot]"), secs / slots, (v) => v.toFixed(2) + "<small>s</small>");
         live.dataset.state = "live";
       } catch {
         live.dataset.state = "offline";
@@ -305,11 +312,16 @@
           const isNew = seen.size && !seen.has(s.signature); seen.add(s.signature);
           const age = s.blockTime ? Math.max(0, Math.round(now - s.blockTime)) : null;
           return `<div class="row${isNew ? " new" : ""}"><span>${age === null ? "just now" : age < 60 ? age + "s ago" : Math.round(age / 60) + "m ago"}</span>
-            <span class="sig">${short(s.signature)}</span><span class="${s.err ? "" : "ok"}">${s.err ? "failed" : "● confirmed"}</span>
+            <span class="sig">${short(s.signature)}</span><span class="${s.err ? "" : "ok"}">${s.err ? "failed" : "confirmed"}</span>
             <a class="ext" target="_blank" rel="noopener" href="https://explorer.solana.com/tx/${s.signature}" title="Open in Explorer">↗</a></div>`;
         }).join("");
         feed.innerHTML = `<div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>` + rows;
         $(".feedsrc").textContent = "live · getSignaturesForAddress(USDC mint) · mainnet-beta · refreshes every 6 s";
+        const tk = $("#ticker");
+        if (tk) {
+          const items = sigs.map((s) => { const age = s.blockTime ? Math.max(0, Math.round(now - s.blockTime)) : 0; return `<a class="tk" href="https://explorer.solana.com/tx/${s.signature}" target="_blank" rel="noopener"><b>USDC</b><span class="mono">${short(s.signature)}</span><em>${s.err ? "failed" : "confirmed"} · ${age}s ago</em></a>`; }).join("");
+          tk.innerHTML = items + items;
+        }
       } catch { $(".feedsrc").textContent = "couldn't reach public RPC from this browser, showing sample data"; }
     };
     perf(); pull(); setInterval(perf, 10000); setInterval(pull, 6000);

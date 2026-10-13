@@ -162,8 +162,8 @@ function landing() {
   <div class="lp-vis">${visual}</div>
   <div class="lp-jb"><span class="lp-ico">${icon}</span><h3>${title}</h3><p>${text}</p></div>
   <div class="lp-jf"><span><b>~${first}</b> to first result</span><span class="lp-go">${cta}${I.arrow}</span></div></a>`;
-  const visPay = `<div class="v-pay"><span class="v-node">You</span><span class="v-track"><i class="v-coin">$</i></span><span class="v-node shop">Shop</span><span class="v-tag">1.00 USDC · 0.4 s · $0.001 fee</span></div>`;
-  const visApi = `<div class="v-api"><div class="v-line l1"><b>GET</b> /api/forecast</div><div class="v-line l2"><span class="s402">402</span> price: $0.01</div><div class="v-line l3"><span class="spay">paid</span> 0.01 USDC · 0.4 s</div><div class="v-line l4"><span class="s200">200</span> { "sky": "clear" }</div></div>`;
+  const visPay = `<div class="v-pay"><span class="v-node">You</span><span class="v-track"><i class="v-coin">$1.00</i></span><span class="v-node shop">Shop</span><span class="v-tag">settled in 0.4 s · $0.001 fee</span></div>`;
+  const visApi = `<div class="v-api"><div class="v-line l1"><b>GET</b> /api/forecast</div><div class="v-line l2"><span class="c402">402</span> price: $0.01</div><div class="v-line l3"><span class="cpay">paid</span> 0.01 USDC · 0.4 s</div><div class="v-line l4"><span class="c200">200</span> { "sky": "clear" }</div></div>`;
   const visAsset = `<div class="v-asset"><div class="v-token">LSF</div><div class="v-rows"><div class="v-r ok">→ Approved investor <b>✓</b></div><div class="v-r no">→ Unknown address <b>✕</b></div></div></div>`;
   const step = (n, t, d, hl) => `<div class="lp-step${hl ? " hl" : ""}"><span class="lp-dot">${n}</span><h4>${t}</h4><p>${d}</p>${hl ? '<span class="lp-win">First win</span>' : ""}</div>`;
   const body = `
@@ -177,13 +177,15 @@ function landing() {
     <p class="lp-quiet2">Coming from Ethereum? Read the <a href="${link("docs/from-ethereum")}">EVM to SVM guide</a>.</p>
   </div>
   <div class="lp-statcard rv" style="--d:120ms" data-live>
-    <div class="lp-sc-h"><i class="lp-pulse"></i><span class="livepill">Live from mainnet</span></div>
+    <div class="lp-sc-h"><span class="livepill">Live from mainnet</span></div>
     <div class="lp-sc-r"><span>Base fee per transaction</span><b data-k="fee">$0.0010</b></div>
     <div class="lp-sc-r"><span>Block time</span><b data-k="slot">0.40<small>s</small></b></div>
     <div class="lp-sc-r"><span>User transactions / sec</span><b data-k="tps">1,100</b></div>
     <div class="lp-sc-f">Excludes validator votes. Most transactions confirm within one block.</div>
   </div>
-</div></section>
+</div>
+<div class="lp-ticker rv" style="--d:200ms" aria-label="Recent mainnet transactions"><div class="lp-tk-track" id="ticker">${(() => { const it = [["5VfY…h3Kq","1s"],["3kPq…tV9a","1s"],["Hq1c…9pLm","2s"],["2xTr…Ww7e","2s"],["Bq9T…mm8A","3s"],["Fv2m…1yQp","3s"],["7xKX…gAsU","4s"],["9WzD…AWWM","4s"]].map(([s, a]) => `<a class="tk" href="https://explorer.solana.com" target="_blank" rel="noopener"><b>USDC</b><span class="mono">${s}</span><em>confirmed · ${a} ago</em></a>`).join(""); return it + it; })()}</div></div>
+</section>
 
 <section class="lp-sec" id="picker"><div class="lp-wrap">
   <div class="lp-head rv"><h2>What are you building?</h2>
@@ -213,7 +215,7 @@ function landing() {
     <p class="lp-p">Live transactions involving the USDC mint on mainnet, fetched from a public RPC node. Click one to view it in Explorer.</p>
     <a class="lp-btn ghost" href="https://explorer.solana.com" target="_blank" rel="noopener">Open Explorer ${I.arrow}</a></div>
   <div class="rv" style="--d:120ms"><div class="lp-feedcard"><div class="feed" id="feed"><div class="row head"><span>Age</span><span>Transaction touching USDC</span><span>Status</span><span></span></div>
-    ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">● confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
+    ${[["1s ago", "5VfY…h3Kq"], ["1s ago", "3kPq…tV9a"], ["2s ago", "Hq1c…9pLm"], ["2s ago", "2xTr…Ww7e"], ["3s ago", "Bq9T…mm8A"], ["3s ago", "Fv2m…1yQp"]].map(([a, s]) => `<div class="row"><span>${a}</span><span class="sig">${s}</span><span class="ok">confirmed</span><a class="ext" href="#">↗</a></div>`).join("")}
   </div></div><div class="feedsrc">sample data · connecting to mainnet…</div></div>
 </div></section>
 
