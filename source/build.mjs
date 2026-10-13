@@ -22,7 +22,7 @@ state.usage.length = 0;
 
 const pathOfPage = (pg) => {
   for (const [k, P] of Object.entries(paths)) {
-    if (pg === `docs/${P.tab}`) return { k, i: -1 };
+    if (pg === P.intro) return { k, i: -1 };
     const i = P.steps.findIndex(([s]) => s === pg);
     if (i >= 0) return { k, i };
   }
@@ -33,17 +33,17 @@ const pathOfPage = (pg) => {
 function topbar() {
   const mega = `<div class="mega">
     <div class="col first"><h6>What are you building?</h6>
-      <a class="it" href="${link("docs/payments")}"><b>Accept dollar payments</b><span>A checkout that settles in seconds</span></a>
-      <a class="it" href="${link("docs/apis")}"><b>Charge per API call</b><span>Pay-per-request for apps and AI agents</span></a>
-      <a class="it" href="${link("docs/tokenization")}"><b>Issue a tokenized asset</b><span>Tokens with approvals and a pause switch</span></a>
-      <a class="more" href="${link("docs/more")}">More use cases: trading, games, custom programs →</a></div>
+      <a class="it" href="${link("docs/build/checkout")}"><b>Accept dollar payments</b><span>A checkout that settles in seconds</span></a>
+      <a class="it" href="${link("docs/build/paywall-api")}"><b>Charge per API call</b><span>Pay-per-request for apps and AI agents</span></a>
+      <a class="it" href="${link("docs/build/issue-asset")}"><b>Issue a tokenized asset</b><span>Tokens with approvals and a pause switch</span></a>
+      <a class="more" href="${link("docs/use-cases")}">More use cases: trading, games, custom programs →</a></div>
     <div class="col"><h6>Start building</h6>
       <a class="it" href="${link("docs")}"><b>Docs</b><span>Start here, then everything else</span></a>
       <a class="it" href="#"><b>Templates</b><span>Clone a working app</span></a>
       <a class="it" href="${link("docs/agents")}"><b>Build with AI agents</b><span>MCP server and Solana skill</span></a>
       <a class="it" href="${link("docs/from-ethereum")}"><b>Coming from Ethereum</b><span>EVM → SVM guide</span></a></div>
     <div class="col"><h6>Tools &amp; reference</h6>
-      <a class="it" href="${link("docs/reference/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
+      <a class="it" href="${link("docs/resources/tools")}"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
       <a class="it" href="${link("docs/reference/rpc")}"><b>RPC API</b><span>Every method</span></a>
       <a class="it" href="https://explorer.solana.com"><b>Explorer</b><span>Look up any transaction</span></a>
       <a class="it" href="#"><b>Changelog</b><span>What shipped</span></a></div></div>`;
@@ -55,7 +55,7 @@ function topbar() {
 }
 const drawer = (notes) => !notes?.length ? "" : `
 <button class="notes-btn">${I.note} Design notes <i>${notes.length}</i></button>
-<aside class="drawer"><button class="x">✕</button><h4>Design notes</h4><p class="sub">Why this page looks the way it does. These are for reviewers, not part of the product.</p>
+<aside class="drawer"><button class="x">✕</button><h4>Design notes</h4><p class="sub">Why this page looks the way it does. These are for reviewers, not part of the product. Full evidence and sources: <a href="${link("docs/research")}" style="color:#ffd27a;text-decoration:underline">Docs Research</a>.</p>
 ${notes.map((n) => `<div class="nt ${n.t}"><span class="ty">${{ why: "Why", risk: "Risk / dependency", change: "Vs. today" }[n.t]}</span>${n.h}</div>`).join("")}</aside>`;
 const shell = (p, { title, body, cls, notes }) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${stripTags(title)}</title>
@@ -73,7 +73,7 @@ function sidebarHtml(tab, cur) {
     if (it.path) {
       const P = paths[it.path];
       const ci = P.steps.findIndex(([s]) => s === cur);
-      return `<div class="sec">Build it</div><div class="pathbox"><div class="ph">${P.name}<span>${P.time}</span></div>${P.steps.map(([s, t], i) =>
+      return `<div class="pathbox"><a class="ph${P.intro === cur ? " on" : ""}" href="${link(P.intro)}">${P.job}<span>${P.time}</span></a>${P.steps.map(([s, t], i) =>
         a(s, t, ci > i ? "done" : "", `<span class="num">${ci > i ? "✓" : i + 1}</span>`).replace("</a>", i === P.first ? `<span class="star" title="First success">★</span></a>` : "</a>")).join("")}</div>`;
     }
     if (it.kids) {
@@ -84,7 +84,7 @@ function sidebarHtml(tab, cur) {
     return a(it.p, it.t);
   }).join("");
 }
-const flatOrder = (tab) => sidebars[tab].flatMap((it) => it.path ? paths[it.path].steps.map(([s, t]) => [s, t]) : it.kids ? [[it.p, it.t], ...it.kids] : it.p ? [[it.p, it.t]] : []);
+const flatOrder = (tab) => sidebars[tab].flatMap((it) => it.path ? [[paths[it.path].intro, paths[it.path].job], ...paths[it.path].steps] : it.kids ? [[it.p, it.t], ...it.kids] : it.p ? [[it.p, it.t]] : []);
 
 function stepperHtml(key, cur) {
   const P = paths[key];
@@ -99,7 +99,7 @@ function coverageHtml() {
   };
   const cell = (key, pk) => {
     const P = paths[pk];
-    const list = [`docs/${P.tab}`, ...P.steps.map(([s]) => s)];
+    const list = [P.intro, ...P.steps.map(([s]) => s)];
     const intro = list.findIndex((pg) => usage.some((u) => u.key === key && u.page === pg && u.kind === "intro"));
     if (intro >= 0) return `<span class="I">${intro === 0 ? "Overview" : "Step " + intro}</span>`;
     if (list.some((pg) => usage.some((u) => u.key === key && u.page === pg))) return `<span class="R">mentioned</span>`;
@@ -107,7 +107,7 @@ function coverageHtml() {
   };
   const w2 = (v) => v === "I" ? `<span class="I">intro</span>` : v === "gap" ? `<span class="gap">GAP</span>` : v ? `<span class="R">reuse</span>` : `<span class="R">·</span>`;
   const rows = Object.entries(concepts).map(([k, c]) => {
-    const w1 = Object.keys(paths).some((pk) => { const P = paths[pk]; return [`docs/${P.tab}`, ...P.steps.map(([s]) => s)].some((pg) => usage.some((u) => u.key === k && u.page === pg)); });
+    const w1 = Object.keys(paths).some((pk) => { const P = paths[pk]; return [P.intro, ...P.steps.map(([s]) => s)].some((pg) => usage.some((u) => u.key === k && u.page === pg)); });
     return `<tr><td><a href="${link("docs/concepts/" + slug(k))}">${c.name}</a>${w1 ? "" : ' <span class="gap">not in Wave 1</span>'}</td>${Object.keys(paths).map((pk) => `<td>${cell(k, pk)}</td>`).join("")}<td>${w2(wave2.shared[k])}</td><td>${w2(wave2.games[k])}</td></tr>`;
   }).join("");
   return `<h2 id="coverage">Where each concept is taught</h2><p>Every concept is introduced inside a build, at the step that needs it. This table is generated from the paths themselves.</p>
@@ -132,7 +132,8 @@ function docsPage(p) {
   const tab = tabs.find((t) => t.id === p.tab);
   const P = p.pathKey && paths[p.pathKey];
   const si = P ? P.steps.findIndex(([s]) => s === p.path) : -1;
-  const crumb = `Solana Documentation <span>/ ${tab.label}${P ? " / " + P.name + " · step " + (si + 1) + " of " + P.steps.length : ""}</span>`;
+  const PI = p.pathIntro && paths[p.pathIntro];
+  const crumb = `Solana Documentation <span>/ ${tab.label}${P ? " / " + P.name + " · step " + (si + 1) + " of " + P.steps.length : PI ? " / " + PI.name + " · overview" : ""}</span>`;
   const main = `
 <nav class="tabs"><div class="in">${tabs.map((t) => t.sep ? `<span class="sep"></span>` : `<a class="${t.id === p.tab ? "cur" : ""}" href="${link(t.href)}">${t.icon}${t.label}${t.isNew ? ' <span class="tag-new">NEW</span>' : ""}</a>`).join("")}</div></nav>
 <div class="layout">
@@ -163,7 +164,7 @@ function landing() {
   <div class="foot"><div class="meta"><span>First result <b>${first}</b></span><span>Full path <b>${total}</b></span><span>In browser</span></div>
   <div class="go">${cta}${I.arrow}</div></div></a>`;
   const body = `
-<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/reference/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
+<nav class="subbar"><div class="in"><a class="cur" href="${link("")}">${I.sparkle}Build</a><a href="${link("docs")}">${I.book}Docs</a><a href="${link("docs/reference/rpc")}">${I.code}API reference</a><a href="${link("docs/resources/tools")}">${I.wrench}Tools</a><a href="#">${I.school}Learn</a><a href="#">${I.users}Community</a></div></nav>
 
 <section class="hero"><div class="wrap">
   <div>
@@ -186,15 +187,15 @@ function landing() {
   <h2 class="display">What are you building?</h2>
   <p class="intro">Internet capital markets are built from a few pieces: money that moves like a message, prices as small as a cent, and assets anyone can hold and trade. Each path builds one piece, starting in your browser and ending in your own stack.</p>
   <div class="grid g3">
-    ${job("docs/payments", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
-    ${job("docs/apis", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
-    ${job("docs/tokenization", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
+    ${job("docs/build/checkout", I.card, "Money", "Accept dollar payments that settle in seconds", "Take digital dollars (USDC) from anyone, anywhere. The money arrives in under a second, for less than a cent, with no percentage fee and no chargebacks.", "5 min", "30 min", "Build a checkout")}
+    ${job("docs/build/paywall-api", I.api, "Pricing", "Charge a few cents per API call", "Card fees make a 2¢ charge impossible. Here a payment costs a fraction of a cent, so you can price per request, for people or AI agents, with no accounts or API keys.", "5 min", "30 min", "Paywall an endpoint")}
+    ${job("docs/build/issue-asset", I.layers, "Assets", "Issue a tokenized asset with compliance controls", "Issue a fund share, a point or a real-world asset with your own transfer rules and a pause switch, enforced by the network instead of your database.", "10 min", "45 min", "Issue an asset")}
   </div>
   <div class="morejobs"><span class="lbl">Markets &amp; more</span>
-    <a href="${link("docs/more/markets")}">Trading &amp; markets <span>guides →</span></a>
-    <a href="${link("docs/more/games")}">Games &amp; digital items <span>guides →</span></a>
-    <a href="${link("docs/apis/agents")}">AI agents that pay <span>guides →</span></a>
-    <a href="${link("docs/more/programs")}">Write your own program <span>guides →</span></a></div>
+    <a href="${link("docs/markets")}">Trading &amp; markets <span>guides →</span></a>
+    <a href="${link("docs/games")}">Games &amp; digital items <span>guides →</span></a>
+    <a href="${link("docs/payments/pay-per-call/agents")}">AI agents that pay <span>guides →</span></a>
+    <a href="${link("docs/programs")}">Write your own program <span>guides →</span></a></div>
 </div></section>
 
 <section class="band"><div class="wrap">
@@ -233,7 +234,7 @@ function landing() {
 
 <div class="wrap"><div class="newsband"><div><h3>Solana developer update</h3><p>Releases, upgrades and new paths, once a month. Or read the <a href="#" style="text-decoration:underline">changelog</a>.</p></div>
 <form onsubmit="return false"><input placeholder="you@company.com"><button class="btn green">Subscribe</button></form></div></div>
-<footer class="site"><div class="wrap"><span>© Solana Foundation · structural mockup, illustrative copy</span><nav><a href="#">Grants</a><a href="#">Media kit</a><a href="#">Careers</a><a href="#">Privacy</a><a href="https://github.com/catmcgee/developers-redesign-mockup">Source</a></nav></div></footer>`;
+<footer class="site"><div class="wrap"><span>© Solana Foundation · structural mockup, illustrative copy</span><nav><a href="#">Grants</a><a href="#">Media kit</a><a href="#">Careers</a><a href="#">Privacy</a><a href="${link("docs/research")}">Docs Research</a><a href="https://github.com/catmcgee/developers-redesign-mockup">Source</a></nav></div></footer>`;
   return shell("", { title: "Build on internet capital markets | Solana Developers", body, cls: "dark", notes: landingWhy });
 }
 

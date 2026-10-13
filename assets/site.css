@@ -442,3 +442,7 @@ main.content{padding:40px 64px 80px;min-width:0}
 .job .meta{flex-wrap:wrap;gap:6px 16px}.job .meta span{white-space:nowrap}
 .morejobs a span{white-space:nowrap;margin-left:10px}
 .morejobs .lbl{white-space:normal}
+.sidebar .pathbox a.ph{display:flex;border-radius:7px;text-decoration:none}
+.sidebar .pathbox a.ph:hover{background:var(--soft)}
+.sidebar .pathbox a.ph.on{background:#ece6fb;color:#4c1d95}
+.sidebar .pathbox+.pathbox{margin-top:8px}

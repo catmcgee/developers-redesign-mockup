@@ -2,46 +2,46 @@
 import { I, concept, chip, h2, callout, cards, flow, fit, table, checklist, code, ghost, concepts, slug } from "./helpers.mjs";
 
 /* ================================================================ paths */
+// Paths are tutorials. They live under Start here; each use-case hub links to its path.
 export const paths = {
   payments: {
-    tab: "payments", label: "Payments", job: "Accept dollar payments", name: "Build a checkout", time: "~30 min", first: 1,
+    intro: "docs/build/checkout", hub: "docs/payments", label: "Payments", job: "Accept dollar payments", name: "Build a checkout", time: "~30 min", first: 1,
     steps: [
-      ["docs/payments/build/try-it", "Pay as a customer"],
-      ["docs/payments/build/browser", "Build it in the browser"],
-      ["docs/payments/build/backend", "Confirm from your backend"],
-      ["docs/payments/build/go-live", "Go live"],
+      ["docs/build/checkout/try-it", "Pay as a customer"],
+      ["docs/build/checkout/browser", "Build it in the browser"],
+      ["docs/build/checkout/backend", "Confirm from your backend"],
+      ["docs/build/checkout/go-live", "Go live"],
     ],
   },
   apis: {
-    tab: "apis", label: "Pay-per-call", job: "Charge per API call", name: "Paywall an endpoint", time: "~30 min", first: 1,
+    intro: "docs/build/paywall-api", hub: "docs/payments/pay-per-call", label: "Pay-per-call", job: "Charge per API call", name: "Paywall an endpoint", time: "~30 min", first: 1,
     steps: [
-      ["docs/apis/build/try-it", "Call a paid API"],
-      ["docs/apis/build/browser", "Paywall it in the browser"],
-      ["docs/apis/build/server", "Add it to your server"],
-      ["docs/apis/build/go-live", "Go live"],
+      ["docs/build/paywall-api/try-it", "Call a paid API"],
+      ["docs/build/paywall-api/browser", "Paywall it in the browser"],
+      ["docs/build/paywall-api/server", "Add it to your server"],
+      ["docs/build/paywall-api/go-live", "Go live"],
     ],
   },
   tokenization: {
-    tab: "tokenization", label: "Tokenized asset", job: "Issue a tokenized asset", name: "Issue an asset", time: "~45 min", first: 1,
+    intro: "docs/build/issue-asset", hub: "docs/tokenization", label: "Tokenized asset", job: "Issue a tokenized asset", name: "Issue an asset", time: "~45 min", first: 1,
     steps: [
-      ["docs/tokenization/build/try-it", "Hold a restricted asset"],
-      ["docs/tokenization/build/browser", "Create it in the browser"],
-      ["docs/tokenization/build/local", "Run it from your machine"],
-      ["docs/tokenization/build/go-live", "Go live"],
+      ["docs/build/issue-asset/try-it", "Hold a restricted asset"],
+      ["docs/build/issue-asset/browser", "Create it in the browser"],
+      ["docs/build/issue-asset/local", "Run it from your machine"],
+      ["docs/build/issue-asset/go-live", "Go live"],
     ],
   },
 };
 
 /* ================================================================= tabs */
+// Six tabs, same count as today. Use cases are ONE tab (see Docs Research).
 export const tabs = [
   { id: "start", label: "Start here", icon: I.home, href: "docs" },
-  { id: "payments", label: "Payments", icon: I.card, href: "docs/payments" },
-  { id: "apis", label: "APIs & agents", icon: I.api, href: "docs/apis", isNew: true },
-  { id: "tokenization", label: "Tokenization", icon: I.layers, href: "docs/tokenization" },
-  { id: "more", label: "More use cases", icon: I.grid, href: "docs/more" },
-  { sep: true },
+  { id: "usecases", label: "Use cases", icon: I.grid, href: "docs/use-cases" },
   { id: "concepts", label: "How Solana works", icon: I.cube, href: "docs/concepts" },
-  { id: "reference", label: "Reference", icon: I.code, href: "docs/reference" },
+  { id: "programs", label: "Programs", icon: I.code, href: "docs/programs" },
+  { id: "reference", label: "API reference", icon: I.api, href: "docs/reference" },
+  { id: "resources", label: "Resources", icon: I.wrench, href: "docs/resources/tools" },
 ];
 
 /* ============================================================ sidebars */
@@ -49,83 +49,76 @@ const guide = (p, t, kids) => ({ p, t, kids });
 export const sidebars = {
   start: [
     { p: "docs", t: "Start here" },
+    { h: "Build something" },
+    { path: "payments" },
+    { path: "apis" },
+    { path: "tokenization" },
     { h: "Set up" },
     { p: "docs/agents", t: "Build with AI coding agents" },
     { p: "docs/setup", t: "Set up your machine" },
     { p: "docs/from-ethereum", t: "Coming from Ethereum" },
+    { h: "About this mockup" },
+    { p: "docs/research", t: "Docs Research" },
   ],
-  payments: [
+  usecases: [
+    { p: "docs/use-cases", t: "All use cases" },
+    { h: "Payments" },
     { p: "docs/payments", t: "Overview" },
-    { path: "payments" },
-    { h: "Guides" },
     guide("docs/payments/send", "Send payments", [["docs/payments/send/basic", "Basic payment"], ["docs/payments/send/memo", "Payment with memo"], ["docs/payments/send/verify-address", "Verify an address"], ["docs/payments/send/processing", "Payment processing"]]),
     guide("docs/payments/accept", "Accept payments", [["docs/payments/accept/solana-pay", "Solana Pay"], ["docs/payments/accept/verification", "Verification tools"], ["docs/payments/accept/indexing", "Indexing & webhooks"]]),
     { p: "docs/payments/subscriptions", t: "Subscriptions" },
     { p: "docs/payments/payouts", t: "Payouts & disbursements" },
+    guide("docs/payments/pay-per-call", "Pay-per-call & agents", [["docs/payments/pay-per-call/x402", "How x402 works"], ["docs/payments/pay-per-call/agents", "Agents that pay"], ["docs/payments/pay-per-call/mpp", "Machine payments (MPP)"], ["docs/payments/pay-per-call/pay-sh", "pay.sh"]]),
     guide("docs/payments/advanced", "Advanced", [["docs/payments/advanced/deferred", "Deferred execution"], ["docs/payments/advanced/spend-permissions", "Spend permissions"]]),
-    { h: "Tools for this job" },
-    { p: "docs/payments/tools/commerce-kit", t: "Commerce Kit" },
-    { p: "docs/payments/tools/kora", t: "Kora (fee sponsorship)" },
-    { p: "docs/payments/tools/solana-pay", t: "Solana Pay" },
-  ],
-  apis: [
-    { p: "docs/apis", t: "Overview" },
-    { path: "apis" },
-    { h: "Guides" },
-    { p: "docs/apis/x402", t: "How x402 works" },
-    { p: "docs/apis/agents", t: "Agents that pay" },
-    { p: "docs/apis/mpp", t: "Machine payments (MPP)" },
-    { p: "docs/apis/pay-sh", t: "pay.sh" },
-    { h: "Tools for this job" },
-    { p: "docs/apis/facilitator", t: "x402 facilitator" },
-    { p: "docs/payments/tools/kora", t: "Kora (fee sponsorship)" },
-  ],
-  tokenization: [
+    { h: "Tokenization" },
     { p: "docs/tokenization", t: "Overview" },
-    { path: "tokenization" },
-    { h: "Guides" },
-    guide("docs/tokenization/basics", "Token basics", [["docs/tokenization/basics/create-mint", "Create a mint"], ["docs/tokenization/basics/mint", "Mint tokens"], ["docs/tokenization/basics/transfer", "Transfer tokens"], ["docs/tokenization/basics/freeze", "Freeze & thaw"], ["docs/tokenization/basics/authorities", "Set authorities"]]),
-    guide("docs/tokenization/extensions", "Token extensions", [["docs/tokenization/extensions/metadata", "Metadata"], ["docs/tokenization/extensions/pausable", "Pausable"], ["docs/tokenization/extensions/default-state", "Default account state"], ["docs/tokenization/extensions/permanent-delegate", "Permanent delegate"], ["docs/tokenization/extensions/transfer-hook", "Transfer hook"], ["docs/tokenization/extensions/confidential", "Confidential transfers"]]),
     { p: "docs/tokenization/token-acl", t: "Allowlists (Token ACL)" },
+    { p: "docs/tokenization/attestations", t: "KYC with Attestations" },
     { p: "docs/tokenization/dvp", t: "Delivery vs payment" },
     { p: "docs/tokenization/nav-strikes", t: "NAV strikes for funds" },
-    { p: "docs/tokenization/verify-token", t: "Verify a token" },
-    { h: "Tools for this job" },
-    { p: "docs/tokenization/attestations", t: "Attestations (KYC claims)" },
-    { p: "docs/tokenization/metaplex", t: "Metaplex" },
-  ],
-  more: [
-    { p: "docs/more", t: "All use cases" },
     { h: "Markets & trading" },
-    guide("docs/more/markets", "Overview", [["docs/more/markets/exchange", "Build an exchange"], ["docs/more/markets/mev", "MEV protection"], ["docs/more/markets/swqos", "Stake-weighted QoS"]]),
-    { h: "Games & digital items" },
-    { p: "docs/more/games", t: "Let players own items" },
-    { h: "Privacy" },
-    { p: "docs/more/privacy", t: "Private payments" },
-    { h: "Keep a shared record" },
-    { p: "docs/more/programs", t: "Write your own program" },
-    { p: "docs/more/programs/first-program", t: "First program in the browser" },
-    { p: "docs/more/programs/anchor", t: "Anchor framework" },
-    { p: "docs/more/programs/testing", t: "Testing programs" },
-    { p: "docs/more/programs/deploying", t: "Deploying" },
-    { p: "docs/more/programs/idls", t: "IDLs & Codama clients" },
+    guide("docs/markets", "Overview", [["docs/markets/exchange", "Build an exchange"], ["docs/markets/mev", "MEV protection"], ["docs/markets/swqos", "Stake-weighted QoS"]]),
+    { h: "More" },
+    { p: "docs/privacy", t: "Private payments" },
+    { p: "docs/games", t: "Games & digital items" },
   ],
   concepts: (() => {
     const cats = {};
     for (const [k, c] of Object.entries(concepts)) (cats[c.cat] ||= []).push(k);
-    return [{ p: "docs/concepts", t: "Overview & coverage" }, ...Object.entries(cats).flatMap(([cat, ks]) => [{ h: cat }, ...ks.map((k) => ({ p: `docs/concepts/${slug(k)}`, t: concepts[k].name }))])];
+    const tokenGuides = [
+      guide("docs/tokens/basics", "Token basics (how-to)", [["docs/tokens/basics/create-mint", "Create a mint"], ["docs/tokens/basics/mint", "Mint tokens"], ["docs/tokens/basics/transfer", "Transfer tokens"], ["docs/tokens/basics/freeze", "Freeze & thaw"], ["docs/tokens/basics/authorities", "Set authorities"]]),
+      guide("docs/tokens/extensions", "Extensions (how-to)", [["docs/tokens/extensions/metadata", "Metadata"], ["docs/tokens/extensions/pausable", "Pausable"], ["docs/tokens/extensions/default-state", "Default account state"], ["docs/tokens/extensions/permanent-delegate", "Permanent delegate"], ["docs/tokens/extensions/transfer-hook", "Transfer hook"], ["docs/tokens/extensions/confidential", "Confidential transfers"]]),
+      { p: "docs/tokens/verify-token", t: "Verify a token" },
+      { p: "docs/tokens/metaplex", t: "NFTs with Metaplex" },
+    ];
+    return [{ p: "docs/concepts", t: "Overview & coverage" }, ...Object.entries(cats).flatMap(([cat, ks]) => [{ h: cat }, ...ks.map((k) => ({ p: `docs/concepts/${slug(k)}`, t: concepts[k].name })), ...(cat === "Tokens" ? tokenGuides : [])])];
   })(),
+  programs: [
+    { p: "docs/programs", t: "Write your own program" },
+    { p: "docs/programs/first-program", t: "First program in the browser" },
+    { h: "Build" },
+    { p: "docs/programs/anchor", t: "Anchor framework" },
+    { p: "docs/programs/testing", t: "Testing programs" },
+    { p: "docs/programs/deploying", t: "Deploying" },
+    { p: "docs/programs/idls", t: "IDLs & Codama clients" },
+  ],
   reference: [
     { p: "docs/reference", t: "Overview" },
-    { h: "APIs" },
     guide("docs/reference/rpc", "RPC methods", [["docs/reference/rpc/http", "HTTP methods"], ["docs/reference/rpc/websocket", "WebSocket methods"], ["docs/reference/rpc/providers", "RPC providers"]]),
     guide("docs/reference/sdks", "SDKs", [["docs/reference/sdks/typescript", "TypeScript (Kit)"], ["docs/reference/sdks/rust", "Rust"], ["docs/reference/sdks/python", "Python"]]),
     { p: "docs/reference/frontend", t: "React & Next.js" },
-    { h: "Tools" },
-    guide("docs/reference/tools", "Developer tools", [["docs/reference/tools/surfpool", "Surfpool"], ["docs/reference/tools/litesvm", "LiteSVM"], ["docs/reference/tools/microscope", "Microscope"], ["docs/reference/tools/keychain", "Keychain"], ["docs/reference/tools/private-channels", "Private Channels"]]),
     { p: "docs/reference/cli", t: "Solana CLI" },
+  ],
+  resources: [
+    { h: "Tools" },
+    guide("docs/resources/tools", "Developer tools", [["docs/resources/tools/surfpool", "Surfpool"], ["docs/resources/tools/litesvm", "LiteSVM"], ["docs/resources/tools/microscope", "Microscope"], ["docs/resources/tools/keychain", "Keychain"], ["docs/resources/tools/private-channels", "Private Channels"]]),
+    { p: "docs/payments/tools/commerce-kit", t: "Commerce Kit" },
+    { p: "docs/payments/tools/kora", t: "Kora (fee sponsorship)" },
+    { p: "docs/payments/tools/solana-pay", t: "Solana Pay" },
+    { p: "docs/payments/pay-per-call/facilitator", t: "x402 facilitator" },
     { h: "Ship" },
-    { p: "docs/reference/production", t: "Production readiness" },
+    { p: "docs/resources/production", t: "Production readiness" },
+    { p: "docs/resources/videos", t: "Video tutorials" },
   ],
 };
 
@@ -152,14 +145,14 @@ page("docs", {
   desc: "Solana is where internet capital markets run. Pick the piece you're building. Every path starts in your browser, ends running in your own stack, and teaches you the parts of Solana each step needs, when it needs them.",
   body: () => `
 <div class="dpick">
-  <a href="@/docs/payments/"><span class="di">${I.card}</span><h3>Accept dollar payments that settle in seconds</h3><p>Take USDC (digital dollars) from anyone. Money arrives in under a second for less than a cent, with no percentage fee and no chargebacks.</p><div class="dm"><span>First result ~5 min</span><b>Build a checkout →</b></div></a>
-  <a href="@/docs/apis/"><span class="di">${I.api}</span><h3>Charge a few cents per API call</h3><p>Price each request at a cent or less. People's apps and AI agents pay inline over HTTP, with no signup, API key or invoice.</p><div class="dm"><span>First result ~5 min</span><b>Paywall an endpoint →</b></div></a>
-  <a href="@/docs/tokenization/"><span class="di">${I.layers}</span><h3>Issue a tokenized asset with compliance controls</h3><p>A fund share, point or real-world asset, with an approval list and a pause switch enforced by the network.</p><div class="dm"><span>First result ~10 min</span><b>Issue an asset →</b></div></a>
+  <a href="@/docs/build/checkout/"><span class="di">${I.card}</span><h3>Accept dollar payments that settle in seconds</h3><p>Take USDC (digital dollars) from anyone. Money arrives in under a second for less than a cent, with no percentage fee and no chargebacks.</p><div class="dm"><span>First result ~5 min</span><b>Build a checkout →</b></div></a>
+  <a href="@/docs/build/paywall-api/"><span class="di">${I.api}</span><h3>Charge a few cents per API call</h3><p>Price each request at a cent or less. People's apps and AI agents pay inline over HTTP, with no signup, API key or invoice.</p><div class="dm"><span>First result ~5 min</span><b>Paywall an endpoint →</b></div></a>
+  <a href="@/docs/build/issue-asset/"><span class="di">${I.layers}</span><h3>Issue a tokenized asset with compliance controls</h3><p>A fund share, point or real-world asset, with an approval list and a pause switch enforced by the network.</p><div class="dm"><span>First result ~10 min</span><b>Issue an asset →</b></div></a>
 </div>
 ${cards([
-  ["Trading & markets", "Exchanges, order flow, MEV protection.", "@/docs/more/markets/", "Guides"],
-  ["Games & digital items", "Items players own and other apps can read.", "@/docs/more/games/", "Guides"],
-  ["Keep a shared record", "Write your own program when existing ones aren't enough.", "@/docs/more/programs/", "Guides"],
+  ["Trading & markets", "Exchanges, order flow, MEV protection.", "@/docs/markets/", "Guides"],
+  ["Games & digital items", "Items players own and other apps can read.", "@/docs/games/", "Guides"],
+  ["Keep a shared record", "Write your own program when existing ones aren't enough.", "@/docs/programs/", "Guides"],
 ], "c3")}
 ${h2("Already know your way around?")}
 ${cards([
@@ -183,8 +176,8 @@ page("docs/setup", { tab: "start", title: "Set up your machine", desc: "Install 
 page("docs/from-ethereum", { tab: "start", title: "Coming from Ethereum", desc: "How EVM concepts map onto Solana: accounts vs contract storage, programs vs contracts, fees and finality.", stub: { was: "/developers/evm-to-svm" } });
 
 /* ------------------------------------------------------------ PAYMENTS */
-page("docs/payments", {
-  tab: "payments", title: "Accept dollar payments that settle in seconds",
+page("docs/build/checkout", {
+  tab: "payments", title: "Accept dollar payments that settle in seconds", pathIntro: "payments",
   desc: "Money is the first piece of internet capital markets. Take USDC, a digital dollar, from anyone with a wallet. You can use the money in under a second, the fee is a fraction of a cent, and there are no chargebacks.",
   body: () => `
 ${flow([["Request", "amount + order"], ["Approve", "customer's wallet"], ["Settle", "~0.4 s on Solana"], ["Verify", "your server checks"], ["Ship", "fulfil the order"]])}
@@ -208,17 +201,18 @@ ${cards([
   ["Subscriptions", "Recurring charges with delegated spending limits.", "@/docs/payments/subscriptions/"],
   ["Payouts & disbursements", "Pay users, vendors or employees in bulk.", "@/docs/payments/payouts/"],
 ])}
-${callout(`<p>Moving real money? Read <a href="@/docs/reference/production/">Production readiness</a> before you launch. It covers RPC infrastructure, confirmation, monitoring and key management.</p>`)}
+${callout(`<p>Moving real money? Read <a href="@/docs/resources/production/">Production readiness</a> before you launch. It covers RPC infrastructure, confirmation, monitoring and key management.</p>`)}
 `,
   why: [
+    N("change", "<b>Moved after the Docs Research.</b> This path intro now lives under <i>Start here → Build something</i>, the way Base (Get Started → Solutions) and Stripe (Get started → Use cases) do it. The Payments <i>hub</i> in the Use cases tab links here, so there is one path and one hub, and neither copies the other."),
     N("why", "This page covers stages 1 and 2 of the template: <b>the job</b> in the developer's words, then an honest <b>fit check</b>. The title is the job (“Accept dollar payments”), not the technology."),
     N("change", "Today's /docs/payments opens with <i>“New to how balances and ownership work on Solana? Read Core Concepts, then review Assets”</i>, which is a concept gate in the second paragraph. That line is gone. The concepts appear inside the steps instead."),
     N("change", "Today's <i>Why Solana</i> list is all upsides. The fit check keeps those facts but adds a comparison against cards and a <b>Not the right fit</b> column. MLH participants compared Solana with Stripe, so we answer that comparison in its own terms."),
-    N("why", "The guides (send, accept, subscriptions…) are unchanged and still live here. The path is a linear 30-minute build that sits <i>above</i> the guides. It doesn't duplicate them, and it links into them at the end."),
+    N("why", "The guides (send, accept, subscriptions…) are unchanged and live in the <i>Use cases → Payments</i> hub. The path is a linear 30-minute tutorial. It doesn't duplicate the guides; it links into them at the end."),
   ],
 });
 
-page("docs/payments/build/try-it", {
+page("docs/build/checkout/try-it", {
   tab: "payments", pathKey: "payments", title: "Pay as a customer",
   desc: "Before writing any code, pay for something the way your customers will. There's nothing to install: this page creates a test wallet for you.",
   body: () => `${stepper()}
@@ -245,7 +239,7 @@ ${concept("tokenAccount")}
 ${h2("Meanwhile, on mainnet")}
 <p>Real businesses are doing exactly this right now. These are live transactions involving USDC on mainnet:</p>
 ${liveFeed()}
-${next("docs/payments/build/browser", "Build the checkout in your browser", "Edit the code behind the button you just used, and take your first payment with it.")}
+${next("docs/build/checkout/browser", "Build the checkout in your browser", "Edit the code behind the button you just used, and take your first payment with it.")}
 `,
   why: [
     N("why", "Principle 4, <b>use it, then show it live</b>. The developer goes through the product as a customer before seeing any code, then reads <i>their own</i> transaction, then sees the real network doing the same thing. The Explorer is taught on a transaction they made, which means more than a sample one would."),
@@ -255,7 +249,7 @@ ${next("docs/payments/build/browser", "Build the checkout in your browser", "Edi
   ],
 });
 
-page("docs/payments/build/browser", {
+page("docs/build/checkout/browser", {
   tab: "payments", pathKey: "payments", title: "Build the checkout in your browser",
   desc: "Here's the code behind the button you just used. Change it, run it, and pay with your test wallet. This is your first working Solana app.",
   body: () => `${stepper()}
@@ -293,7 +287,7 @@ ${concept("signature")}
 ${callout(`<p><strong>Don't ship orders from this callback alone.</strong> Anything that runs in the browser can be faked. In the next step your server looks the signature up on the network and checks the amount itself.</p>`, "warn")}
 ${h2("Prefer another framework?")}
 <p>Commerce Kit works in any React app. For Vue, Svelte or plain JavaScript, build the same transaction with <a href="@/docs/reference/sdks/typescript/">@solana/kit</a>; see <a href="@/docs/payments/send/basic/">Basic payment</a>.</p>
-${next("docs/payments/build/backend", "Confirm payments from your backend", "Run a verify endpoint on your own machine and only ship orders the network has confirmed.")}
+${next("docs/build/checkout/backend", "Confirm payments from your backend", "Run a verify endpoint on your own machine and only ship orders the network has confirmed.")}
 `,
   why: [
     N("why", "<b>This is the first-success moment</b>, about 5 minutes from landing, with nothing to read, install or decide first. It's built on the Commerce Kit playground that already exists (<code>launch.solana.com/products/commercekit/playground</code>)."),
@@ -303,7 +297,7 @@ ${next("docs/payments/build/backend", "Confirm payments from your backend", "Run
   ],
 });
 
-page("docs/payments/build/backend", {
+page("docs/build/checkout/backend", {
   tab: "payments", pathKey: "payments", title: "Confirm payments from your backend",
   desc: "Your server should ship the order only after it has checked the payment on the network itself. Run this from your own machine against devnet.",
   body: () => `${stepper()}
@@ -387,7 +381,7 @@ ${code({ label: "curl", lang: "sh", src: `curl -X POST localhost:3000/api/orders
   -d '{"signature":"<your signature from step 2>"}'
 # {"paid":true}` })}
 ${callout(`<p>Want the CLI, a local test network or Anchor? You don't need them for payments, but <a href="@/docs/setup/">Set up your machine</a> covers them.</p>`)}
-${next("docs/payments/build/go-live", "Go live", "Switch to mainnet, decide who pays network fees, and handle the edge cases real customers hit.")}
+${next("docs/build/checkout/go-live", "Go live", "Switch to mainnet, decide who pays network fees, and handle the edge cases real customers hit.")}
 `,
   why: [
     N("why", "Stage 5 of the template, <b>plug it into your stack</b>. It runs on the developer's machine in their framework, and it carries the path's real engineering lesson: <b>never trust the client, verify on the network</b>. That's the step MLH participants said was missing (“examples ended with no next step”)."),
@@ -397,7 +391,7 @@ ${next("docs/payments/build/go-live", "Go live", "Switch to mainnet, decide who 
   ],
 });
 
-page("docs/payments/build/go-live", {
+page("docs/build/checkout/go-live", {
   tab: "payments", pathKey: "payments", title: "Go live",
   desc: "Switch to mainnet, decide who pays network fees, and handle the edge cases real customers hit. Then pick where to go next.",
   body: () => `${stepper()}
@@ -421,7 +415,7 @@ ${table(["", "Devnet (testing)", "Mainnet (real money)"], [
 ${h2("You built a working checkout")}
 <p>You took a payment as a customer, built the button, and verified payments from your own server. From here:</p>
 ${cards([
-  ["Next path: charge per API call", "Reuses everything you've learned, and adds paying from code instead of from a button.", "@/docs/apis/", "Next path"],
+  ["Next path: charge per API call", "Reuses everything you've learned, and adds paying from code instead of from a button.", "@/docs/build/paywall-api/", "Next path"],
   ["Subscriptions", "Recurring charges with spending limits the customer controls.", "@/docs/payments/subscriptions/", "Go deeper"],
   ["Payouts & disbursements", "Send money back out: refunds, payroll, marketplace splits.", "@/docs/payments/payouts/", "Go deeper"],
   ["Solana School or a partner", "A guided program, or a team that has shipped Solana payments before.", "#", "Get help"],
@@ -435,8 +429,8 @@ ${cards([
 });
 
 /* -------------------------------------------------------------- APIS */
-page("docs/apis", {
-  tab: "apis", title: "Charge a few cents per API call",
+page("docs/build/paywall-api", {
+  tab: "apis", title: "Charge a few cents per API call", pathIntro: "apis",
   desc: "On internet capital markets anything can have a price, down to a single request. Price each request at a cent or less. Clients, whether people's apps or AI agents, pay inline over HTTP, with no signup, API key or invoice.",
   body: () => `
 ${flow([["Request", "GET /api/forecast"], ["402", "price: $0.01"], ["Pay", "client signs"], ["Retry", "with payment"], ["200", "your data"]])}
@@ -453,17 +447,17 @@ ${fit(["You want to price per request, per page or per second of compute", "Your
 ${concept("fees")}
 ${h2("Guides")}
 ${cards([
-  ["How x402 works", "The HTTP 402 flow, payment headers and facilitators.", "@/docs/apis/x402/"],
-  ["Agents that pay", "Give an AI agent a wallet with a spending limit.", "@/docs/apis/agents/"],
+  ["How x402 works", "The HTTP 402 flow, payment headers and facilitators.", "@/docs/payments/pay-per-call/x402/"],
+  ["Agents that pay", "Give an AI agent a wallet with a spending limit.", "@/docs/payments/pay-per-call/agents/"],
 ])}
 `,
   why: [
     N("why", "This path covers what today's nav calls <i>Agents and AI</i>, so it doesn't need its own Wave 1 path. Pay-per-call is the concrete job agents do with Solana."),
-    N("change", "Today this content is split across <i>Payments → Agentic payments → x402</i>, <i>pay.sh</i> and <i>Resources → x402 facilitator</i>. Here it becomes one use case with its own tab."),
+    N("change", "Today this content is split across <i>Payments → Agentic payments → x402</i>, <i>pay.sh</i> and <i>Resources → x402 facilitator</i>. Here it becomes one sub-section of Payments (x402 <i>is</i> payments) plus a path under Start here. The Docs Research found no precedent for a separate “APIs &amp; agents” tab."),
     N("why", "The fit check is honest about latency. The first paid request includes a settlement round-trip, so it's not for sub-10 ms SLAs without sessions."),
   ],
 });
-page("docs/apis/build/try-it", {
+page("docs/build/paywall-api/try-it", {
   tab: "apis", pathKey: "apis", title: "Call a paid API",
   desc: "Call a real paywalled endpoint from this page and watch the HTTP 402 flow happen: request, price, payment, data.",
   body: () => `${stepper()}
@@ -477,11 +471,11 @@ ${concept("wallet")}
 ${concept("transaction")}
 ${h2("Why 402?")}
 <p>HTTP has reserved status 402 “Payment Required” since 1997 without ever defining how to pay. <strong>x402</strong> is the open standard that fills that gap: the 402 response lists accepted payments, and the client retries with an <code>X-PAYMENT</code> header containing a signed payment. On Solana that payment costs a fraction of a cent, which is what makes 1¢ prices work.</p>
-${next("docs/apis/build/browser", "Paywall an endpoint in your browser", "Write the server side: one middleware, a price and your wallet address.")}`,
+${next("docs/build/paywall-api/browser", "Paywall an endpoint in your browser", "Write the server side: one middleware, a price and your wallet address.")}`,
   why: [N("why", "Same shape as the payments path: use it as a customer first. Here the “customer” is an HTTP client, so the developer sees raw requests and responses. That's the format web2 API developers already think in."),
         N("why", "Wallet and transaction are introduced again, using the same text as the payments path. Each path is a possible entry point, so <b>at most once per path</b> means once in each path, not once across the site.")],
 });
-page("docs/apis/build/browser", {
+page("docs/build/paywall-api/browser", {
   tab: "apis", pathKey: "apis", title: "Paywall an endpoint in your browser",
   desc: "One middleware, a price and your wallet address. Run it, and a test client pays for each request.",
   body: () => `${stepper()}
@@ -510,12 +504,12 @@ ${h2("What the code is doing")}
 <ul><li>The first argument is your ${chip("wallet", "wallet address")}: where payments land.</li>
 <li>The route map sets a price per endpoint. Requests without a valid payment get a <code>402</code> listing that price.</li>
 <li>The <strong>facilitator</strong> checks the client's signed payment, submits it, and confirms it, so your server doesn't need to talk to the network itself.</li></ul>
-${callout(`<p>The test client is a script with its own keypair, which is a wallet in code. That's how AI agents pay: they hold a wallet with a spending limit you set. See <a href="@/docs/apis/agents/">Agents that pay</a>.</p>`)}
-${next("docs/apis/build/server", "Add it to your server", "Install the middleware in your own app, choose a facilitator, and call it from a real client.")}`,
+${callout(`<p>The test client is a script with its own keypair, which is a wallet in code. That's how AI agents pay: they hold a wallet with a spending limit you set. See <a href="@/docs/payments/pay-per-call/agents/">Agents that pay</a>.</p>`)}
+${next("docs/build/paywall-api/server", "Add it to your server", "Install the middleware in your own app, choose a facilitator, and call it from a real client.")}`,
   why: [N("why", "The first success is the server side, because that's the developer's job here. The client is simulated so that nothing has to be installed."),
         N("risk", "This needs a <b>hosted devnet demo endpoint and facilitator</b> owned by the docs team. A third-party demo that disappears would break the path. The middleware API shown is illustrative and must match the SDK at launch.")],
 });
-page("docs/apis/build/server", {
+page("docs/build/paywall-api/server", {
   tab: "apis", pathKey: "apis", title: "Add it to your server",
   desc: "Install the middleware in your own app, pick a facilitator, and pay for your endpoint from a real client.",
   body: () => `${stepper()}
@@ -550,11 +544,11 @@ console.log(await res.json());` })}
 ${concept("rpc")}
 ${concept("commitment")}
 <p>Facilitators usually settle at <em>confirmed</em>, which adds roughly half a second to the first paid request. For high-frequency clients, cache a short-lived session after the first payment.</p>
-${next("docs/apis/build/go-live", "Go live", "Mainnet, pricing in USDC base units, and protecting unpaid routes from abuse.")}`,
+${next("docs/build/paywall-api/go-live", "Go live", "Mainnet, pricing in USDC base units, and protecting unpaid routes from abuse.")}`,
   why: [N("why", "RPC and confirmation appear here, at the point where latency becomes a design decision for the API owner."),
         N("why", "The client example uses <code>maxPerRequest</code>. Spending limits are the first question every reviewer asks about agents paying.")],
 });
-page("docs/apis/build/go-live", {
+page("docs/build/paywall-api/go-live", {
   tab: "apis", pathKey: "apis", title: "Go live",
   desc: "Mainnet, a facilitator you trust, and protection for unpaid routes. Then where to go next.",
   body: () => `${stepper()}
@@ -569,21 +563,21 @@ ${checklist("api-live", [
 ${concept("sponsorship")}
 ${h2("You paywalled an API")}
 ${cards([
-  ["Agents that pay", "Give an AI agent a wallet and a budget.", "@/docs/apis/agents/", "Next"],
-  ["Accept dollar payments", "Add a human checkout next to your API.", "@/docs/payments/", "Next path"],
-  ["Machine payments (MPP)", "Streaming and session-based payments.", "@/docs/apis/mpp/", "Go deeper"],
+  ["Agents that pay", "Give an AI agent a wallet and a budget.", "@/docs/payments/pay-per-call/agents/", "Next"],
+  ["Accept dollar payments", "Add a human checkout next to your API.", "@/docs/build/checkout/", "Next path"],
+  ["Machine payments (MPP)", "Streaming and session-based payments.", "@/docs/payments/pay-per-call/mpp/", "Go deeper"],
   ["Kora", "Run your own fee payer.", "@/docs/payments/tools/kora/", "Tool"],
 ])}`,
 });
-page("docs/apis/x402", { tab: "apis", title: "How x402 works", desc: "The HTTP 402 flow in detail: payment requirements, the X-PAYMENT header, verification and settlement.", stub: { was: "/docs/payments/agentic-payments/x402" } });
-page("docs/apis/agents", { tab: "apis", title: "Agents that pay", desc: "Give an AI agent a wallet with a spending limit, and let it pay for APIs on its own.", stub: { was: "/docs/payments/agentic-payments" } });
-page("docs/apis/mpp", { tab: "apis", title: "Machine payments (MPP)", desc: "Session- and stream-based payments between machines.", stub: { was: "/docs/payments/agentic-payments/mpp" } });
-page("docs/apis/pay-sh", { tab: "apis", title: "pay.sh", desc: "Pay for APIs from the command line.", stub: { was: "/docs/payments/pay-sh" } });
-page("docs/apis/facilitator", { tab: "apis", title: "x402 facilitator", desc: "Run or choose a facilitator that verifies and settles x402 payments.", stub: { was: "/docs/tools/x402-facilitator" } });
+page("docs/payments/pay-per-call/x402", { tab: "apis", title: "How x402 works", desc: "The HTTP 402 flow in detail: payment requirements, the X-PAYMENT header, verification and settlement.", stub: { was: "/docs/payments/agentic-payments/x402" } });
+page("docs/payments/pay-per-call/agents", { tab: "apis", title: "Agents that pay", desc: "Give an AI agent a wallet with a spending limit, and let it pay for APIs on its own.", stub: { was: "/docs/payments/agentic-payments" } });
+page("docs/payments/pay-per-call/mpp", { tab: "apis", title: "Machine payments (MPP)", desc: "Session- and stream-based payments between machines.", stub: { was: "/docs/payments/agentic-payments/mpp" } });
+page("docs/payments/pay-per-call/pay-sh", { tab: "apis", title: "pay.sh", desc: "Pay for APIs from the command line.", stub: { was: "/docs/payments/pay-sh" } });
+page("docs/payments/pay-per-call/facilitator", { tab: "apis", title: "x402 facilitator", desc: "Run or choose a facilitator that verifies and settles x402 payments.", stub: { was: "/docs/tools/x402-facilitator" } });
 
 /* -------------------------------------------------------- TOKENIZATION */
-page("docs/tokenization", {
-  tab: "tokenization", title: "Issue a tokenized asset with compliance controls",
+page("docs/build/issue-asset", {
+  tab: "tokenization", title: "Issue a tokenized asset with compliance controls", pathIntro: "tokenization",
   desc: "Assets are what internet capital markets trade. Create a token for a fund share, a security, a point or a real-world asset, with metadata, an approval list and a pause switch that the network enforces on every transfer.",
   body: () => `
 ${flow([["Define", "name, rules"], ["Approve", "who may hold it"], ["Issue", "mint to holders"], ["Transfer", "under your rules"], ["Control", "pause · recover"]])}
@@ -599,8 +593,8 @@ ${fit(["Holders sit outside your company and transfer between themselves", "You 
      ["All holdings are internal. A database is simpler", "Balances must be hidden from the public (see confidential transfers first)", "You don't have the legal role covered (issuer, transfer agent, licences). Talk to a partner"])}
 ${h2("Guides")}
 ${cards([
-  ["Token basics", "Create a mint, mint, transfer, freeze.", "@/docs/tokenization/basics/"],
-  ["Token extensions", "Metadata, pause, default state, transfer hooks and more.", "@/docs/tokenization/extensions/"],
+  ["Token basics", "Create a mint, mint, transfer, freeze.", "@/docs/tokens/basics/"],
+  ["Token extensions", "Metadata, pause, default state, transfer hooks and more.", "@/docs/tokens/extensions/"],
   ["Allowlists (Token ACL)", "Approve holders without writing a program.", "@/docs/tokenization/token-acl/"],
   ["Delivery vs payment", "Swap an asset for USDC atomically.", "@/docs/tokenization/dvp/"],
 ])}`,
@@ -609,7 +603,7 @@ ${cards([
     N("change", "<b>Token Extensions</b> leaves the global Build dropdown, where it was listed as a technology, and becomes a guide inside this job. Nobody's job is “a transfer hook”. Their job is an asset that only approved holders can receive."),
   ],
 });
-page("docs/tokenization/build/try-it", {
+page("docs/build/issue-asset/try-it", {
   tab: "tokenization", pathKey: "tokenization", title: "Hold a restricted asset",
   desc: "Your test wallet holds 100 shares of a demo fund. Send some to an approved investor, then to an unknown address, and watch the network enforce the rule.",
   body: () => `${stepper()}
@@ -624,11 +618,11 @@ ${concept("tokenAccount")}
 ${concept("transaction")}
 ${h2("Why it failed")}
 <p>This asset was created so that every new holder's token account starts <strong>frozen</strong>. The issuer approves (thaws) accounts after a KYC check. The unknown address had no approved account, so the Token ${chip("program")} rejected the transfer, and because transactions are all-or-nothing, nothing moved.</p>
-${next("docs/tokenization/build/browser", "Create the asset in your browser", "Make your own restricted asset with metadata, pause and default-frozen accounts.")}`,
+${next("docs/build/issue-asset/browser", "Create the asset in your browser", "Make your own restricted asset with metadata, pause and default-frozen accounts.")}`,
   why: [N("why", "<b>Failure is the lesson.</b> Watching a transfer get blocked teaches more about compliance controls in five seconds than a page about extensions does."),
         N("risk", "This path's first success needs a browser playground for Token-2022 (today's tokenization quickstart runs on a local network). That's the long pole of Phase 2 for the Playground team.")],
 });
-page("docs/tokenization/build/browser", {
+page("docs/build/issue-asset/browser", {
   tab: "tokenization", pathKey: "tokenization", title: "Create the asset in your browser",
   desc: "Create a Token-2022 mint with metadata, a pause switch and default-frozen accounts, then mint some to your test wallet.",
   body: () => `${stepper()}
@@ -658,11 +652,11 @@ ${concept("mint")}
 ${concept("program")}
 ${concept("extensions")}
 ${callout(`<p><strong>Choose extensions before you launch.</strong> Most of them can't be added to a mint after it's created. Decide on pause, default state and a permanent delegate up front, or plan to migrate.</p>`, "warn")}
-${next("docs/tokenization/build/local", "Run it from your machine", "The same script against devnet from your terminal, plus approving a holder with Token ACL.")}`,
+${next("docs/build/issue-asset/local", "Run it from your machine", "The same script against devnet from your terminal, plus approving a holder with Token ACL.")}`,
   why: [N("why", "The concept cards come <i>after</i> the success, and each one points at a line in the code the developer just ran. Four cards is the most on any step, and they're the four ideas this asset depends on."),
         N("change", "Today this content is the <i>Quickstart: launch a token</i>, which runs on a local test network (Surfpool) with CodeTabs for Kit, legacy and Rust. Those code samples carry over to the next step.")],
 });
-page("docs/tokenization/build/local", {
+page("docs/build/issue-asset/local", {
   tab: "tokenization", pathKey: "tokenization", title: "Run it from your machine",
   desc: "Create the same asset from your terminal against devnet, then approve a holder so they can receive it.",
   body: () => `${stepper()}
@@ -694,9 +688,9 @@ ${concept("rpc")}
 ${h2("3. Approve a holder")}
 <p>New token accounts start frozen. Approve an investor by thawing their account directly, or let <a href="@/docs/tokenization/token-acl/">Token ACL</a> do it automatically for addresses on your allowlist.</p>
 ${code({ label: "approve.ts", file: "approve.ts", src: `await thawAccount(rpc, { mint, owner: investorAddress, freezeAuthority: issuer });` })}
-${next("docs/tokenization/build/go-live", "Go live", "Protect the authority keys, connect KYC, and write the pause runbook.")}`,
+${next("docs/build/issue-asset/go-live", "Go live", "Protect the authority keys, connect KYC, and write the pause runbook.")}`,
 });
-page("docs/tokenization/build/go-live", {
+page("docs/build/issue-asset/go-live", {
   tab: "tokenization", pathKey: "tokenization", title: "Go live",
   desc: "Protect the authority keys, connect your KYC process, and decide who can pause. Then go further.",
   body: () => `${stepper()}
@@ -711,43 +705,43 @@ ${h2("You issued an asset")}
 ${cards([
   ["Delivery vs payment", "Swap the asset for USDC atomically.", "@/docs/tokenization/dvp/", "Next"],
   ["NAV strikes for funds", "Daily pricing for money-market style funds.", "@/docs/tokenization/nav-strikes/", "Go deeper"],
-  ["Accept dollar payments", "Take USDC for subscriptions to your fund.", "@/docs/payments/", "Next path"],
+  ["Accept dollar payments", "Take USDC for subscriptions to your fund.", "@/docs/build/checkout/", "Next path"],
   ["Work with a partner", "Issuance platforms and transfer agents on Solana.", "#", "Get help"],
 ])}`,
 });
 const tokStubs = { "basics": ["Token basics", "Create a mint, mint, transfer, freeze and close token accounts.", "/docs/tokens/basics"], "basics/create-mint": ["Create a mint", "", "/docs/tokens/basics/create-mint"], "basics/mint": ["Mint tokens", "", "/docs/tokens/basics/mint-tokens"], "basics/transfer": ["Transfer tokens", "", "/docs/tokens/basics/transfer-tokens"], "basics/freeze": ["Freeze & thaw", "", "/docs/tokens/basics/freeze-account"], "basics/authorities": ["Set authorities", "", "/docs/tokens/basics/set-authority"], "extensions": ["Token extensions", "Every Token-2022 extension, what it does, and when it must be set.", "/docs/tokens/extensions"], "extensions/metadata": ["Metadata", "", "/docs/tokens/extensions/metadata"], "extensions/pausable": ["Pausable", "", "/docs/tokens/extensions/pausable"], "extensions/default-state": ["Default account state", "", "/docs/tokens/extensions/default-state"], "extensions/permanent-delegate": ["Permanent delegate", "", "/docs/tokens/extensions/permanent-delegate"], "extensions/transfer-hook": ["Transfer hook", "", "/docs/tokens/extensions/transfer-hook"], "extensions/confidential": ["Confidential transfers", "", "/docs/tokens/extensions/confidential-transfer"], "token-acl": ["Allowlists (Token ACL)", "Approve and revoke holders from a list, without writing a program.", "/docs/tokenization/token-acl"], "dvp": ["Delivery vs payment", "", "/docs/tokenization/dvp"], "nav-strikes": ["NAV strikes for funds", "", "/docs/tokenization/nav-strikes"], "verify-token": ["Verify a token", "", "/docs/tokens/how-to-verify-a-token"], "attestations": ["Attestations", "Issue and check verifiable claims such as KYC status.", "/docs/tools/attestations"], "metaplex": ["Metaplex", "", "/docs/tokens/metaplex"] };
-for (const [k, [t, d, w]] of Object.entries(tokStubs)) page(`docs/tokenization/${k}`, { tab: "tokenization", title: t, desc: d, stub: { was: w } });
+for (const [k, [t, d, w]] of Object.entries(tokStubs)) page(/^(basics|extensions|metaplex|verify-token)/.test(k) ? `docs/tokens/${k}` : `docs/tokenization/${k}`, { tab: "tokenization", title: t, desc: d, stub: { was: w } });
 
 /* payments guide stubs */
 const payStubs = { "send": ["Send payments", "Everything about moving money out: basic transfers, memos, address checks and processing at scale.", "/docs/payments/send-payments"], "send/basic": ["Basic payment", "", "/docs/payments/send-payments/basic-payment"], "send/memo": ["Payment with memo", "", "/docs/payments/send-payments/payment-with-memo"], "send/verify-address": ["Verify an address", "", "/docs/payments/send-payments/verify-address"], "send/processing": ["Payment processing", "", "/docs/payments/send-payments/payment-processing"], "accept": ["Accept payments", "Checkout flows, Solana Pay, verification and indexing.", "/docs/payments/accept-payments"], "accept/solana-pay": ["Solana Pay", "", "/docs/payments/accept-payments/solana-pay"], "accept/verification": ["Verification tools", "", "/docs/payments/accept-payments/verification-tools"], "accept/indexing": ["Indexing & webhooks", "", "/docs/payments/accept-payments/indexing"], "subscriptions": ["Subscriptions", "Recurring charges using delegated spending authority.", "/docs/payments/subscriptions"], "payouts": ["Payouts & disbursements", "Pay users, vendors or employees in bulk.", "/docs/payments/send-payments/payment-processing"], "advanced": ["Advanced payments", "", "/docs/payments/advanced-payments"], "advanced/deferred": ["Deferred execution", "", "/docs/payments/advanced-payments/deferred-execution"], "advanced/spend-permissions": ["Spend permissions", "", "/docs/payments/advanced-payments/spend-permissions"], "tools/commerce-kit": ["Commerce Kit", "React components and hooks for checkout.", "/docs/tools/commerce-kit"], "tools/kora": ["Kora", "A fee-payer service that lets your app cover network fees for users.", "/docs/tools/kora"], "tools/solana-pay": ["Solana Pay", "", "/docs/tools/solana-pay"] };
 for (const [k, [t, d, w]] of Object.entries(payStubs)) page(`docs/payments/${k}`, { tab: "payments", title: t, desc: d, stub: { was: w } });
 
 /* ------------------------------------------------------------- MORE */
-page("docs/more", {
+page("docs/use-cases", {
   tab: "more", title: "All use cases",
   desc: "Guides for jobs that don't have a full build path yet. Each one becomes a path in Wave 2, using the same template.",
   body: () => `
 ${cards([
-  ["Trading & markets", "Exchanges, order flow, MEV protection and stake-weighted QoS.", "@/docs/more/markets/", "Guides"],
-  ["Let players own items across games", "Items minted to a player and read by a second app.", "@/docs/more/games/", "Wave 2 path"],
-  ["Private payments", "Confidential balances and private channels.", "@/docs/more/privacy/", "Guides"],
-  ["Keep a shared record partners can audit", "Write a program that records who changed what.", "@/docs/more/programs/", "Wave 2 path"],
+  ["Trading & markets", "Exchanges, order flow, MEV protection and stake-weighted QoS.", "@/docs/markets/", "Guides"],
+  ["Let players own items across games", "Items minted to a player and read by a second app.", "@/docs/games/", "Wave 2 path"],
+  ["Private payments", "Confidential balances and private channels.", "@/docs/privacy/", "Guides"],
+  ["Keep a shared record partners can audit", "Write a program that records who changed what.", "@/docs/programs/", "Wave 2 path"],
 ])}`,
   why: [N("why", "Only jobs with a real path get a top-level tab. These sections keep today's content without pretending to be paths, so the picker never promises a path that doesn't exist yet.")],
 });
-page("docs/more/markets", { tab: "more", title: "Markets & trading", desc: "Build exchanges and trading systems.", stub: { was: "/docs/defi" } });
-page("docs/more/markets/exchange", { tab: "more", title: "Build an exchange", desc: "", stub: { was: "/docs/defi/exchange" } });
-page("docs/more/markets/mev", { tab: "more", title: "MEV protection", desc: "", stub: { was: "/docs/defi/mev-protection" } });
-page("docs/more/markets/swqos", { tab: "more", title: "Stake-weighted QoS", desc: "", stub: { was: "/docs/defi/stake-weighted-qos" } });
-page("docs/more/games", { tab: "more", title: "Let players own items across games", desc: "Mint an item to a player and read it from a second app. A Wave 2 job path.", stub: { was: "/developers/guides/games" } });
-page("docs/more/privacy", { tab: "more", title: "Private payments", desc: "Confidential transfers and private channels.", stub: { was: "/docs/finance/privacy" },
+page("docs/markets", { tab: "more", title: "Markets & trading", desc: "Build exchanges and trading systems.", stub: { was: "/docs/defi" } });
+page("docs/markets/exchange", { tab: "more", title: "Build an exchange", desc: "", stub: { was: "/docs/defi/exchange" } });
+page("docs/markets/mev", { tab: "more", title: "MEV protection", desc: "", stub: { was: "/docs/defi/mev-protection" } });
+page("docs/markets/swqos", { tab: "more", title: "Stake-weighted QoS", desc: "", stub: { was: "/docs/defi/stake-weighted-qos" } });
+page("docs/games", { tab: "more", title: "Let players own items across games", desc: "Mint an item to a player and read it from a second app. A Wave 2 job path.", stub: { was: "/developers/guides/games" } });
+page("docs/privacy", { tab: "more", title: "Private payments", desc: "Confidential transfers and private channels.", stub: { was: "/docs/finance/privacy" },
   why: [N("change", "Today this is the only page in a top-level section called <i>Finance</i>. A one-page section with a broad name promises more than it delivers, so it's renamed after what it covers.")] });
-page("docs/more/programs", { tab: "more", title: "Keep a shared record: write your own program", desc: "When existing programs aren't enough, write your own. This becomes the Wave 2 path “Keep a shared record partners can audit”.", stub: { was: "/docs/programs" },
+page("docs/programs", { tab: "more", title: "Keep a shared record: write your own program", desc: "When existing programs aren't enough, write your own. This becomes the Wave 2 path “Keep a shared record partners can audit”.", stub: { was: "/docs/programs" },
   why: [N("why", "The coverage map shows that Wave 1 teaches <i>using</i> Solana, but never <b>writing a program, PDAs or CPI</b>. This is where that lives until the Wave 2 path ships.")] });
-page("docs/more/programs/first-program", { tab: "more", title: "First program in the browser", desc: "Write, deploy and call a program in Solana Playground: accounts, PDAs and cross-program calls.", stub: { was: "/docs/intro/quick-start" },
+page("docs/programs/first-program", { tab: "more", title: "First program in the browser", desc: "Write, deploy and call a program in Solana Playground: accounts, PDAs and cross-program calls.", stub: { was: "/docs/intro/quick-start" },
   why: [N("change", "This is today's <b>Quick Start</b>, the first card on <code>/docs</code>. It's good content behind the wrong front door: it teaches programs, PDAs and CPI before a web2 developer has a reason to care. It moves here, and the URL redirects.")] });
 for (const [k, t, w] of [["anchor", "Anchor framework", "/docs/programs/anchor"], ["testing", "Testing programs", "/docs/programs/testing"], ["deploying", "Deploying", "/docs/programs/deploying"], ["idls", "IDLs & Codama clients", "/docs/programs/idls"]])
-  page(`docs/more/programs/${k}`, { tab: "more", title: t, desc: "", stub: { was: w } });
+  page(`docs/programs/${k}`, { tab: "more", title: t, desc: "", stub: { was: w } });
 
 /* --------------------------------------------------------- CONCEPTS */
 page("docs/concepts", {
@@ -781,10 +775,10 @@ ${h2("Fees")}
 
 /* --------------------------------------------------------- REFERENCE */
 page("docs/reference", { tab: "reference", title: "Reference", desc: "APIs, SDKs and tools: the lookup material you'll need once something is working.",
-  body: () => cards([["RPC methods", "Every HTTP and WebSocket method.", "@/docs/reference/rpc/"], ["SDKs", "TypeScript (Kit), Rust, Python.", "@/docs/reference/sdks/"], ["React & Next.js", "Hooks, wallet connection and server patterns.", "@/docs/reference/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope, Keychain and more.", "@/docs/reference/tools/"], ["Solana CLI", "Keys, airdrops, deploys and config.", "@/docs/reference/cli/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/reference/production/"]]),
+  body: () => cards([["RPC methods", "Every HTTP and WebSocket method.", "@/docs/reference/rpc/"], ["SDKs", "TypeScript (Kit), Rust, Python.", "@/docs/reference/sdks/"], ["React & Next.js", "Hooks, wallet connection and server patterns.", "@/docs/reference/frontend/"], ["Developer tools", "Surfpool, LiteSVM, Microscope, Keychain and more.", "@/docs/resources/tools/"], ["Solana CLI", "Keys, airdrops, deploys and config.", "@/docs/reference/cli/"], ["Production readiness", "Infrastructure, monitoring and keys before launch.", "@/docs/resources/production/"]]),
   why: [N("change", "This merges today's <i>Solana SDKs</i>, <i>Frontend</i>, <i>Solana RPC Methods</i> and the tools half of <i>Resources</i> into one place for lookups. Tools that belong to one job (Commerce Kit, Kora, Attestations) are listed inside that job too, the same just-in-time rule applied to products.")] });
 for (const [p, t, w] of [["rpc", "RPC methods", "/docs/rpc"], ["rpc/http", "HTTP methods", "/docs/rpc/http"], ["rpc/websocket", "WebSocket methods", "/docs/rpc/websocket"], ["rpc/providers", "RPC providers", "/docs/rpc/providers"], ["sdks", "SDKs", "/docs/clients"], ["sdks/typescript", "TypeScript (Kit)", "/docs/clients/official/javascript"], ["sdks/rust", "Rust", "/docs/clients/official/rust"], ["sdks/python", "Python", "/docs/clients/community"], ["frontend", "React & Next.js", "/docs/frontend"], ["tools", "Developer tools", "/docs/tools"], ["tools/surfpool", "Surfpool", "/docs/tools/surfpool"], ["tools/litesvm", "LiteSVM", "/docs/tools/litesvm"], ["tools/microscope", "Microscope", "/microscope"], ["tools/keychain", "Keychain", "/docs/tools/keychain"], ["tools/private-channels", "Private Channels", "/docs/tools/private-channels"], ["cli", "Solana CLI", "/docs/intro/installation/solana-cli-basics"], ["production", "Production readiness", "/docs/tools/production-readiness"]])
-  page(`docs/reference/${p}`, { tab: "reference", title: t, desc: "", stub: { was: w } });
+  page(/^(tools|production)/.test(p) ? `docs/resources/${p}` : `docs/reference/${p}`, { tab: "reference", title: t, desc: "", stub: { was: w } });
 
 /* ============================================================ LANDING */
 export const landingWhy = [
@@ -799,3 +793,235 @@ export const landingWhy = [
   N("risk", "<b>Check that web2 developers understand “internet capital markets”.</b> It isn't chain vocabulary, but it is a coined term. Add one question to the MLH rerun script: “After reading the first screen, what do you think you could build here?” If people can't answer, keep ICM as the eyebrow and move the plain-language line into the headline."),
   N("why", "The words “web3”, “blockchain”, “decentralized” and “keypair” still appear nowhere on this page."),
 ];
+
+
+/* ===================================================== use-case hubs (one tab) */
+const hubPath = (key, blurb) => {
+  const p = paths[key];
+  return `<div class="pcard"><div><div class="k">Start with the path · ${p.time}</div><h3>${p.job}</h3><p>${blurb}</p></div><a class="btnd purple" href="@/${p.intro}/">Open the path ${I.arrow}</a></div>`;
+};
+page("docs/use-cases", {
+  tab: "usecases", title: "Use cases",
+  desc: "How-to guides grouped by what you're building. New here? Each use case starts with a path under Start here; these guides are where you go next.",
+  body: () => `
+${cards([
+  ["Payments", "Send, accept, subscriptions, payouts, and pay-per-call for apps and AI agents.", "@/docs/payments/", "30 guides"],
+  ["Tokenization", "Allowlists, KYC attestations, delivery vs payment, fund NAV.", "@/docs/tokenization/", "Guides"],
+  ["Markets & trading", "Exchanges, order flow, MEV protection, stake-weighted QoS.", "@/docs/markets/", "Guides"],
+  ["Privacy", "Confidential balances and private channels.", "@/docs/privacy/", "Guides"],
+  ["Games & digital items", "Items players own and other apps can read.", "@/docs/games/", "Wave 2"],
+])}
+${callout(`<p>Looking for how tokens, accounts or fees work? Those have one home: <a href="@/docs/concepts/">How Solana works</a>. Use-case guides link there instead of re-explaining.</p>`)}`,
+  why: [
+    N("change", "<b>One tab, not four.</b> The Docs Research found that no leading docs site (of 21 checked) puts fine-grained jobs in the global nav; the common pattern is a few domain groups plus job guides under Get started. Solana's use-case sections are also thin today (tokenization 5 pages, defi 9, finance 2), and their borders already leak (DvP in two roots, x402 in three)."),
+    N("why", "This tab holds <b>how-to guides</b> (Diátaxis). The <b>tutorials</b>, i.e. the job paths, sit under Start here. Concepts and token mechanics sit in How Solana works. Each type of content has exactly one home."),
+    N("risk", "Validate the labels with a tree test before shipping, and pull the PostHog <code>trackMarkdownRequest</code> data by section to see what agents actually fetch."),
+  ],
+});
+page("docs/payments", {
+  tab: "usecases", title: "Payments",
+  desc: "Guides for moving money with stablecoins: sending, accepting, recurring billing, payouts, and per-request pricing for apps and AI agents.",
+  body: () => `
+${hubPath("payments", "New to payments on Solana? Take a payment in your browser in five minutes, then confirm it from your own backend.")}
+${h2("Guides")}
+${cards([
+  ["Send payments", "Transfers, memos, address checks and processing at scale.", "@/docs/payments/send/"],
+  ["Accept payments", "Checkout flows, Solana Pay, verification and indexing.", "@/docs/payments/accept/"],
+  ["Subscriptions", "Recurring charges with delegated spending limits.", "@/docs/payments/subscriptions/"],
+  ["Payouts & disbursements", "Pay users, vendors or employees in bulk.", "@/docs/payments/payouts/"],
+  ["Pay-per-call & agents", "x402: price API requests at a cent or less; let agents pay.", "@/docs/payments/pay-per-call/"],
+  ["Advanced", "Deferred execution and spend permissions.", "@/docs/payments/advanced/"],
+])}
+${h2("Tools for payments")}
+${cards([["Commerce Kit", "React components for checkout.", "@/docs/payments/tools/commerce-kit/"], ["Kora", "Pay network fees for your users.", "@/docs/payments/tools/kora/"]])}
+${callout(`<p>How do token accounts, fees and confirmation work? See <a href="@/docs/concepts/">How Solana works</a>. Payments guides link there instead of re-explaining (today 19 of 30 payments pages re-explain token accounts; 5 link to the token docs).</p>`)}`,
+  why: [N("change", "Today's <code>payments/how-payments-work</code> re-explains accounts, ATAs, token programs, fees and transactions. In this structure that page becomes links to the concept pages plus the concept cards, which render from one source.")],
+});
+page("docs/payments/pay-per-call", {
+  tab: "usecases", title: "Pay-per-call & agents",
+  desc: "Price API requests at a cent or less with x402, and let AI agents pay for what they use.",
+  body: () => `${hubPath("apis", "Call a paywalled API from your browser, then paywall your own endpoint in five minutes.")}
+${cards([["How x402 works", "The HTTP 402 flow, payment headers and facilitators.", "@/docs/payments/pay-per-call/x402/"], ["Agents that pay", "Give an agent a wallet and a budget.", "@/docs/payments/pay-per-call/agents/"], ["Machine payments (MPP)", "Session and streaming payments.", "@/docs/payments/pay-per-call/mpp/"], ["x402 facilitator", "Verify and settle payments for your API.", "@/docs/payments/pay-per-call/facilitator/"]])}`,
+  why: [N("change", "x402 currently appears in three places (<code>payments/agentic-payments/x402</code>, <code>tools/x402-facilitator</code>, <code>video-guides/agent-payments</code>). Here it has one home, under Payments.")],
+});
+page("docs/tokenization", {
+  tab: "usecases", title: "Tokenization",
+  desc: "Guides for issuing regulated and real-world assets: approvals, KYC claims, settlement and fund pricing. Token mechanics live in How Solana works → Tokens.",
+  body: () => `${hubPath("tokenization", "Hold a restricted asset, watch a blocked transfer, then create your own with approvals and a pause switch.")}
+${h2("Guides")}
+${cards([["Allowlists (Token ACL)", "Approve holders without writing a program.", "@/docs/tokenization/token-acl/"], ["KYC with Attestations", "Issue and check verifiable claims.", "@/docs/tokenization/attestations/"], ["Delivery vs payment", "Swap an asset for USDC atomically. One canonical page.", "@/docs/tokenization/dvp/"], ["NAV strikes for funds", "Daily pricing for money-market style funds.", "@/docs/tokenization/nav-strikes/"]])}
+${h2("Token mechanics")}
+${cards([["Token basics", "Mints, minting, transfers, freeze and thaw.", "@/docs/tokens/basics/"], ["Token extensions", "Metadata, pausable, default state, transfer hooks.", "@/docs/tokens/extensions/"]])}`,
+  why: [
+    N("change", "Today general token docs (including NFTs and Metaplex) sit under Finance → Assets. Here they move to <b>How Solana works → Tokens</b>, so gaming and NFT developers aren't sent through a finance tab."),
+    N("change", "DvP is currently split across <code>tokenization/dvp</code> and <code>defi/dvp-program/</code> (5 pages). This structure keeps one canonical DvP page here and links to it from Markets."),
+  ],
+});
+page("docs/resources/videos", { tab: "resources", title: "Video tutorials", desc: "", stub: { was: "/docs/video-guides" } });
+
+/* ===================================================== Docs Research */
+const src = (n, t, u) => `<li id="s${n}"><b>[${n}]</b> ${u ? `<a href="${u}">${t}</a>` : t}</li>`;
+const c = (...ns) => ns.map((n) => `<a href="#s${n}">[${n}]</a>`).join("");
+page("docs/research", {
+  tab: "start", title: "Docs Research", wide: false,
+  desc: "Why this mockup is structured the way it is: the brief it implements, the research into docs navigation, and every source.",
+  body: () => `
+${callout(`<p><strong>Question:</strong> should use cases be the top-level navigation of solana.com/docs?<br><strong>Answer:</strong> use cases should be the <em>entry point</em> (Start here, the job picker, the paths), not several top-level tabs. Keep one canonical core organised by subject, and put the use-case domains in <strong>one</strong> tab.</p>`, "green")}
+
+${h2("1. The brief")}
+<p>This mockup implements an internal Notion brief, <em>“TL;DR: solana.com/developers becomes a job picker”</em> ${c(1)}, shared at the start of this work (12 Oct 2026). Its core claims:</p>
+<ul>
+<li><strong>Thesis.</strong> “Every developer enters through a problem they already have, and leaves with something working. Solana fundamentals are never an initial blocker.”</li>
+<li><strong>Evidence.</strong> MLH focus group (Sept 2026): participants couldn't say what Solana is or what they'd build; they compared it with Stripe and databases, not other chains; concepts arrived without context; examples ended with no next step. MLH recommended explaining Solana through questions web2 developers already ask.</li>
+<li><strong>Five principles.</strong> Name the outcome · fundamentals just in time (two sentences, a web2 analogy, a docs link) · no concept gate before first success · use it, then show it live · end in their stack.</li>
+<li><strong>Wave 1 paths.</strong> Accept dollar payments · Charge a few cents per API call · Issue a tokenized asset with compliance controls. <strong>Wave 2:</strong> shared audit record, game items.</li>
+<li><strong>Six-stage path template</strong>, phasing (Align → Pilot (Payments) → Build → Validate), owners (Awesome Docs team, Playground team, Bri for video), and three open decisions (Wave 1 paths; where “web3” appears; how to run the assessment).</li>
+</ul>
+<h3>Where each principle shows up in this mockup</h3>
+${table(["Principle (brief)", "Implemented as"], [
+  ["Name the outcome", "Job picker and path titles are the developer's question (“Accept dollar payments that settle in seconds”), on the landing page and in Start here."],
+  ["Fundamentals just in time", "Concept cards (two sentences + “Like:” analogy + link) at the step that uses them; one source of truth on each How Solana works page, with “You've used this in” backlinks."],
+  ["No concept gate before first success", "Step 2 of every path is a browser playground; installation is optional and linked from step 3."],
+  ["Use it, then show it live", "Step 1 demos (test wallet buys a sticker, 402 → pay → 200, blocked transfer) plus a live mainnet feed."],
+  ["End in their stack", "Step 3 runs on the developer's machine in their framework; step 4 ends with the next path first."],
+  ["Six-stage template", "Path intro (stages 1–2: job + fit check) + four steps (stages 3–6)."],
+  ["Coverage map", "Generated from the paths on How Solana works; flags PDAs and CPI as not covered in Wave 1."],
+])}
+
+${h2("2. Method")}
+<p>Three research tracks ran in parallel on 13 Oct 2026, plus inspection of the live site and repo while building the mockup:</p>
+<ol>
+<li><strong>Platform survey.</strong> Live top-level navigation of 21 developer docs sites, parsed from page HTML where possible.</li>
+<li><strong>Literature and frameworks.</strong> Empirical studies of how developers use API docs, survey and traffic data, IA frameworks, AI-agent consumption.</li>
+<li><strong>Solana's own docs.</strong> The public <code>solana-foundation/solana-com</code> repo: IA, git and PR history, overlap counts; plus documented redesigns elsewhere.</li>
+</ol>
+<p>Not checked: internal analytics, Linear, or internal research behind unauthorised connectors.</p>
+
+${h2("3. What leading docs sites do")}
+<p>No site of the 21 uses fine-grained jobs as its global navigation. The common pattern is a few <strong>domain tabs with job-like names</strong>, with specific jobs one level down.</p>
+${table(["Site", "Top level (abridged)", "Where use cases live"], [
+  ["Stripe " + c(10), "Get started · Payments · Revenue · Risk · Money management · Stablecoins · …", "Get started → Use cases: full guides by business type " + c(11)],
+  ["Base " + c(12), "Get Started · Build on Base · Specifications · SDKs & APIs", "Get Started → Solutions: Accept Payments, Tokenize Assets, Issue a Stablecoin (deep guides)"],
+  ["Circle " + c(13), "Get started · Assets · Payments · Crosschain · Agent stack · API reference", "Job-phrased home cards that route to products"],
+  ["Coinbase CDP " + c(14), "Docs · API Reference · SDKs · Recipes", "Domain sidebar groups (Payments, Stablecoins, Trading)"],
+  ["Plaid " + c(15), "Quickstart · API · … then Payments and Funding · Financial Insights · …", "The job-named product groups"],
+  ["Cloudflare " + c(16), "Docs · Directory · API · SDKs · Changelog", "/use-cases/: a thin hub, not in the header"],
+  ["Sui " + c(17), "Getting Started · Develop · Onchain Finance · References", "One “Onchain Finance” tab (like Solana's Finance)"],
+  ["Polygon " + c(18), "Platform · Payments · Wallets · …", "Payments is a top-level tab (the only chain doing this)"],
+  ["ethereum.org " + c(19), "Use: Payments · Stablecoins · … (site menu)", "Marketing layer, outside the dev docs"],
+  ["AWS, Google Cloud, Azure " + c(20, 21), "Product categories + guidance layers", "Separate solutions/architecture catalogues"],
+])}
+<p>Also surveyed: Twilio, Shopify, Supabase, Vercel, Firebase, Adyen, Aptos, NEAR, Avalanche. API reference is a separate top-level item on every site.</p>
+
+${h2("4. What the research says")}
+<ul>
+<li><strong>Start from the scenario.</strong> “Matching APIs with scenarios” was a key need among 440+ Microsoft developers; scenario docs “can compensate for hard-to-understand API structure” ${c(30)}. Developers spend ~49% of task time in docs and are both opportunistic and systematic ${c(31, 33)}.</li>
+<li><strong>Organise by what the developer is doing, not by content type.</strong> A top level split into Concepts / Samples / Reference confused participants ${c(31)}; a use-case-oriented redesign gave fewer errors and faster tasks (n=22, changes bundled) ${c(32)}.</li>
+<li><strong>But task and audience schemes are ambiguous.</strong> Mixing schemes in one menu “almost guarantees confusion” ${c(37)}; audience-based navigation degraded usability in testing because users fit several buckets ${c(38, 39)}.</li>
+<li><strong>Fragmentation and duplicated scenarios are top complaints</strong> ${c(34)}; findability and organisation matter to most practitioners ${c(35)}.</li>
+<li><strong>Diátaxis</strong> allows another axis at the top with the four types beneath, and warns against empty top-down structures ${c(36)}. <strong>Top Tasks:</strong> a few tasks carry most demand, so keep the entry list short and data-driven ${c(40)}.</li>
+<li><strong>Every page is page one.</strong> Readers arrive by search, so pages must stand alone and link richly ${c(41)}.</li>
+</ul>
+<p><em>Strength of evidence:</em> studies are small and mostly pre-AI; nothing tests use-case versus product navigation head-to-head for a blockchain platform.</p>
+
+${h2("5. What AI agents change")}
+<ul>
+<li>Agents are roughly half or more of docs traffic on vendor platforms (Mintlify ~45% in 2025, reported 66% by Aug 2026; GitBook ~52%) ${c(50, 51, 52)}.</li>
+<li>They navigate by <strong>links, llms.txt and .md pages</strong>, not tabs: 86–97% of fetches via links ${c(53)}; llms.txt cut 404s about 20× ${c(51)}. Counterpoint: 97% of llms.txt files site-wide get no requests ${c(54)}.</li>
+<li>Humans still verify: technical docs are the top learning resource (67.8%) and 46% distrust AI output ${c(55)}.</li>
+<li>Implication: the menu matters less, <strong>single sources and links matter more</strong>. Duplicated explanations hand agents conflicting answers.</li>
+</ul>
+
+${h2("6. What Solana's docs look like today")}
+<ul>
+<li>Six tabs today: Start here · Concepts · RPC API · Finance · Video Tutorials · Resources ${c(60)}. <strong>The use cases are already one tab, Finance</strong>, added in #1767 (29 Jul 2026) as part 2 of the docs restructure stack ${c(61)}. Payments was added in #1061 (16 Jan 2026) ${c(62)}. None of these PRs cite user research or analytics.</li>
+<li><strong>Thin sections:</strong> payments 30 pages, defi 9 (5 are one DvP program), tokenization 5, finance 2. For comparison: rpc 91, tools 197.</li>
+<li><strong>Leaky borders:</strong> DvP in two roots; x402 in three places; Solana Pay in two; #2127 moved Production Readiness and the x402 facilitator out of Payments ${c(63)}.</li>
+<li><strong>Re-explained basics:</strong> 19 of 30 payments pages discuss token accounts, only 5 link to <code>/docs/tokens</code>; <code>how-payments-work</code> re-explains accounts, ATAs, token programs, fees and transactions.</li>
+<li><strong>Already instrumented:</strong> per-section llms.txt, .md versions of every page, and PostHog logging of Markdown requests by route.</li>
+</ul>
+
+${h2("7. Redesigns elsewhere")}
+<ul>
+<li><strong>GitLab</strong> moved its docs nav to workflow-based groups after usability testing (“improved overall success rates”), and its guidelines warn against a long top-level nav ${c(70, 71)}. Its UI nav moved to task groups after card sorts and a longitudinal study ${c(72)}.</li>
+<li><strong>Twilio</strong> reorganised its Console by lifecycle after card sorts and removed ~10% duplicate content ${c(73)}.</li>
+<li><strong>GOV.UK</strong> dropped audience-based navigation after testing ${c(39)}. <strong>Gatsby</strong> and <strong>Kubernetes</strong> organise by content type ${c(74)}.</li>
+<li>No documented case was found of a company moving <em>away</em> from use-case tabs, and none published measured outcomes for either direction.</li>
+</ul>
+
+${h2("8. Decision and what changed in this mockup")}
+${table(["Before (first mockup)", "After (this version)", "Why"], [
+  ["Tabs: Payments · APIs & agents · Tokenization · More use cases", "<strong>One Use cases tab</strong>", "No precedent for job tabs; thin sections; leaky borders " + c(10, 12, 60)],
+  ["Paths inside each use-case tab", "<strong>Paths under Start here → Build something</strong>", "Tutorials have one home, like Base and Stripe " + c(11, 12)],
+  ["Pay-per-call as its own tab", "<strong>Payments → Pay-per-call & agents</strong>", "x402 is payments; already split across three places"],
+  ["Token basics under Tokenization", "<strong>How Solana works → Tokens</strong>", "NFT and game developers shouldn't go through finance"],
+  ["“More use cases” incl. programs", "<strong>Programs</strong> tab", "Writing programs is a skill, not a use case"],
+  ["Reference incl. tools", "<strong>API reference</strong> + <strong>Resources</strong>", "Reference is always its own item " + c(10, 16)],
+])}
+<p>Result: six tabs, the same count as today. Start here · Use cases · How Solana works · Programs · API reference · Resources.</p>
+
+${h2("9. Validate before shipping")}
+<ol>
+<li><strong>Top-tasks survey</strong> (MLH participants + current docs users) to confirm the 3–7 jobs in the picker ${c(40)}.</li>
+<li><strong>Tree test</strong> of today's nav versus this one, with web2 and crypto-native groups ${c(70, 73)}.</li>
+<li><strong>PostHog Markdown-request data and search logs</strong> by section, to see what agents and people actually pull.</li>
+<li><strong>MLH rerun</strong> question from the brief: after the first screen, can participants say what Solana is and what they'd build?</li>
+</ol>
+
+${h2("Sources")}
+<ol style="list-style:none;padding-left:0;font-size:14px">
+${src(1, "Internal Notion brief: “TL;DR: solana.com/developers becomes a job picker” (Awesome Docs team), shared 12 Oct 2026, including the MLH focus group findings (Sept 2026) and the job-picker mockup it references")}
+${src(2, "Live solana.com/developers and solana.com/docs pages, inspected 12–13 Oct 2026", "https://solana.com/developers")}
+${src(10, "Stripe docs", "https://docs.stripe.com/")}
+${src(11, "Stripe: Get started → Use cases", "https://docs.stripe.com/get-started/use-cases")}
+${src(12, "Base docs", "https://docs.base.org/")}
+${src(13, "Circle developer docs", "https://developers.circle.com/")}
+${src(14, "Coinbase Developer Platform docs", "https://docs.cdp.coinbase.com/")}
+${src(15, "Plaid docs", "https://plaid.com/docs/")}
+${src(16, "Cloudflare developer docs: use cases", "https://developers.cloudflare.com/use-cases/")}
+${src(17, "Sui docs", "https://docs.sui.io/")}
+${src(18, "Polygon docs", "https://docs.polygon.technology/")}
+${src(19, "ethereum.org developer docs", "https://ethereum.org/developers/docs/")}
+${src(20, "AWS documentation", "https://docs.aws.amazon.com/")}
+${src(21, "Azure Architecture Center", "https://learn.microsoft.com/en-us/azure/architecture/")}
+${src(30, "Robillard & DeLine (2011), A field study of API learning obstacles", "https://www.cs.mcgill.ca/~martin/papers/ese2011.pdf")}
+${src(31, "Meng, Steinhardt & Schubert (2019), How developers use API documentation: an observation study", "https://mangold-international.com/resources/meng-et-al-how-developers-use-api-documentation-2019.pdf")}
+${src(32, "Meng et al. (2020), Optimizing API documentation (SIGDOC)", "https://mangold-international.com/resources/meng-et-al-optimizing-api-documentation-2020.pdf")}
+${src(33, "Meng et al. (2018), API documentation: what do software developers want?", "https://journals.sagepub.com/doi/full/10.1177/0047281617721853")}
+${src(34, "Uddin & Robillard (2015), How API documentation fails", "https://www.cs.mcgill.ca/~martin/papers/ieeesw2015.pdf")}
+${src(35, "Aghajani et al. (2020), Software documentation: the practitioners' perspective (ICSE)", "https://www.inf.usi.ch/faculty/lanza/PUBS/P/Agha2020a.pdf")}
+${src(36, "Diátaxis: complex hierarchies (archived)", "https://github.com/evildmp/diataxis-documentation-framework/blob/de7a2d813e2fda339b959e3075afb4e2f09bf54c/complex-hierarchies.rst")}
+${src(37, "Rosenfeld & Morville, Information Architecture for the WWW: organisation schemes", "https://files.znu.edu.ua/files/comp.books/books/information_architecture_for_WWW/infoarch/ch03_02.htm")}
+${src(38, "Nielsen Norman Group: audience-based website navigation", "https://www.nngroup.com/videos/audience-based-website-navigation/")}
+${src(39, "GOV.UK: the trouble with audience-based navigation", "https://insidegovuk.blog.gov.uk/2014/07/18/hey-you-there-the-trouble-with-audience-based-navigation/")}
+${src(40, "Gerry McGovern, Top Tasks", "https://articles.centercentre.com/?p=877")}
+${src(41, "Mark Baker, Every Page is Page One", "https://xmlpress.net/publications/eppo/")}
+${src(50, "Mintlify: State of AI in docs", "https://www.mintlify.com/blog/state-of-ai")}
+${src(51, "Mintlify: State of Knowledge 2026", "https://www.mintlify.com/state-of-knowledge/2026")}
+${src(52, "GitBook: AI docs data, April 2026", "https://gitbook.com/blog/ai-docs-data-april-2026")}
+${src(53, "Vercel: Make your documentation readable by AI agents", "https://vercel.com/kb/guide/make-your-documentation-readable-by-ai-agents")}
+${src(54, "Ahrefs: llms.txt study", "https://ahrefs.com/blog/llmstxt-study/")}
+${src(55, "Stack Overflow Developer Survey 2025", "https://survey.stackoverflow.co/2025/")}
+${src(60, "solana-foundation/solana-com: apps/docs content and packages/ui-chrome/src/developers-nav.tsx", "https://github.com/solana-foundation/solana-com")}
+${src(61, "solana-com #1767: Finance, Tokenization and DeFi sections (docs restructure, part 2 of 6)", "https://github.com/solana-foundation/solana-com/pull/1767")}
+${src(62, "solana-com #1061: initial payments docs section", "https://github.com/solana-foundation/solana-com/pull/1061")}
+${src(63, "solana-com #2127: move Production Readiness and x402 facilitator to Resources", "https://github.com/solana-foundation/solana-com/pull/2127")}
+${src(70, "GitLab docs: workflow-based navigation (MR 1812)", "https://gitlab.com/gitlab-org/gitlab-docs/-/merge_requests/1812")}
+${src(71, "GitLab docs: global navigation guidelines", "https://docs.gitlab.com/development/documentation/site_architecture/global_nav/")}
+${src(72, "GitLab: navigation research", "https://about.gitlab.com/blog/navigation-research-blog-post/")}
+${src(73, "Twilio: designing a Console that matches the customer journey", "https://www.twilio.com/en-us/blog/designing-console-that-matches-customer-journey")}
+${src(74, "Gatsby: announcing the new docs site", "https://v3.gatsbyjs.com/blog/announcing-new-gatsby-docs-site")}
+</ol>`,
+  why: [N("why", "This page exists so reviewers can trace every structural decision in the mockup back to the brief or to a source.")],
+});
+
+/* ===================================================== tab assignment */
+// The tab follows the URL, so the sidebar and the address never disagree.
+const tabFor = (p) =>
+  p.startsWith("docs/build/") || ["docs", "docs/agents", "docs/setup", "docs/from-ethereum", "docs/research"].includes(p) ? "start"
+  : /^docs\/(payments|tokenization|markets|privacy|games|use-cases)(\/|$)/.test(p) && !p.startsWith("docs/payments/tools") && p !== "docs/payments/pay-per-call/facilitator" ? "usecases"
+  : /^docs\/(concepts|tokens)(\/|$)/.test(p) ? "concepts"
+  : p.startsWith("docs/programs") ? "programs"
+  : p.startsWith("docs/resources") || p.startsWith("docs/payments/tools") || p === "docs/payments/pay-per-call/facilitator" ? "resources"
+  : "reference";
+for (const pg of Object.values(pages)) pg.tab = tabFor(pg.path);

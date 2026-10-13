@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Confirm payments from your backend | Solana Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../assets/site.css?v=mv6noyv7"></head>
+<body class="docs"><header class="topbar"><div class="in">
+  <a class="logo" href="../../../../"><svg viewBox="0 0 101 88" aria-hidden="true"><defs><linearGradient id="lg" x1="8" y1="91" x2="88" y2="-3" gradientUnits="userSpaceOnUse"><stop stop-color="#9945FF"/><stop offset=".2" stop-color="#7962E7"/><stop offset="1" stop-color="#00D18C"/></linearGradient></defs><path fill="url(#lg)" d="M100.5 69.4L84 87a3.8 3.8 0 01-2.8 1.2H3a1.9 1.9 0 01-1.4-3.2L18 67.4a3.8 3.8 0 012.8-1.2h78.2a1.9 1.9 0 011.4 3.2zM84 34a3.8 3.8 0 00-2.8-1.2H3a1.9 1.9 0 00-1.4 3.2L18 53.6a3.8 3.8 0 002.8 1.2h78.2a1.9 1.9 0 001.4-3.2zM3 21.3h78.2A3.8 3.8 0 0084 20.1L100.5 2.5A1.9 1.9 0 0099.1-.7H20.8A3.8 3.8 0 0018 .5L1.6 18.1A1.9 1.9 0 003 21.3z"/></svg>SOLANA</a>
+  <nav class="mainnav"><div class=""><a href="#" class="">Use Solana<span class="caret"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span></a></div><div class="has"><a href="../../../../" class="cur">Build<span class="caret"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span></a><div class="mega">
+    <div class="col first"><h6>What are you building?</h6>
+      <a class="it" href="../../../../docs/build/checkout/"><b>Accept dollar payments</b><span>A checkout that settles in seconds</span></a>
+      <a class="it" href="../../../../docs/build/paywall-api/"><b>Charge per API call</b><span>Pay-per-request for apps and AI agents</span></a>
+      <a class="it" href="../../../../docs/build/issue-asset/"><b>Issue a tokenized asset</b><span>Tokens with approvals and a pause switch</span></a>
+      <a class="more" href="../../../../docs/use-cases/">More use cases: trading, games, custom programs →</a></div>
+    <div class="col"><h6>Start building</h6>
+      <a class="it" href="../../../../docs/"><b>Docs</b><span>Start here, then everything else</span></a>
+      <a class="it" href="#"><b>Templates</b><span>Clone a working app</span></a>
+      <a class="it" href="../../../../docs/agents/"><b>Build with AI agents</b><span>MCP server and Solana skill</span></a>
+      <a class="it" href="../../../../docs/from-ethereum/"><b>Coming from Ethereum</b><span>EVM → SVM guide</span></a></div>
+    <div class="col"><h6>Tools &amp; reference</h6>
+      <a class="it" href="../../../../docs/resources/tools/"><b>Developer tools</b><span>Commerce Kit, Kora, Surfpool…</span></a>
+      <a class="it" href="../../../../docs/reference/rpc/"><b>RPC API</b><span>Every method</span></a>
+      <a class="it" href="https://explorer.solana.com"><b>Explorer</b><span>Look up any transaction</span></a>
+      <a class="it" href="#"><b>Changelog</b><span>What shipped</span></a></div></div></div><div class=""><a href="#" class="">Enterprise<span class="caret"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span></a></div><div class=""><a href="#" class="">Products<span class="caret"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span></a></div><div class=""><a href="#" class="">Ecosystem<span class="caret"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span></a></div></nav>
+  <div class="right"><span class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><span>Search</span><kbd>⌘K</kbd></span><span class="lang">EN</span></div></div></header>
+<nav class="tabs"><div class="in"><a class="cur" href="../../../../docs/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l6-4.5L14 7v6.5a.5.5 0 01-.5.5H10V10H6v4H2.5a.5.5 0 01-.5-.5z"/></svg>Start here</a><a class="" href="../../../../docs/use-cases/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Use cases</a><a class="" href="../../../../docs/concepts/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5l5.5 3v7L8 14.5l-5.5-3v-7z"/><path d="M2.5 4.5L8 7.5l5.5-3M8 7.5v7"/></svg>How Solana works</a><a class="" href="../../../../docs/programs/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M5.5 7L4 8.5 5.5 10M10.5 7L12 8.5 10.5 10"/></svg>Programs</a><a class="" href="../../../../docs/reference/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4L1.5 8 5 12M11 4l3.5 4-3.5 4M9.5 2.5l-3 11"/></svg>API reference</a><a class="" href="../../../../docs/resources/tools/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.2a3.5 3.5 0 00-3.3 4.6L2 11.5V14h2.5l4.7-4.7A3.5 3.5 0 0013.8 6l-2 2-1.8-.2-.2-1.8 2-2A3.5 3.5 0 0010 2.2z"/></svg>Resources</a></div></nav>
+<div class="layout">
+<aside class="sidebar"><a class="l  " href="../../../../docs/">Start here</a><div class="sec">Build something</div><div class="pathbox"><a class="ph" href="../../../../docs/build/checkout/">Accept dollar payments<span>~30 min</span></a><a class="l  done" href="../../../../docs/build/checkout/try-it/"><span class="num">✓</span>Pay as a customer</a><a class="l  done" href="../../../../docs/build/checkout/browser/"><span class="num">✓</span>Build it in the browser<span class="star" title="First success">★</span></a><a class="l cur " href="../../../../docs/build/checkout/backend/"><span class="num">3</span>Confirm from your backend</a><a class="l  " href="../../../../docs/build/checkout/go-live/"><span class="num">4</span>Go live</a></div><div class="pathbox"><a class="ph" href="../../../../docs/build/paywall-api/">Charge per API call<span>~30 min</span></a><a class="l  " href="../../../../docs/build/paywall-api/try-it/"><span class="num">1</span>Call a paid API</a><a class="l  " href="../../../../docs/build/paywall-api/browser/"><span class="num">2</span>Paywall it in the browser<span class="star" title="First success">★</span></a><a class="l  " href="../../../../docs/build/paywall-api/server/"><span class="num">3</span>Add it to your server</a><a class="l  " href="../../../../docs/build/paywall-api/go-live/"><span class="num">4</span>Go live</a></div><div class="pathbox"><a class="ph" href="../../../../docs/build/issue-asset/">Issue a tokenized asset<span>~45 min</span></a><a class="l  " href="../../../../docs/build/issue-asset/try-it/"><span class="num">1</span>Hold a restricted asset</a><a class="l  " href="../../../../docs/build/issue-asset/browser/"><span class="num">2</span>Create it in the browser<span class="star" title="First success">★</span></a><a class="l  " href="../../../../docs/build/issue-asset/local/"><span class="num">3</span>Run it from your machine</a><a class="l  " href="../../../../docs/build/issue-asset/go-live/"><span class="num">4</span>Go live</a></div><div class="sec">Set up</div><a class="l  " href="../../../../docs/agents/">Build with AI coding agents</a><a class="l  " href="../../../../docs/setup/">Set up your machine</a><a class="l  " href="../../../../docs/from-ethereum/">Coming from Ethereum</a><div class="sec">About this mockup</div><a class="l  " href="../../../../docs/research/">Docs Research</a></aside>
+<main class="content"><div class="crumb">Solana Documentation <span>/ Start here / Build a checkout · step 3 of 4</span></div><h1>Confirm payments from your backend</h1><p class="desc">Your server should ship the order only after it has checked the payment on the network itself. Run this from your own machine against devnet.</p>
+<div class="pageacts"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/></svg> Copy Markdown</span><span>Open ▾</span><span class="meta">~10 min</span></div>
+<div class="prose "><div class="stepper"><a href="../../../../docs/build/checkout/try-it/" class="done"><span class="n">STEP 1 ✓</span>Pay as a customer</a><a href="../../../../docs/build/checkout/browser/" class="done"><span class="n">STEP 2 ✓ <span class="s">★ first win</span></span>Build it in the browser</a><a href="../../../../docs/build/checkout/backend/" class="cur"><span class="n">STEP 3</span>Confirm from your backend</a><a href="../../../../docs/build/checkout/go-live/" class=""><span class="n">STEP 4</span>Go live</a></div>
+<h2 id="1-install-the-sdk">1. Install the SDK</h2>
+<p>No CLI and no local network. One package and a URL:</p>
+<div class="code" data-tabs><div class="ct"><button class="on" data-file="">npm</button><span class="file"></span></div>
+<pre><code>npm install @solana/kit
+echo <span class="tk-s">'RPC_URL=https://api.devnet.solana.com'</span> &gt;&gt; .env.local</code></pre></div>
+<aside class="concept"><div class="ch"><span class="gem"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l3 4-7 8-7-8z"/><path d="M1 6h14M6 2L5 6l3 8 3-8-1-4"/></svg></span><b>RPC</b><span class="lbl">New concept</span><a href="../../../../docs/concepts/rpc/">Learn more →</a></div>
+<div>RPC is the HTTP/JSON API your code uses to read from and send to the network. Use public endpoints for testing and a provider in production.</div><div class="like"><b>Like:</b><span>A hosted database endpoint, with RPC providers in the role of AWS or Supabase.</span></div></aside>
+<h2 id="2-add-a-verify-endpoint">2. Add a verify endpoint</h2>
+<p>Given an order and the signature from the checkout, fetch the transaction from the network and check that it really paid <em>you</em>, in USDC, the right amount, for <em>this</em> order:</p>
+<div class="code" data-tabs><div class="ct"><button class="on" data-file="app/api/orders/[id]/confirm/route.ts">Next.js</button><button class="" data-file="server/confirm.ts">Express</button><button class="" data-file="confirm.py">Python</button><span class="file">app/api/orders/[id]/confirm/route.ts</span></div>
+<pre><code><span class="tk-k">import</span> { createSolanaRpc, signature as toSignature } <span class="tk-k">from</span> <span class="tk-s">"@solana/kit"</span>;
+<span class="tk-k">import</span> { findTransfer } <span class="tk-k">from</span> <span class="tk-s">"./lib/payments"</span>; <span class="tk-c">// ~20 lines, see Verification tools</span>
+
+<span class="tk-k">const</span> rpc = <span class="tk-f">createSolanaRpc</span>(process.env.RPC_URL!);
+
+<span class="tk-k">export</span> <span class="tk-k">async</span> <span class="tk-k">function</span> <span class="tk-f">POST</span>(req: Request, { params }) {
+  <span class="tk-k">const</span> { signature } = <span class="tk-k">await</span> req.<span class="tk-f">json</span>();
+  <span class="tk-k">const</span> order = <span class="tk-k">await</span> db.orders.<span class="tk-f">get</span>(params.id);
+
+  <span class="tk-k">const</span> tx = <span class="tk-k">await</span> rpc.<span class="tk-f">getTransaction</span>(<span class="tk-f">toSignature</span>(signature), {
+    commitment: <span class="tk-s">"confirmed"</span>,          <span class="tk-c">// see "Confirmation &amp; finality" below</span>
+    encoding: <span class="tk-s">"jsonParsed"</span>,
+    maxSupportedTransactionVersion: <span class="tk-n">0</span>,
+  }).<span class="tk-f">send</span>();
+
+  <span class="tk-k">if</span> (!tx || tx.meta?.err) <span class="tk-k">return</span> Response.<span class="tk-f">json</span>({ paid: <span class="tk-k">false</span> }, { status: <span class="tk-n">402</span> });
+
+  <span class="tk-k">const</span> paid = <span class="tk-f">findTransfer</span>(tx, { to: STORE_USDC_ACCOUNT, mint: USDC_MINT, reference: order.reference });
+  <span class="tk-k">if</span> (!paid || paid.amount !== order.totalUsdc) <span class="tk-k">return</span> Response.<span class="tk-f">json</span>({ paid: <span class="tk-k">false</span> }, { status: <span class="tk-n">402</span> });
+
+  <span class="tk-k">await</span> db.orders.<span class="tk-f">markPaidOnce</span>(order.id, signature); <span class="tk-c">// a signature can only pay once</span>
+  <span class="tk-k">return</span> Response.<span class="tk-f">json</span>({ paid: <span class="tk-k">true</span> });
+}</code></pre><pre hidden><code><span class="tk-k">import</span> express <span class="tk-k">from</span> <span class="tk-s">"express"</span>;
+<span class="tk-k">import</span> { createSolanaRpc, signature as toSignature } <span class="tk-k">from</span> <span class="tk-s">"@solana/kit"</span>;
+
+<span class="tk-k">const</span> rpc = <span class="tk-f">createSolanaRpc</span>(process.env.RPC_URL);
+<span class="tk-k">const</span> app = <span class="tk-f">express</span>().<span class="tk-k">use</span>(express.<span class="tk-f">json</span>());
+
+app.<span class="tk-f">post</span>(<span class="tk-s">"/orders/:id/confirm"</span>, <span class="tk-k">async</span> (req, res) =&gt; {
+  <span class="tk-k">const</span> order = <span class="tk-k">await</span> db.orders.<span class="tk-f">get</span>(req.params.id);
+  <span class="tk-k">const</span> tx = <span class="tk-k">await</span> rpc.<span class="tk-f">getTransaction</span>(<span class="tk-f">toSignature</span>(req.body.signature), {
+    commitment: <span class="tk-s">"confirmed"</span>, encoding: <span class="tk-s">"jsonParsed"</span>, maxSupportedTransactionVersion: <span class="tk-n">0</span>,
+  }).<span class="tk-f">send</span>();
+  <span class="tk-k">const</span> paid = tx &amp;&amp; !tx.meta?.err &amp;&amp; <span class="tk-f">findTransfer</span>(tx, { to: STORE_USDC_ACCOUNT, mint: USDC_MINT, reference: order.reference });
+  <span class="tk-k">if</span> (!paid || paid.amount !== order.totalUsdc) <span class="tk-k">return</span> res.<span class="tk-f">status</span>(<span class="tk-n">402</span>).<span class="tk-f">json</span>({ paid: <span class="tk-k">false</span> });
+  <span class="tk-k">await</span> db.orders.<span class="tk-f">markPaidOnce</span>(order.id, req.body.signature);
+  res.<span class="tk-f">json</span>({ paid: <span class="tk-k">true</span> });
+});</code></pre><pre hidden><code><span class="tk-k">from</span> solana.rpc.api <span class="tk-k">import</span> Client
+<span class="tk-k">from</span> solders.signature <span class="tk-k">import</span> Signature
+
+rpc = <span class="tk-f">Client</span>(os.environ[<span class="tk-s">"RPC_URL"</span>])
+
+<span class="tk-k">def</span> <span class="tk-f">confirm</span>(order_id: str, signature: str) -&gt; bool:
+    order = db.orders.<span class="tk-f">get</span>(order_id)
+    tx = rpc.<span class="tk-f">get_transaction</span>(Signature.<span class="tk-f">from_string</span>(signature), <span class="tk-s">"jsonParsed"</span>,
+                             commitment=<span class="tk-s">"confirmed"</span>, max_supported_transaction_version=<span class="tk-n">0</span>).value
+    <span class="tk-k">if</span> tx is <span class="tk-k">None</span> <span class="tk-k">or</span> tx.transaction.meta.err:
+        <span class="tk-k">return</span> <span class="tk-k">False</span>
+    paid = <span class="tk-f">find_transfer</span>(tx, to=STORE_USDC_ACCOUNT, mint=USDC_MINT, reference=order.reference)
+    <span class="tk-k">if</span> <span class="tk-k">not</span> paid <span class="tk-k">or</span> paid.amount != order.total_usdc:
+        <span class="tk-k">return</span> <span class="tk-k">False</span>
+    <span class="tk-k">return</span> db.orders.<span class="tk-f">mark_paid_once</span>(order.id, signature)  <span class="tk-c"># a signature can only pay once</span></code></pre></div>
+<aside class="concept"><div class="ch"><span class="gem"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h8l3 4-7 8-7-8z"/><path d="M1 6h14M6 2L5 6l3 8 3-8-1-4"/></svg></span><b>Confirmation & finality</b><span class="lbl">New concept</span><a href="../../../../docs/concepts/commitment/">Learn more →</a></div>
+<div>A transaction goes from <em>processed</em> to <em>confirmed</em> (~0.4 s) to <em>finalized</em>. Confirmed is enough for most orders. Finalized can't be reversed, and takes longer.</div><div class="like"><b>Like:</b><span>Pending → authorized → settled.</span></div></aside>
+<h2 id="3-call-it-from-the-checkout">3. Call it from the checkout</h2>
+<div class="code" data-tabs><div class="ct"><button class="on" data-file="checkout.tsx">checkout.tsx</button><span class="file">checkout.tsx</span></div>
+<pre><code>onPaymentSuccess={<span class="tk-k">async</span> (signature) =&gt; {
+  <span class="tk-k">const</span> r = <span class="tk-k">await</span> <span class="tk-f">fetch</span>(<span class="tk-s">"/api/orders/"</span> + order.id + <span class="tk-s">"/confirm"</span>, {
+    method: <span class="tk-s">"POST"</span>, body: JSON.<span class="tk-f">stringify</span>({ signature }),
+  });
+  <span class="tk-k">if</span> ((<span class="tk-k">await</span> r.<span class="tk-f">json</span>()).paid) router.<span class="tk-f">push</span>(<span class="tk-s">"/thanks"</span>);
+}}</code></pre></div>
+<h2 id="4-test-it">4. Test it</h2>
+<p>Pay with your test wallet from the previous step, then call the endpoint directly with that signature:</p>
+<div class="code" data-tabs><div class="ct"><button class="on" data-file="">curl</button><span class="file"></span></div>
+<pre><code>curl -X POST localhost:<span class="tk-n">3000</span>/api/orders/demo/confirm \
+  -d <span class="tk-s">'{"signature":"&lt;your signature from step 2&gt;"}'</span>
+<span class="tk-c"># {"paid":true}</span></code></pre></div>
+<div class="callout "><span class="ci"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7.2V11M8 5v.3"/></svg></span><div><p>Want the CLI, a local test network or Anchor? You don't need them for payments, but <a href="../../../../docs/setup/">Set up your machine</a> covers them.</p></div></div>
+<div class="pcard" style="grid-template-columns:1fr auto"><div><div class="k">Next step</div><h3>Go live</h3><p>Switch to mainnet, decide who pays network fees, and handle the edge cases real customers hit.</p></div><a class="btnd" href="../../../../docs/build/checkout/go-live/">Continue <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+</div>
+<div class="helpful">Is this page helpful? <span>👍</span><span>👎</span></div>
+<div class="pn"><a href="../../../../docs/build/checkout/browser/">‹ Previous<b>Build it in the browser</b></a><a class="n" href="../../../../docs/build/checkout/go-live/">Next ›<b>Go live</b></a></div>
+</main>
+<aside class="toc"><h6><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h12M2 8h8M2 12h10"/></svg> On this page</h6><a href="#1-install-the-sdk">1. Install the SDK</a><a href="#2-add-a-verify-endpoint">2. Add a verify endpoint</a><a href="#3-call-it-from-the-checkout">3. Call it from the checkout</a><a href="#4-test-it">4. Test it</a><div class="edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.5c-3 .9-3-1.5-4.2-1.8M10 15v-2.3a2 2 0 00-.6-1.6c2-.2 4.1-1 4.1-4.5a3.5 3.5 0 00-1-2.4 3.2 3.2 0 000-2.4s-.8-.2-2.5 1a8.6 8.6 0 00-4.5 0C3.8 1.6 3 1.8 3 1.8a3.2 3.2 0 000 2.4 3.5 3.5 0 00-1 2.4c0 3.5 2.1 4.3 4.1 4.5a2 2 0 00-.6 1.6V15"/></svg> Edit page</div>
+<div class="pathmini"><b>Build a checkout</b><div class="pbar"><i style="width:75%"></i></div><span>Step 3 of 4 · ~30 min total</span></div></aside>
+</div>
+<button class="notes-btn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2.5h7l3 3v8a.5.5 0 01-.5.5h-9.5a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5z"/><path d="M5.5 7.5h5M5.5 10h5M10 2.5v3h3"/></svg> Design notes <i>4</i></button>
+<aside class="drawer"><button class="x">✕</button><h4>Design notes</h4><p class="sub">Why this page looks the way it does. These are for reviewers, not part of the product. Full evidence and sources: <a href="../../../../docs/research/" style="color:#ffd27a;text-decoration:underline">Docs Research</a>.</p>
+<div class="nt why"><span class="ty">Why</span>Stage 5 of the template, <b>plug it into your stack</b>. It runs on the developer's machine in their framework, and it carries the path's real engineering lesson: <b>never trust the client, verify on the network</b>. That's the step MLH participants said was missing (“examples ended with no next step”).</div><div class="nt why"><span class="ty">Why</span>RPC and confirmation levels are introduced here because this is the first time they matter. Taught before step 2 they would have been noise.</div><div class="nt change"><span class="ty">Vs. today</span>Installation (CLI, Anchor, Surfpool) is currently <i>Getting Started → Installation</i>. Here it's an optional link, because payments only need <code>npm install</code> and a URL.</div><div class="nt risk"><span class="ty">Risk / dependency</span>The code is illustrative. The pilot needs a real, tested <code>findTransfer</code> helper (or a Commerce Kit server helper), so developers don't hand-parse transactions.</div></aside><script src="../../../../assets/site.js?v=mv6noyv7"></script></body></html>
