@@ -141,3 +141,17 @@ Start here · Payments · Assets · Markets | How Solana works · Programs · De
 ```
 
 **Label risk:** web2 developers may read "Programs" as grant programs. The tab's landing page is titled "Write onchain programs". If the tree test shows confusion, rename the tab to "Onchain programs".
+
+## Revision 3 (2026-10-13): quieter tab bar
+
+The eight-tab bar read as busy. Stripe has nine tabs but stays calm because its tabs are text-only and API reference sits apart as a separate link. Changes:
+
+- Tab icons removed.
+- Markets, the thinnest tab at about 9 pages, folded into **Assets & markets**.
+- **API reference** moved to a right-aligned utility link.
+
+```
+Start here · Payments · Assets & markets · How Solana works · Programs · Developer resources            API reference ↗
+```
+
+A single "Use cases" tab was rejected again: it hides Payments, the most common job, behind a generic label.

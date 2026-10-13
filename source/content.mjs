@@ -39,13 +39,11 @@ export const paths = {
 export const tabs = [
   { id: "start", label: "Start here", icon: I.home, href: "docs" },
   { id: "payments", label: "Payments", icon: I.card, href: "docs/payments" },
-  { id: "assets", label: "Assets", icon: I.layers, href: "docs/assets" },
-  { id: "markets", label: "Markets", icon: I.chart, href: "docs/markets" },
-  { sep: true },
+  { id: "assets", label: "Assets & markets", icon: I.layers, href: "docs/assets" },
   { id: "concepts", label: "How Solana works", icon: I.cube, href: "docs/concepts" },
   { id: "programs", label: "Programs", icon: I.code, href: "docs/programs" },
   { id: "resources", label: "Developer resources", icon: I.wrench, href: "docs/resources" },
-  { id: "reference", label: "API reference", icon: I.book, href: "docs/reference" },
+  { id: "reference", label: "API reference", icon: I.book, href: "docs/reference", util: true },
 ];
 
 /* ============================================================ sidebars */
@@ -94,10 +92,8 @@ export const sidebars = {
     { h: "NFTs & game items" },
     { p: "docs/tokens/metaplex", t: "NFTs with Metaplex" },
     { p: "docs/assets/games", t: "Let players own items" },
-  ],
-  markets: [
-    { p: "docs/markets", t: "Overview" },
-    { h: "Guides" },
+    { h: "Markets" },
+    { p: "docs/markets", t: "Markets overview" },
     { p: "docs/markets/exchange", t: "Build an exchange" },
     { p: "docs/markets/dvp", t: "Delivery vs payment" },
     { p: "docs/markets/mev", t: "MEV protection" },
@@ -880,7 +876,7 @@ page("docs/research", {
   tab: "start", title: "Docs Research", wide: false,
   desc: "Why this mockup is structured the way it is: the brief it implements, the research into docs navigation, and every source.",
   body: () => `
-${callout(`<p><strong>Question:</strong> should use cases be the top-level navigation of solana.com/docs?<br><strong>Answer:</strong> not as fine-grained jobs (“Charge per API call”) in the global nav; no leading docs site does that. Yes as a few <strong>domain tabs</strong>, the Stripe / Circle / Coinbase pattern: <strong>Payments · Assets · Markets</strong>, the three pieces of internet capital markets. Each opens with its job path, then guides. Underneath sits one shared core: How Solana works · Programs · Developer resources · API reference.</p>`, "green")}
+${callout(`<p><strong>Question:</strong> should use cases be the top-level navigation of solana.com/docs?<br><strong>Answer:</strong> not as fine-grained jobs (“Charge per API call”) in the global nav; no leading docs site does that. Yes as a few <strong>domain tabs</strong>, the Stripe / Circle / Coinbase pattern: <strong>Payments · Assets &amp; markets</strong>, the pieces of internet capital markets. Each opens with its job path, then guides. Underneath sits one shared core: How Solana works · Programs · Developer resources, with API reference as a utility link.</p>`, "green")}
 
 ${h2("1. The brief")}
 <p>This mockup implements an internal Notion brief, <em>“TL;DR: solana.com/developers becomes a job picker”</em> ${c(1)}, shared at the start of this work (12 Oct 2026). Its core claims:</p>
@@ -986,7 +982,7 @@ ${h2("7. Redesigns elsewhere")}
 </ul>
 
 ${h2("8. Decision and what changed in this mockup")}
-<p><strong>Tabs:</strong> Start here · <strong>Payments · Assets · Markets</strong> | How Solana works · Programs · Developer resources · API reference (eight, against Stripe's nine). Benchmarks are web2 and institutional-finance docs (Stripe, Shopify, Plaid, Circle, Canton) rather than other chains.</p>
+<p><strong>Tabs:</strong> Start here · <strong>Payments · Assets &amp; markets</strong> · How Solana works · Programs · Developer resources, plus <strong>API reference</strong> as a right-aligned utility link. Six tabs, text only. Benchmarks are web2 and institutional-finance docs (Stripe, Shopify, Plaid, Circle, Canton) rather than other chains.</p>
 ${table(["Decision", "Why"], [
   ["<strong>Domain tabs: Payments, Assets, Markets</strong>", "The dominant pattern among the most comparable sites (Stripe, Circle, Coinbase CDP, Plaid, Polygon) " + c(10, 13, 14, 15, 18) + ". Broad enough to avoid overlap, specific enough to signal what's inside. They also spell out the internet capital markets framing."],
   ["<strong>Jobs are paths inside their domain</strong> (Payments opens with “Accept dollar payments” and “Charge per API call”)", "Stripe's Payments sidebar opens with “Accept a payment”. Keeping path, guides and tools in one sidebar avoids cross-tab jumps " + c(10)],
@@ -999,6 +995,7 @@ ${table(["Decision", "Why"], [
   ["<strong>Start here stays short</strong>: the picker, All use cases, setup, AI agents", "It routes people; it doesn't hold content"],
 ])}
 <h3>Revision history</h3>
+<p><strong>Third revision.</strong> The eight-tab bar read as busy. Following Stripe, which has nine tabs but plain text labels and a separate API link, the tab icons were removed, Markets (the thinnest tab, about 9 pages) folded into <em>Assets &amp; markets</em>, and API reference became a right-aligned utility link. A single “Use cases” tab was considered again and rejected: it hides Payments, the job most developers arrive with, behind a generic label.</p>
 <p><strong>Second revision.</strong> A “Develop” tab (programs plus tools) was briefly modelled on Base and Sui. It was replaced after review by benchmarks from the strongest web2 and institutional-finance docs: Stripe (Developer resources), Shopify (Functions nested in Apps) and Canton (App Development as a top-level tab). Programs keeps its own tab, and tools move to Developer resources.</p>
 <p><strong>First revision.</strong> An earlier version of this mockup collapsed everything into a single “Use cases” tab, mainly because some of Solana's use-case sections are thin today (tokenization 5 pages, defi 9). On review that overweighted a snapshot of current page counts. It also departed from the closest precedents, Stripe above all, which put their domains at the top level. A single generic “Use cases” label also says nothing about what's inside. The thin-section risk is handled instead by folding tokens into Assets, and by a fold-back rule for Markets if it doesn't grow (see the design notes on that tab).</p>
 
@@ -1155,13 +1152,15 @@ ${cards([["Keep a shared record", "Write your own program (Wave 2 path)", "@/doc
   why: [N("why", "Stripe has the same kind of page (<i>Find your use case</i>) alongside its domain tabs. It's the one place that lists every job, so the tabs can stay few.")],
 });
 page("docs/assets", {
-  title: "Assets",
-  desc: "Assets are what internet capital markets trade: tokenized funds and securities, stablecoins, points, NFTs and game items. Everything about creating and controlling tokens lives here.",
+  title: "Assets & markets",
+  desc: "Assets are what internet capital markets trade: tokenized funds and securities, stablecoins, points, NFTs and game items. Markets are where they trade and settle. Everything about creating, controlling and trading tokens lives here.",
   body: () => `${hubPath("tokenization", "Hold a restricted asset, watch a blocked transfer, then create your own with approvals and a pause switch.")}
 ${h2("Tokenization")}
 ${cards([["Allowlists (Token ACL)", "Approve holders without writing a program.", "@/docs/tokenization/token-acl/"], ["KYC with Attestations", "Issue and check verifiable claims.", "@/docs/tokenization/attestations/"], ["NAV strikes for funds", "Daily pricing for money-market style funds.", "@/docs/tokenization/nav-strikes/"], ["Delivery vs payment", "Settle an asset against USDC. Lives in Markets.", "@/docs/markets/dvp/"]])}
 ${h2("Tokens")}
 ${cards([["Token basics", "Mints, minting, transfers, freeze and thaw.", "@/docs/tokens/basics/"], ["Token extensions", "Metadata, pausable, default state, transfer hooks.", "@/docs/tokens/extensions/"], ["NFTs with Metaplex", "Collections and digital items.", "@/docs/tokens/metaplex/"], ["Let players own items", "Wave 2 path.", "@/docs/assets/games/"]])}
+${h2("Markets")}
+${cards([["Build an exchange", "Order books, matching and settlement.", "@/docs/markets/exchange/"], ["Delivery vs payment", "Swap an asset for USDC atomically.", "@/docs/markets/dvp/"], ["MEV protection", "Protect users' orders.", "@/docs/markets/mev/"], ["Stake-weighted QoS", "Land transactions under load.", "@/docs/markets/swqos/"]])}
 ${callout(`<p>How token accounts, mints and extensions <em>work</em> is explained once, in <a href="@/docs/concepts/token-account/">How Solana works</a>. The guides here are how-tos that link there.</p>`)}`,
   why: [
     N("change", "Today general token docs, including NFTs and Metaplex, sit under <i>Finance → Assets</i>. Naming the tab <b>Assets</b> rather than Finance or Tokenization gives NFT and game developers a home too, and fits the internet capital markets framing (money, assets, markets)."),
@@ -1174,7 +1173,7 @@ page("docs/markets", {
   body: () => `${cards([["Build an exchange", "Order books, matching and settlement.", "@/docs/markets/exchange/"], ["Delivery vs payment", "Swap an asset for USDC atomically. One canonical page.", "@/docs/markets/dvp/"], ["MEV protection", "Protect users' orders from front-running.", "@/docs/markets/mev/"], ["Stake-weighted QoS", "Get transactions landed reliably under load.", "@/docs/markets/swqos/"]])}`,
   why: [
     N("change", "DvP is split today across <code>tokenization/dvp</code> and <code>defi/dvp-program/</code> (5 pages). Settlement is a market activity, so it gets one canonical page here, linked from Assets."),
-    N("risk", "<b>This is the thinnest tab</b> (about 9 pages today). It earns its place because it completes the money / assets / markets framing and is where the Markets Wave 2 work lands. If it isn't growing within a couple of quarters, fold it into Assets as <i>Assets &amp; markets</i>."),
+    N("change", "<b>Folded into Assets &amp; markets</b> to quieten the tab bar. At about 9 pages it was the thinnest tab. Promote it back to its own tab if Markets content grows."),
   ],
 });
 page("docs/resources", {
@@ -1204,8 +1203,7 @@ ${callout(`<p>New to how programs, accounts and PDAs work? Start with ${chip("pr
 // The tab follows the URL, so the sidebar and the address never disagree.
 const tabFor = (p) =>
   /^docs\/payments(\/|$)/.test(p) ? "payments"
-  : /^docs\/(assets|tokenization|tokens)(\/|$)/.test(p) ? "assets"
-  : /^docs\/markets(\/|$)/.test(p) ? "markets"
+  : /^docs\/(assets|tokenization|tokens|markets)(\/|$)/.test(p) ? "assets"
   : /^docs\/concepts(\/|$)/.test(p) ? "concepts"
   : /^docs\/programs(\/|$)/.test(p) ? "programs"
   : /^docs\/resources(\/|$)/.test(p) ? "resources"
